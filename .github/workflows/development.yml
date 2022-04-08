@@ -32,7 +32,7 @@ jobs:
     - name: Run Test Suite (specified in package.json)
       run: npm test
     - name: Deploy on Heroku
-      uses: duclosa/heroku-deploy@v3.12.12
+      uses: duclosa@oregonstate.edu/heroku-deploy@v3.12.12
       with:
         args: deploy --dir=build --prod
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
