@@ -30,17 +30,16 @@ jobs:
         cache: 'npm'
         
     - name: Dependency Install
-    - run: npm ci
+      run: npm ci
     
     - name: Build the App
-    - run: npm run build --if-present
+      run: npm run build --if-present
     
     - name: Run ESlint
-    - run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: eslint . --ext .js,.jsx,.ts,.tsx
     
     - name: Run Test Suite (specified in package.json)
-    - run: npm test
-    - run: npm test
+      run: npm test
     
     - name: Deploy on Heroku
       uses: duclosa/heroku-deploy@v3.12.12
