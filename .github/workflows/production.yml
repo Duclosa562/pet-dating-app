@@ -18,10 +18,9 @@ jobs:
       - run: npm install
       - run: npm run build --if-present
       - name: Deploy to Heroku
-        uses: duclosa@oregonstate.edu/heroku-deploy@v3.12.12
+        uses: duclosa/heroku-deploy@v3.12.12
         with:
           args: deploy --dir=build --prod
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'pet-dating-app-prod'
           heroku_email: 'duclosa@oregonstate.edu'
-      
