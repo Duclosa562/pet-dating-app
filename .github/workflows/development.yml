@@ -28,6 +28,8 @@ jobs:
         cache: 'npm'
     - name: Dependency Install
       run: npm ci
+    - name: ESlint Action
+    - uses: eslint/github-action@v0
     - name: Build the App
       run: npm run build --if-present
     - name: Run ESlint
