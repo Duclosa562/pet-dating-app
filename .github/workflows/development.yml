@@ -32,8 +32,8 @@ jobs:
       uses: eslint/github-action@v0
     - name: Build the App
       run: npm run build --if-present
-    - name: Run ESlint
-      run: npx run eslint . --ext .js,.jsx,.ts,.tsx
+#     - name: Run ESlint
+#       run: npx run eslint . --ext .js,.jsx,.ts,.tsx
     - name: Run Test Suite (specified in package.json)
       run: npm test
     - name: Deploy on Heroku
