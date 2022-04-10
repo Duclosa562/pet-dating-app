@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
     - name: Checkout the Repository
@@ -22,19 +22,19 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm' 
+        cache: 'npm'
     - name: Dependency Install
       run: npm ci
+    - name: ESlint Action
+      uses: eslint/github-action@v0
     - name: Build the App
       run: npm run build --if-present
-    - name: Run ESlint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
     - name: Run Test Suite (specified in package.json)
       run: npm test
     - name: Deploy on Heroku
       uses: akhileshns/heroku-deploy@v3.12.12
       with:
-        args: deploy --dir=build --prod
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: 'pet-dating-app-develop'
         heroku_email: 'duclosa@oregonstate.edu'
+        branch: "develop"
