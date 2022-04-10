@@ -6,6 +6,7 @@ This is a CICD test on the development branch
 This is another dev test....
 
 Directories
+
     - components -> Place React components here.
     - images -> Place all images here.
     - styles -> All stylesheets for the components here.
