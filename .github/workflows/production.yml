@@ -1,9 +1,10 @@
-name: Production Workflow
+name: Production workflow
 
-on: 
+on:
   push:
     branches:
-      -main
+      - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,14 +15,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
          node-version: 17.x
+         node-version: 17.x
       - run: npm install
       - run: npm run build --if-present
       - name: Deploy to Heroku
-        uses: duclosa/heroku-deploy@v3.12.12
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           args: deploy --dir=build --prod
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'pet-dating-app-prod'
           heroku_email: 'duclosa@oregonstate.edu'
-       
-      
