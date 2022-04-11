@@ -1,0 +1,27 @@
+* {
+    background-color: #95D1CC;
+}
+
+.NavBar {
+    background-color: #95D1CC;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.NavBarTitle {
+    color: #fff;
+    justify-content: flex-start;
+    margin-left: 10 px;
+}
+
+.NavMenu {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    justify-content: flex-end;
+}
+
