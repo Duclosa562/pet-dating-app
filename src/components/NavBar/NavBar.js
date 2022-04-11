@@ -5,8 +5,8 @@ function NavBar() {
     return (
         <div className="NavBar">
             <h1 className="NavBarTitle">Pet Dating App</h1>
-            <div className="menu-icon">
-                {/* <h3>Icon Could go here</h3> */}
+            <div className="NavBarIcon">
+                <i class="fa-solid fa-paw"></i>
             </div>
             <ul className="NavMenu">
                 {MenuItems.map((item, index) => {

@@ -6,22 +6,24 @@
     background-color: #95D1CC;
     height: 80px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     font-size: 1.2rem;
 }
 
 .NavBarTitle {
     color: #fff;
-    justify-content: flex-start;
+    justify-content: start;
     margin-left: 10 px;
 }
 
 .NavMenu {
+    color: #fff;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
-    justify-content: flex-end;
+    justify-content: end;
 }
 
