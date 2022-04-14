@@ -1,29 +1,20 @@
-* {
-    background-color: #95D1CC;
-}
 
-.NavBar {
-    background-color: #95D1CC;
-    height: 80px;
+.navbar {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    font-size: 1.2rem;
+    background: #95D1CC;
+    color: black;
 }
 
-.NavBarTitle {
-    color: #fff;
-    justify-content: start;
-    margin-left: 10 px;
+.navbar-title, .navbar-icon {
+    margin-right: auto;
+    font-size: 150%;
+    padding: 12px 16px;
 }
 
-.NavMenu {
-    color: #fff;
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-gap: 10px;
-    list-style: none;
-    text-align: center;
-    justify-content: end;
-}
 
+.navbar-button {
+    padding: 16px 16px;
+    cursor: pointer;
+    vertical-align: middle;
+}
