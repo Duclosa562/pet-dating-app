@@ -81,7 +81,6 @@ async function query_find(collectionName, query) {
 // Run Example Queries Here
 
 query_findOne(animalsCollection, animalsQuery1);
-query_findOne(animalsCollection, animalsQuery2);
+query_findOne(animalsCollection, animalsQuery3);
 
 //query_find(animalsCollection, animalsQuery3);
-
