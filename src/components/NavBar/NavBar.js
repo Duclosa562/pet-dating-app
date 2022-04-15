@@ -3,9 +3,9 @@ import "./NavBar.css";
 function NavBar() {
     return (
         <header className='navbar'>
-            <div className='navbar-title'>Pet Dating App</div>
-            <div className="navbar-icon">
-                <i class="fa-solid fa-paw"></i>
+            <div className='navbar-title'>
+                Pet Dating App
+                <i class="fa-solid fa-paw navbar-icon"></i>
             </div>
             <div className='navbar-button'>Home</div>
             <div className='navbar-button'>Search</div>
