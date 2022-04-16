@@ -1,6 +1,7 @@
 import NavBar from '../components/NavBar/NavBar';
 import Avatar from '../components/Avatar/Avatar.js';
 import ImageGrid from '../components/ImageGrid/ImageGrid';
+import UploadPhoto from '../components/UploadPhotoButton/UploadPhoto'
 import { StyledEngineProvider } from '@mui/material/styles';
 import '../App.css';
 import * as React from 'react';
@@ -26,6 +27,7 @@ function AdminCRUD() {
     <div>
         <NavBar/>
         <Avatar/>
+        <UploadPhoto/>
         <Box sx={{ width: '100%' }}>
             <Grid container rowSpacing={4} columnSpacing={3}>
                 <Grid item xs={12}>
@@ -42,10 +44,6 @@ function AdminCRUD() {
         </Box>
 
     </div>
-    
-    
-    
-    
     
     )
 

@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import FormInputText from '../FormInput/FormInputText';
 import DropDownMenu from '../DropDownMenu/DropDownMenu';
+import AvailCheckbox from '../AvailCheckbox/AvailCheckbox';
+import { EventAvailable } from '@mui/icons-material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#5584AC',
@@ -37,6 +39,10 @@ function CrudFormGroup() {
         <Item>
             <label> Disposition: </label>
             <DropDownMenu/>
+        </Item>
+        <Item>
+            <label> Availability: </label>
+            <AvailCheckbox/>
         </Item>
       </Stack>
     </Box>
