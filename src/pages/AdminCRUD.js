@@ -1,5 +1,5 @@
 import NavBar from '../components/NavBar/NavBar';
-import Avatar from '../components/Avatar/Avatar.js';
+import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
 import ImageGrid from '../components/ImageGrid/ImageGrid';
 import UploadPhoto from '../components/UploadPhotoButton/UploadPhoto'
 import { StyledEngineProvider } from '@mui/material/styles';
@@ -26,7 +26,7 @@ function AdminCRUD() {
     return (
     <div>
         <NavBar/>
-        <Avatar/>
+        <ImageAvatar/>
         <UploadPhoto/>
         <Box sx={{ width: '100%' }}>
             <Grid container rowSpacing={4} columnSpacing={3}>
