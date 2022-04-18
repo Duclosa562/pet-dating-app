@@ -24,10 +24,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Dependency Install
-      run: npm ci
     - name: package-lock.json Validation
       run: npm i --package-lock-only
+    - name: Dependency Install
+      run: npm ci
     - name: ESlint Action
       uses: eslint/github-action@v0
     - name: Build the App
