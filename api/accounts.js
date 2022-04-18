@@ -34,5 +34,6 @@ router.post('/', (req, res) => {
             "error": err,
             "message": "Error creating account"
         }))
-})
-module.exports = router 
+});
+
+module.exports = router;

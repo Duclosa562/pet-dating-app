@@ -18,8 +18,8 @@ app.use(cors());
 });*/
 
 // API
-const accounts = require('/api/accounts'); // prev users, users
-app.use('/api/accounts', accounts); // prev users
+const accounts = require('../api/accounts'); // prev users, users
+app.use('../api/accounts', accounts); // prev users
 
 app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {
