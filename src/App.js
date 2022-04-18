@@ -30,6 +30,12 @@ function App() {
 export default App;
 */
 
+
+/* DO NOT DELETE
+
+// You un-comment the code below to test the backend architecture that we are trying to implement.
+// The page should load accounts from the db, and allow you insert new records.
+
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 
@@ -149,3 +155,4 @@ const App = function () {
 	);
 };
 export default App
+*/
