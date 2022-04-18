@@ -5,3 +5,14 @@
   font-family: 'M PLUS 1 Code', sans-serif;
   /* background-color: #22577E; */
 }
+.App {
+  text-align: center;
+}
+body {
+  background-color: #95D1CC;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
