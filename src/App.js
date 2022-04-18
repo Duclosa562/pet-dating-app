@@ -1,8 +1,8 @@
-import Template from './Template';
+// import Template from './Template';
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-/*
+
 // This is the default boilerplate code created by Calvin.
 // Do not delete
 
@@ -31,7 +31,6 @@ function App() {
 }
 
 export default App;
-*/
 
 
 /* DO NOT DELETE
