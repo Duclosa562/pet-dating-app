@@ -7,6 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 import NavBar from '../components/NavBar/NavBar';
 
@@ -37,7 +38,7 @@ function SearchPage(props) {
                             disablePortal
                             clearOnEscape
                             options={["Available", "Adopted", "Fostered"]}
-                            renderInput={(params) => <TextField {...params} label="Status"/>}
+                            renderInput={(params) => <TextField {...params} label="Select a Status"/>}
                             sx={{width:300}}
                             />
                         </Stack>
@@ -62,6 +63,7 @@ function SearchPage(props) {
                         </Stack>
                     </Box>
                 </Box>
+                <Divider sx={{p:1}}/>
             </Container>
             
         </div>
