@@ -10,7 +10,8 @@ function HomePage() {
     <NavBar/>
     <p>TEST</p>
     <Link to="/AdminCRUD"><button>Admin_CRUD</button></Link >
-    <Link to="/PetProfile"><button>PetProfile</button></Link>  
+    <Link to="/PetProfile"><button>PetProfile</button></Link>
+    <Link to="/Search"><button>Search</button></Link>
     </div>
     );
 }
