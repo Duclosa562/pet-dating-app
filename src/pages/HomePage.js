@@ -7,11 +7,12 @@ import { useHistory } from 'react-router-dom';
 function HomePage() {
     return (
     <div className="Homepage">
-    <NavBar/>
-    <p>TEST</p>
-    <Link to="/AdminCRUD"><button>Admin_CRUD</button></Link >
-    <Link to="/PetProfile"><button>PetProfile</button></Link>
-    <Link to="/AdminDashboard"><button>AdminDashboard</button></Link> 
+      <NavBar/>
+      <p>TEST</p>
+      <Link to="/AdminCRUD"><button>Admin_CRUD</button></Link >
+      <Link to="/PetProfile"><button>PetProfile</button></Link>
+      <Link to="/Search"><button>Search</button></Link>
+      <Link to="/AdminDashboard"><button>AdminDashboard</button></Link> 
     </div>
     );
 }
