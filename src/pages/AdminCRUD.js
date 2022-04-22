@@ -38,11 +38,8 @@ function AdminCRUD() {
                 <Grid item xs={4}>
                     <Item><FormsComponents/></Item>
                 </Grid>
-                
             </Grid>
-
         </Box>
-
     </div>
     
     )

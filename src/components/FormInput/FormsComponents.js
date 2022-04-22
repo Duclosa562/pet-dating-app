@@ -18,7 +18,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function CrudFormGroup() {
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box  justifyContent="center" sx={{ flexGrow: 1,
+                width: '50%' }}>
       <Stack spacing={2}>
         <Item>
             <label> Age: </label>

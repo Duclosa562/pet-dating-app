@@ -1,10 +1,10 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Development CI
+name: Development CI PR
 
 on:
-  push:
+  pull_request:
     branches: [develop]
 
 jobs:
@@ -34,10 +34,3 @@ jobs:
           CI: false
     - name: Run Test Suite (specified in package.json)
       run: npm test
-    - name: Deploy on Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: 'pet-dating-app-develop'
-        heroku_email: 'duclosa@oregonstate.edu'
-        branch: "develop"
