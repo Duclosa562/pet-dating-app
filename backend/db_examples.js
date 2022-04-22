@@ -22,8 +22,6 @@ Current Issues
 
 */
 
-//import {structuredClone} from '@ungap/structured-clone';
-//const sc = require('@ungap/structured-clone');
 
 /**************************************
     GLOBAL CONSTANTS
