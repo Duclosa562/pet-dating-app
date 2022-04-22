@@ -18,7 +18,7 @@ How-to
     2. node db_examples.js
 
 Current Issues
-    Sending boolean values to the db
+    None
 
 */
 
