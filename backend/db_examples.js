@@ -177,7 +177,7 @@ async function query_findMany(collectionName, query) {
         await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
-        cursor = await collection.find(query);
+        var cursor = await collection.find(query);
         await printFindManyResult(query_findMany.name, collectionName, query, cursor);
     } finally {
         await client.close();
