@@ -20,7 +20,7 @@ function createData(name, Age, Breed, Availability, GoodWithAnimals, GoodWithChi
 
 
 //Sample date for testing purposes
-const rows = [
+const animalss = [
   createData('Otis', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
   createData('Otis', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
   createData('Otis', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
@@ -51,7 +51,7 @@ function BasicTable({animals, onDelete}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {animals.map((row) => (
+          {animalss.map((row) => (
             <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell align="right"><Avatar sx={{ border: 5, borderRadius: '50%'}}></Avatar></TableCell>
               <TableCell component="th" scope="row"> <Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.name}</Typography></TableCell>
