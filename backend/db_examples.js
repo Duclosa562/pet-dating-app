@@ -22,6 +22,9 @@ Current Issues
 
 */
 
+//import {structuredClone} from '@ungap/structured-clone';
+//const sc = require('@ungap/structured-clone');
+
 /**************************************
     GLOBAL CONSTANTS
 ***************************************/
@@ -31,7 +34,6 @@ const { MongoClient } = require("mongodb");
 const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 const db_name = 'PetDatingApp-Local';
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Collections
 const animalsCollection = 'Animals';
@@ -110,7 +112,11 @@ function printQueryResult(funcName, collectionName, query, result) {
 }
 
 async function printFindManyResult(funcName, collectionName, query, results) {
-    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n%s\n\n', funcName, collectionName, JSON.stringify(query));
+    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n', funcName, collectionName, JSON.stringify(query), results);
+    for (let result of results) {
+        console.log(result);
+    }
+    console.log('\n');
 }
 
 function printUpdateOneResult(funcName, collectionName, query, update, result) {
@@ -174,8 +180,8 @@ async function query_findMany(collectionName, query) {
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         var cursor = await collection.find(query);
-        cursor.forEach((item) => {
-            results.push(item);
+        await cursor.forEach(item => {
+            results.push(JSON.parse(JSON.stringify(item)));
         });
         await printFindManyResult(query_findMany.name, collectionName, query, results);
     } finally {
@@ -259,5 +265,6 @@ module.exports = {
     query_insertOne,
     query_findOne,
     query_findMany,
+    query_updateOne,
     query_deleteOne
 };
