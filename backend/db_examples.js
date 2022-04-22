@@ -255,3 +255,10 @@ async function executeQueries() {
 }
 
 executeQueries();
+
+module.exports = {
+    query_insertOne,
+    query_findOne,
+    query_findMany,
+    query_deleteOne
+};
