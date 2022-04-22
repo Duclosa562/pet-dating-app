@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 
 import NavBar from '../components/NavBar/NavBar';
+import SearchResults from '../components/SearchResults/SearchResults';
 import SearchCard from '../components/SearchCard/SearchCard';
 
 import '../styles/SearchPage.css';
@@ -64,8 +65,7 @@ function SearchPage(props) {
                         </Stack>
                     </Box>
                 </Box>
-                <Divider sx={{p:1}}/>
-                <SearchCard />
+                <SearchResults searchRes={[1, 2, 3, 4, 5, 6]}/>
             </Container>
             
         </div>
