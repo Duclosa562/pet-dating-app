@@ -109,12 +109,8 @@ function printQueryResult(funcName, collectionName, query, result) {
     console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n%s\n\n', funcName, collectionName, JSON.stringify(query), JSON.stringify(result, undefined, 4));
 }
 
-async function printFindManyResult(funcName, collectionName, query, cursor) {
-    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:', funcName, collectionName, JSON.stringify(query));
-    await cursor.forEach(item => {
-        console.log(item)
-    });
-    console.log('\n');
+async function printFindManyResult(funcName, collectionName, query, results) {
+    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n%s\n\n', funcName, collectionName, JSON.stringify(query));
 }
 
 function printUpdateOneResult(funcName, collectionName, query, update, result) {
@@ -172,17 +168,20 @@ async function query_findOne(collectionName, query) {
 
 // returns all records matching <query> from <collection>
 async function query_findMany(collectionName, query) {
-    var result;
+    var results = [];
     try {
         await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         var cursor = await collection.find(query);
-        await printFindManyResult(query_findMany.name, collectionName, query, cursor);
+        cursor.forEach((item) => {
+            results.push(item);
+        });
+        await printFindManyResult(query_findMany.name, collectionName, query, results);
     } finally {
         await client.close();
     }
-    return result;
+    return results;
 }
 
 /***************************************
