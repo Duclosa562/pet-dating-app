@@ -1,3 +1,5 @@
+// import Divider from '@mui/material/Divider';
+
 import "./NavBar.css";
 
 function NavBar() {
