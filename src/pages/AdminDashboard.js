@@ -23,6 +23,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProfileCard from '../components/AdminCrudCard/AdminCrudCard';
+//import Database from '../temp_db/db_examples';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#95D1CC' : '#FAFFAF',
@@ -33,18 +35,27 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-
 function AdminDashboard({setAnimalToEdit}) {
+    function createData(name, age, breed, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
+        return { name, breed, age, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
+      };
+    const animals = [
+        createData('Otis', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
+        createData('Maria', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
+        createData('Alex', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
+        createData('Dingo', 'Dog', 3, "Adopted", "False", "True", "True", "True")
+      
+      ];
 
     // State hook to manage animal data
-    const [animals, setAnimals] = useState([]);
-    const history = useNavigate();
+    // const [animals, setAnimals] = useState([]);
+    const navigate = useNavigate();
 
     //populates the table component with data from the DB
     const loadAnimals = async () => {
         const response = await fetch('/animals', {method: 'GET'});
         const data = await response.json();
-        setAnimals(data);
+        //setAnimals(data);
     }
 
     // trigger render on load
@@ -55,18 +66,23 @@ function AdminDashboard({setAnimalToEdit}) {
 
     // function to delete an Animal from the DB, re-renders the table too 
     const onDeleteAnimal = async _id => {
+        //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
+        //console.log(response)
+        //Datbase.printDeleteResults()
         const response = await fetch(`/Animals/${_id}`, {method: 'DELETE'});
         if(response.status === 204){
             const newAnimals = animals.filter(e => e._id !== _id);
-            setAnimals(newAnimals);
+            //setAnimals(newAnimals);
         } else{
             console.error("Failed to delete Animal")
         }
     }
-
-    const onEditAnimal = async animal => {
-        setAnimalToEdit(animal);
-        history.pushState("/AdminCRUD")
+    // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
+    const onEditAnimal = async (row) => {
+        //setAnimalToEdit(animal);
+        console.log("In onEditAnimal, row is...")
+        console.log(row)
+        navigate("/AdminEdit", {state: row, replace: true})
     }
 
     return (
@@ -81,7 +97,7 @@ function AdminDashboard({setAnimalToEdit}) {
                     <Box sx={{ width: '100%' }}>
                         <Stack spacing={5}>
                             <Item><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>Welcome Back, Shelter_Name!</Typography></Item>
-                            <Table animals={animals} onDelete={onDeleteAnimal}></Table>
+                            <Table animals={animals} onDeleteAnimal={onDeleteAnimal} onEditAnimal={onEditAnimal}></Table>
                         </Stack>
                     </Box>
                 </Grid>

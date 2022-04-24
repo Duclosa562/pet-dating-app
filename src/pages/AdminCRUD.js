@@ -1,5 +1,6 @@
 import NavBar from '../components/NavBar/NavBar';
 import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
+import ImageAvatarCrud from '../components/ImageAvatar/ImageAvatarCrudCard';
 import ImageGrid from '../components/ImageGrid/ImageGrid';
 import UploadPhoto from '../components/UploadPhotoButton/UploadPhoto'
 import { StyledEngineProvider } from '@mui/material/styles';
@@ -12,11 +13,15 @@ import FormsComponents from '../components/FormInput/FormsComponents';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
+import AdminCrudCard from '../components/AdminCrudCard/AdminCrudCard';
+import Stack from '@mui/material/Stack';
+
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#5584AC' : '#22577E',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(5),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
@@ -26,20 +31,29 @@ function AdminCRUD() {
     return (
     <div>
         <NavBar/>
-        <ImageAvatar/>
-        <UploadPhoto/>
-        <Box sx={{ width: '100%' }}>
-            <Grid container rowSpacing={4} columnSpacing={3}>
-                <Grid item xs={12}>
-                </Grid>
-                <Grid item xs={4}>
-                    <Item><ImageGrid/></Item>
-                </Grid>
-                <Grid item xs={4}>
-                    <Item><FormsComponents/></Item>
-                </Grid>
+        <Grid container columnSpacing={1}>
+            <Grid item xs={1}>
             </Grid>
-        </Box>
+            <Grid item container xs={3} 
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center">
+                        <Stack>
+                        <Box >
+                            <ImageAvatarCrud></ImageAvatarCrud>
+                        </Box>
+                        <Box >
+                            <UploadPhoto></UploadPhoto>
+                        </Box>
+                        </Stack>
+            </Grid>
+            <Grid item container xs={7}>
+                <Box sx={{ }}>
+                    <AdminCrudCard></AdminCrudCard>
+                </Box>
+            </Grid>
+            <Grid item container xs={1}></Grid>
+        </Grid>
     </div>
     
     )

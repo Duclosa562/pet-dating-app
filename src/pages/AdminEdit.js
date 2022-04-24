@@ -1,0 +1,233 @@
+import NavBar from '../components/NavBar/NavBar';
+import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
+import ImageAvatarCrud from '../components/ImageAvatar/ImageAvatarCrudCard';
+import ImageGrid from '../components/ImageGrid/ImageGrid';
+import UploadPhoto from '../components/UploadPhotoButton/UploadPhoto'
+import { StyledEngineProvider } from '@mui/material/styles';
+import '../App.css';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import FormsComponents from '../components/FormInput/FormsComponents';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import AdminCrudCard from '../components/AdminCrudCard/AdminCrudCard';
+import Stack from '@mui/material/Stack';
+import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import { useLocation } from 'react-router-dom';
+
+
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#5584AC' : '#22577E',
+  ...theme.typography.body2,
+  padding: theme.spacing(5),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+function AdminEdit({animal}) {
+    const location = useLocation();
+    console.log("location %s", JSON.stringify(location))
+    console.log("animal on the Edit Page is...")
+    animal = location.state
+    console.log(animal)
+
+
+    const [name, setName] = useState(animal.name);
+    const [age, setAge] = useState(animal.age);
+    const [ageUnits, setAgeUnits] = useState(animal.ageUnits);
+    const [breed, setBreed] = useState(animal.breed);
+    const [avail, setAvail] = useState(animal.availability);
+    const [descr, setDescr] = useState(animal.description);
+
+
+    // will need a handle for the disposition to get this set properly
+    const [goodWithAnimals, setGoodWithAnimals] = useState(animal.goodWithAnimals);
+    const [goodWithChildren, setGoodWithChildren] = useState(animal.goodWithChildren);
+    const [mustBeLeashed, setMustBeLeashed] = useState(animal.mustBeLeashed);
+
+    const [disp, setDisp] = useState([])
+
+
+    //not sure how to handle this one
+    const [imgPath, setImgPath] = useState(animal.path);
+
+
+    // for nav back to dashboard on submit
+    const history = useNavigate();
+
+
+    //called by submit form button below, sends edit data to REST and gets edited json back
+    const editAnimal = async () => {
+        const editedAnimal = {};
+        const response = await fetch(`/animals/${animal._id}`, {
+            method: 'PUT',
+            body : JSON.stringify(editedAnimal),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        if (response.status === 200){
+            alert("Successfully Edited an Existing Animal!");
+        }
+        else{
+            alert(`Failed to Edit an Existing Animal, status code = ${response.status}`);
+        }
+        history.push("/AdminDashboard");
+    };
+
+
+
+    return (
+    <div>
+        <NavBar/>
+        <Grid container columnSpacing={1}>
+            <Grid item xs={1}></Grid>
+            <Grid item container xs={3} 
+            direction="column"
+            alignItems="center"
+            justifyContent="center">
+            <Stack>
+                <Box >
+                    <ImageAvatarCrud></ImageAvatarCrud>
+                </Box>
+                <Box >
+                    <UploadPhoto></UploadPhoto>
+                </Box>
+            </Stack>
+            </Grid>
+            <Grid item container xs={7}>
+                <Box sx={{ }}>
+                    {/* <AdminCrudCard ></AdminCrudCard> */}
+                    <Card >
+                <CardHeader title='EditData'/>
+                <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
+                    {/* <Item><FormsComponents/> */}
+                    <Item>
+                    <Box  justifyContent="center" sx={{ flexGrow: 1,
+                width: '100%' }}>
+      <Stack spacing={2}>
+        <Item>
+            <label> Name: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.name}
+              onChange={e => setName(e.target.value)}
+            />
+            </div>
+            {/* <FormInputName onChange={e => setName(e.target.value)}/> */}
+        </Item>
+        <Item>
+            <label> Age: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.age}
+              onChange={e => setAge(e.target.value)}
+            />
+            </div>
+            {/* <FormInputAge onChange={e => setAge(e.target.value)}/> */}
+        </Item>
+        <Item>
+            <label> Age Units: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.ageUnits}
+              onChange={e => setAgeUnits(e.target.value)}
+            />
+            </div>
+            {/* <DropDownMenuAgeUnits onChange={e => setAgeUnits(e.target.value)}/> */}
+        </Item>
+        <Item>
+            <label> Breed: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.breed}
+              onChange={e => setBreed(e.target.value)}
+            />
+            </div>
+            {/* <FormInputBreed onChange={e => setBreed(e.target.value)}/> */}
+        </Item>
+        <Item>
+            <label> Description: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.descr}
+              onChange={e => setDescr(e.target.value)}
+            />
+            </div>
+            {/* <FormInputDescription justifyContent="center" onChange={e => setDescr(e.target.value)}></FormInputDescription> */}
+        </Item>
+        <Item>
+            <label> Disposition: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.disp}
+              onChange={e => setDisp(e.target.value)}
+            />
+            </div>
+            {/* <DropDownMenuAge onChange={e => setName(e.target.value)}/> */}
+        </Item>
+        <Item>
+            <label> Availability: </label>
+            <div>
+            <TextField
+              required
+              id="outlined-required"
+              label="Required"
+              value={animal.availability}
+              onChange={e => setAvail(e.target.value)}
+            />
+            </div>
+            {/* <AvailCheckbox onChange={e => setAvail(e.target.value)}/> */}
+        </Item>
+      </Stack>
+    </Box>
+                    
+                    
+                    
+                    
+                    </Item>
+                </CardContent>
+                <CardActions  direction="column" style={{justifyContent: 'center'}}>
+                    <Button variant='contained'>Submit</Button>
+                </CardActions>
+            </Card>
+                </Box>
+            </Grid>
+            <Grid item container xs={1}></Grid>
+        </Grid>
+    </div>
+    
+    )
+
+}
+
+export default AdminEdit
