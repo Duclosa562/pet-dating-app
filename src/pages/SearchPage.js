@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
 
-import { query_findMany } from '../utils/db_queries';
+import { query_findMany } from '../utils/db_queries'; // "../../backend/db_examples"
 
 import '../styles/SearchPage.css';
 
