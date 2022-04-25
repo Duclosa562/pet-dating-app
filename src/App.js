@@ -1,6 +1,6 @@
 // import Template from './Template';
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Switch} from 'react-router-dom';
 
 
 // This is the default boilerplate code created by Calvin.
@@ -27,8 +27,8 @@ function App() {
             <Route path="/" exact element={<HomePage/>}></Route>
             <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
             <Route path="/PetProfile" element={<PetProfile/>}></Route>
-			      <Route path="/Search" element={<SearchPage/>}></Route>
-			      <Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
+			<Route path="/Search" element={<SearchPage/>}></Route>
+			<Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
         </Routes>
       </Router>
     </div>
