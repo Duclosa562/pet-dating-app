@@ -7,16 +7,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
-import SearchCard from '../components/SearchCard/SearchCard';
+
+import { query_findMany } from '../utils/db_queries';
 
 import '../styles/SearchPage.css';
 
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
+    const animalsCollection = 'Animals';
+    const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
 
     return (
         <div className='search-page'>
@@ -61,7 +63,7 @@ function SearchPage(props) {
                     </Stack>
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
-                            <Button variant='contained'>Search</Button>
+                            <Button variant='contained' onClick={()=>console.log(query_findMany(animalsCollection, animalsQuery4))}>Search</Button>
                         </Stack>
                     </Box>
                 </Box>
