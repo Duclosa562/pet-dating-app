@@ -63,6 +63,7 @@ function SearchPage(props) {
                     </Stack>
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
+                            {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={()=>console.log(query_findMany(animalsCollection, animalsQuery4))}>Search</Button>
                         </Stack>
                     </Box>
