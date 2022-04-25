@@ -24,7 +24,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileCard from '../components/AdminCrudCard/AdminCrudCard';
-//import Database from '../temp_db/db_examples';
+import Database from '../temp_db/db_examples';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#95D1CC' : '#FAFFAF',
@@ -33,6 +33,23 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+const animalsCollection = 'Animals';
+
+const animalRecord1 = {
+    "name": "Roxy",
+    "breed": "Dog",
+    "good_with_animals": false,
+    "good_with_children": true,
+    "must_be_leashed": true,
+    "availability": "Not Available",
+    "description": "American Dingo",
+    "date_created": "04/19/2022",
+    "age": 12,
+    "age_descriptor": "years",
+    "filesystem_location": "src/images/some_oid.jpeg",
+    "shelter_oid": "6254368a11c4ca8be3b22ad1"
+}
 
 
 function AdminDashboard({setAnimalToEdit}) {
@@ -66,16 +83,20 @@ function AdminDashboard({setAnimalToEdit}) {
 
     // function to delete an Animal from the DB, re-renders the table too 
     const onDeleteAnimal = async _id => {
-        //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
+        const response = Database.query_deleteOne(animalsCollection, animalRecord1)
         //console.log(response)
         //Datbase.printDeleteResults()
-        const response = await fetch(`/Animals/${_id}`, {method: 'DELETE'});
-        if(response.status === 204){
-            const newAnimals = animals.filter(e => e._id !== _id);
+
+
+
+
+        //const response = await fetch(`/Animals/${_id}`, {method: 'DELETE'});
+       //if(response.status === 204){
+            //const newAnimals = animals.filter(e => e._id !== _id);
             //setAnimals(newAnimals);
-        } else{
-            console.error("Failed to delete Animal")
-        }
+        //} else{
+            //console.error("Failed to delete Animal")
+        //}
     }
     // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
     const onEditAnimal = async (row) => {
