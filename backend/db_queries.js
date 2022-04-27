@@ -244,6 +244,7 @@ async function executeQueries() {
     await query_findOne(animalsCollection, animalsQuery3);
     await query_findOne(animalsCollection, {"_id": newAnimalRecord1._id}); // find by id
     await query_findMany(animalsCollection, animalsQuery4);
+    await query_findMany(animalsCollection, {});
 
     // UPDATE //
     const animalUpdate1 = {$set: {availability: 'Adopted'}}
@@ -257,7 +258,7 @@ async function executeQueries() {
     await query_deleteOne(animalsCollection, {_id: newAnimalRecord2._id}); // delete by id
 }
 
-executeQueries();
+//executeQueries();
 
 module.exports = {
     query_insertOne,

@@ -13,7 +13,14 @@ import SearchResults from '../components/SearchResults/SearchResults';
 
 //import { query_findMany } from '../utils/db_queries'; // "../../backend/db_examples"
 
+
 import '../styles/SearchPage.css';
+
+const queries = require('../utils/queries');
+
+function someCallbackHandler(data) {
+    console.log(data);
+}
 
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
@@ -64,7 +71,12 @@ function SearchPage(props) {
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={()=>console.log(/*query_findMany(animalsCollection, animalsQuery4)*/'you clicked the Search button')}>Search</Button>
+                            <Button variant='contained' onClick={ () => {
+                                        queries.query_findMany('Shelters', {}).then(
+                                            (data) => someCallbackHandler(data)
+                                        )
+                                    }
+                                }>Search</Button>
                         </Stack>
                     </Box>
                 </Box>
