@@ -25,7 +25,7 @@ function AdminCrudCard() {
             <Card >
                 <CardHeader title='CreateData'/>
                 <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
-                    <Item><FormsComponents/></Item>
+                    <Item><FormsComponents formData = {props}/></Item>
                 </CardContent>
                 <CardActions  direction="column" style={{justifyContent: 'center'}}>
                     <Button variant='contained'>Submit</Button>

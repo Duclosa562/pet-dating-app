@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function CrudFormGroup() {
+function CrudFormGroup({props}) {
   return (
     <Box  justifyContent="center" sx={{ flexGrow: 1,
                 width: '100%' }}>

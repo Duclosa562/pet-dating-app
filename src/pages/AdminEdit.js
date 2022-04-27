@@ -24,6 +24,11 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useLocation } from 'react-router-dom';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 
 
 
@@ -34,6 +39,15 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+const Item2 = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#5584AC' : '#5584AC',
+    ...theme.typography.body2,
+    padding: theme.spacing(5),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    boxShadow: "5px",
+  }));
 
 function AdminEdit({animal}) {
     const location = useLocation();
@@ -66,6 +80,12 @@ function AdminEdit({animal}) {
     // for nav back to dashboard on submit
     const history = useNavigate();
 
+    const submitHandler = () => {
+        const animalTest = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath}
+        console.log(animalTest)
+    }
+
+
 
     //called by submit form button below, sends edit data to REST and gets edited json back
     const editAnimal = async () => {
@@ -89,7 +109,7 @@ function AdminEdit({animal}) {
 
 
     return (
-    <div>
+        <div>
         <NavBar/>
         <Grid container columnSpacing={1}>
             <Grid item xs={1}></Grid>
@@ -110,120 +130,205 @@ function AdminEdit({animal}) {
                 <Box sx={{ }}>
                     {/* <AdminCrudCard ></AdminCrudCard> */}
                     <Card >
-                <CardHeader title='EditData'/>
+                <CardHeader title='Edit an Animal'/>
                 <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
                     {/* <Item><FormsComponents/> */}
                     <Item>
                     <Box  justifyContent="center" sx={{ flexGrow: 1,
                 width: '100%' }}>
       <Stack spacing={2}>
-        <Item>
+        <Item2>
             <label> Name: </label>
             <div>
             <TextField
-              required
+              required={true}
               id="outlined-required"
-              label="Required"
-              value={animal.name}
+              label="Enter a Name"
+              value={name}
               onChange={e => setName(e.target.value)}
             />
             </div>
             {/* <FormInputName onChange={e => setName(e.target.value)}/> */}
-        </Item>
-        <Item>
+        </Item2>
+        <Item2>
             <label> Age: </label>
             <div>
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              value={animal.age}
+              label="Enter A Number"
+              value={age}
               onChange={e => setAge(e.target.value)}
             />
             </div>
             {/* <FormInputAge onChange={e => setAge(e.target.value)}/> */}
-        </Item>
-        <Item>
-            <label> Age Units: </label>
+        </Item2>
+        <Item2>
+            {/* <label> Age Units: </label> */}
             <div>
-            <TextField
+            {/* <TextField
               required
               id="outlined-required"
               label="Required"
-              value={animal.ageUnits}
+              value={ageUnits}
               onChange={e => setAgeUnits(e.target.value)}
-            />
+            /> */}
+             <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Age Descriptor</FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="Weeks"
+                    name="ageDescripterAdd"
+                    value={ageUnits}
+                    onChange={e => setAgeUnits(e.target.value)}
+                >
+                    <FormControlLabel value="Years" control={<Radio />} label="Years" />
+                    <FormControlLabel value="Months" control={<Radio />} label="Months" />
+                    <FormControlLabel value="Weeks" control={<Radio />} label="Weeks" />
+                </RadioGroup>
+            </FormControl>
             </div>
             {/* <DropDownMenuAgeUnits onChange={e => setAgeUnits(e.target.value)}/> */}
-        </Item>
-        <Item>
+        </Item2>
+        <Item2>
             <label> Breed: </label>
             <div>
             <TextField
               required
               id="outlined-required"
-              label="Required"
-              value={animal.breed}
+              label="Enter a Breed Type"
+              value={breed}
               onChange={e => setBreed(e.target.value)}
             />
             </div>
             {/* <FormInputBreed onChange={e => setBreed(e.target.value)}/> */}
-        </Item>
-        <Item>
+        </Item2>
+        <Item2>
             <label> Description: </label>
             <div>
             <TextField
+             multiline
+             rows={8}
               required
               id="outlined-required"
-              label="Required"
-              value={animal.descr}
+              label="Enter Something Fun"
+              value={animal.description}
               onChange={e => setDescr(e.target.value)}
             />
             </div>
             {/* <FormInputDescription justifyContent="center" onChange={e => setDescr(e.target.value)}></FormInputDescription> */}
-        </Item>
-        <Item>
+        </Item2>
+        <Item2>
             <label> Disposition: </label>
             <div>
-            <TextField
+            {/* <TextField
               required
               id="outlined-required"
               label="Required"
-              value={animal.disp}
+              value={disp}
               onChange={e => setDisp(e.target.value)}
-            />
+            /> */}
+            <Grid>
+                <Grid>
+                    <Item2>
+                    <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Good With Animals?</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="Weeks"
+                            name="dispositionAdd"
+                            value={goodWithAnimals}
+                            onChange={e => setGoodWithAnimals(e.target.value)}
+                        >
+                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </FormControl>
+                    </Item2>
+                </Grid>
+                <Grid>
+                    <Item2>
+                    <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Good With Kids?</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="Weeks"
+                            name="dispositionAdd"
+                            value={goodWithChildren}
+                            onChange={e => setGoodWithChildren(e.target.value)}
+                        >
+                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </FormControl>
+                    </Item2>
+                </Grid>
+                <Grid>
+                    <Item2>
+                    <FormControl>
+                        <FormLabel id="demo-radio-buttons-group-label">Must Be Leashed?</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-radio-buttons-group-label"
+                            defaultValue="Weeks"
+                            name="dispositionAdd"
+                            value={mustBeLeashed}
+                            onChange={e => setMustBeLeashed(e.target.value)}
+                        >
+                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                        </RadioGroup>
+                    </FormControl>
+                    </Item2>
+                </Grid>
+            </Grid>
+              
+
             </div>
             {/* <DropDownMenuAge onChange={e => setName(e.target.value)}/> */}
-        </Item>
-        <Item>
-            <label> Availability: </label>
+        </Item2>
+        <Item2>
+            {/* <label> Availability: </label> */}
             <div>
-            <TextField
+            {/* <TextField
               required
               id="outlined-required"
               label="Required"
-              value={animal.availability}
+              value={avail}
               onChange={e => setAvail(e.target.value)}
-            />
+            /> */}
+                <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label">Availability:</FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="Weeks"
+                    name="availabilityAdd"
+                    value={avail}
+                    onChange={e => setAvail(e.target.value)}
+                >
+                    <FormControlLabel value="Adopted" control={<Radio />} label="Adopted" />
+                    <FormControlLabel value="Available" control={<Radio />} label="Available" />
+                    <FormControlLabel value="Not Available" control={<Radio />} label="Not Available" />
+                </RadioGroup>
+            </FormControl>
             </div>
             {/* <AvailCheckbox onChange={e => setAvail(e.target.value)}/> */}
-        </Item>
+        </Item2>
       </Stack>
     </Box>
-                    
-                    
-                    
-                    
-                    </Item>
-                </CardContent>
-                <CardActions  direction="column" style={{justifyContent: 'center'}}>
-                    <Button variant='contained'>Submit</Button>
-                </CardActions>
-            </Card>
-                </Box>
-            </Grid>
-            <Grid item container xs={1}></Grid>
-        </Grid>
+            
+            
+            
+            
+            </Item>
+        </CardContent>
+        <CardActions  direction="column" style={{justifyContent: 'center'}}>
+            <Button variant='contained' onClick={() => {submitHandler() }}>Submit</Button>
+        </CardActions>
+    </Card>
+        </Box>
+    </Grid>
+    <Grid item container xs={1}></Grid>
+</Grid>
     </div>
     
     )

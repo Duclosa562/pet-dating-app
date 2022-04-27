@@ -24,7 +24,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileCard from '../components/AdminCrudCard/AdminCrudCard';
-import Database from '../temp_db/db_examples';
+//import Database from '../temp_db/db_examples';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#95D1CC' : '#FAFFAF',
@@ -53,16 +53,14 @@ const animalRecord1 = {
 
 
 function AdminDashboard({setAnimalToEdit}) {
-    function createData(name, age, breed, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
-        return { name, breed, age, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
+    function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
+        return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
       };
     const animals = [
-        createData('Otis', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
-        createData('Maria', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
-        createData('Alex', 'Dog', 3, "Adopted", "False", "True", "True", "True"),
-        createData('Dingo', 'Dog', 3, "Adopted", "False", "True", "True", "True")
+        createData("Months", 'Otis', 3, "Dog", "A cute dog.", "Adopted", "False", "True", "True", "True"),
       
       ];
+
 
     // State hook to manage animal data
     // const [animals, setAnimals] = useState([]);
@@ -83,7 +81,7 @@ function AdminDashboard({setAnimalToEdit}) {
 
     // function to delete an Animal from the DB, re-renders the table too 
     const onDeleteAnimal = async _id => {
-        const response = Database.query_deleteOne(animalsCollection, animalRecord1)
+        //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
         //console.log(response)
         //Datbase.printDeleteResults()
 
