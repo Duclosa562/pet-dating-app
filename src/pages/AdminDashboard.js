@@ -96,6 +96,9 @@ function AdminDashboard({setAnimalToEdit}) {
             //console.error("Failed to delete Animal")
         //}
     }
+
+
+    
     // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
     const onEditAnimal = async (row) => {
         //setAnimalToEdit(animal);
