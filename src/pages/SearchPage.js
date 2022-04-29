@@ -18,6 +18,26 @@ import '../styles/SearchPage.css';
 
 const queries = require('../utils/queries');
 
+const animalRecord1 = {
+    "name": "Dog From the UI",
+    "breed": "Dog",
+    "good_with_animals": true,
+    "good_with_children": true,
+    "must_be_leashed": false,
+    "availability": "Available",
+    "description": "Most loveable pit bull on the planet",
+    "date_created": "04/28/2022",
+    "age": 12,
+    "age_descriptor": "years",
+    "filesystem_location": "src/images/some_oid.jpeg",
+    "shelter_oid": "6254368a11c4ca8be3b22ad1"
+}
+
+const animalUpdate1 = {
+    "_id": "626b3c9ee92cb1b5ba4e36fe",
+    "name": "Chomper (name updated via UI)"
+}
+
 function someCallbackHandler(data) {
     console.log(data);
 }
@@ -72,7 +92,7 @@ function SearchPage(props) {
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
-                                        queries.query_findMany('Shelters', {}).then(
+                                        queries.query_deleteOne('Animals', "626b3c9ee92cb1b5ba4e36fe").then(
                                             (data) => someCallbackHandler(data)
                                         )
                                     }
