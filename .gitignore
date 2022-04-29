@@ -1,3 +1,6 @@
+# backend stuff
+build/
+
 # Logs
 logs
 *.log
