@@ -18,14 +18,14 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-function AdminCrudCard({props}) {
+function AdminCrudCard() {
     return (
         <div>
 
             <Card >
                 <CardHeader title='CreateData'/>
                 <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
-                    <Item><FormsComponents formData = {props}/></Item>
+                    <Item><FormsComponents/></Item>
                 </CardContent>
                 <CardActions  direction="column" style={{justifyContent: 'center'}}>
                     <Button variant='contained'>Submit</Button>
