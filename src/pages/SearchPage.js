@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
 
-import { query_findMany } from '../utils/db_queries'; // "../../backend/db_examples"
+// import { query_findMany } from "../../backend/db_examples"; // "../../backend/db_examples"
 
 import '../styles/SearchPage.css';
 
@@ -64,7 +64,7 @@ function SearchPage(props) {
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={()=>console.log(query_findMany(animalsCollection, animalsQuery4))}>Search</Button>
+                            <Button variant='contained'>Search</Button>
                         </Stack>
                     </Box>
                 </Box>
