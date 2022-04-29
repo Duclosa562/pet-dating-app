@@ -13,3 +13,4 @@ Directories
     - utils -> js helper and utility functions here.
 
     - public/static -> for static files 
+test
