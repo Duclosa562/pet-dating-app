@@ -11,9 +11,40 @@ import Button from '@mui/material/Button';
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
 
+<<<<<<< HEAD
 // import { query_findMany } from "../../backend/db_examples"; // "../../backend/db_examples"
+=======
+//import { query_findMany } from '../utils/db_queries'; // "../../backend/db_examples"
+
+>>>>>>> e687bdd209b947c2f7a0ac765e23918be5b7650d
 
 import '../styles/SearchPage.css';
+
+const queries = require('../utils/queries');
+
+const animalRecord1 = {
+    "name": "Dog From the UI",
+    "breed": "Dog",
+    "good_with_animals": true,
+    "good_with_children": true,
+    "must_be_leashed": false,
+    "availability": "Available",
+    "description": "Most loveable pit bull on the planet",
+    "date_created": "04/28/2022",
+    "age": 12,
+    "age_descriptor": "years",
+    "filesystem_location": "src/images/some_oid.jpeg",
+    "shelter_oid": "6254368a11c4ca8be3b22ad1"
+}
+
+const animalUpdate1 = {
+    "_id": "626b3c9ee92cb1b5ba4e36fe",
+    "name": "Chomper (name updated via UI)"
+}
+
+function someCallbackHandler(data) {
+    console.log(data);
+}
 
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
@@ -64,7 +95,16 @@ function SearchPage(props) {
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
+<<<<<<< HEAD
                             <Button variant='contained'>Search</Button>
+=======
+                            <Button variant='contained' onClick={ () => {
+                                        queries.query_deleteOne('Animals', "626b3c9ee92cb1b5ba4e36fe").then(
+                                            (data) => someCallbackHandler(data)
+                                        )
+                                    }
+                                }>Search</Button>
+>>>>>>> e687bdd209b947c2f7a0ac765e23918be5b7650d
                         </Stack>
                     </Box>
                 </Box>

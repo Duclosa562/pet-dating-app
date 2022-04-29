@@ -22,16 +22,16 @@ Current Issues
 
 */
 
+
 /**************************************
     GLOBAL CONSTANTS
 ***************************************/
 
 // Connection parameters
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 const db_name = 'PetDatingApp-Local';
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // Collections
 const animalsCollection = 'Animals';
@@ -101,27 +101,33 @@ const accountRecord2 = {}
     PRINT Results
 ***************************************/
 
+function printAtFileLevel() {
+    console.log('Results @ db_queries.js');
+}
+
 function printInsertResult(funcName, collectionName, record, result) {
+    printAtFileLevel();
     console.log('\n\nFunction:\t%s\nCollection:\t%s\nInserted:\t%s\nInsertedId:\t%s\nRecord:\n%s\n\n', funcName, collectionName, result.acknowledged, result.insertedId, record);
 }
 
 function printQueryResult(funcName, collectionName, query, result) {
+    printAtFileLevel();
     console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n%s\n\n', funcName, collectionName, JSON.stringify(query), JSON.stringify(result, undefined, 4));
 }
 
-async function printFindManyResult(funcName, collectionName, query, cursor) {
-    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:', funcName, collectionName, JSON.stringify(query));
-    await cursor.forEach(item => {
-        console.log(item)
-    });
+async function printFindManyResult(funcName, collectionName, query, results) {
+    printAtFileLevel();
+    console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\t\t%s\nResults:\n', funcName, collectionName, JSON.stringify(query), results);
     console.log('\n');
 }
 
 function printUpdateOneResult(funcName, collectionName, query, update, result) {
+    printAtFileLevel();
     console.log('\n\nFunction:\t%s\nCollection:\t%s\nQuery:\n%s\nUpdate\n%s\nResults:\n%s\n\n', funcName, collectionName, JSON.stringify(query, undefined, 4), JSON.stringify(update, undefined, 4), JSON.stringify(result, undefined, 4));
 }
 
 function printDeleteResult(funcName, collectionName, result, query) {
+    printAtFileLevel();
     console.log('\n\nFunction:\t%s\nCollection:\t%s\nResponse:\t%s\nQuery:\n%s\n\n', funcName, collectionName, result, JSON.stringify(query, undefined, 4));
 }
 
@@ -145,6 +151,7 @@ async function query_insertOne(collectionName, record) {
         printInsertResult(query_insertOne.name, collectionName, record, result);
     } catch (err) {
         printError(query_insertOne.name, err);
+        result = {};
     } finally {
         await client.close();
     }
@@ -172,13 +179,30 @@ async function query_findOne(collectionName, query) {
 
 // returns all records matching <query> from <collection>
 async function query_findMany(collectionName, query) {
-    var result;
+    var results = [];
     try {
         await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         var cursor = await collection.find(query);
-        await printFindManyResult(query_findMany.name, collectionName, query, cursor);
+        await cursor.forEach(item => {
+            results.push(JSON.parse(JSON.stringify(item)));
+        });
+        await printFindManyResult(query_findMany.name, collectionName, query, results);
+    } finally {
+        await client.close();
+    }
+    return results;
+}
+
+async function query_findById(collectionName, id) {
+    var result;
+    try {
+        await client.connect();
+        const db = client.db(db_name);
+        const collection = db.collection(collectionName);
+        //result = await db.collection.findOne(...);
+        printQueryResult(query_findOne.name, collectionName, query, result);
     } finally {
         await client.close();
     }
@@ -201,6 +225,9 @@ async function query_updateOne(collectionName, query, update) {
         const collection = db.collection(collectionName);
         result = await collection.updateOne(query, update, options);
         await printUpdateOneResult(query_updateOne.name, collectionName, query, update, result);
+    } catch (err) {
+        printError(query_updateOne.name, err);
+        result = {};
     } finally {
         await client.close();
     }
@@ -241,6 +268,7 @@ async function executeQueries() {
     await query_findOne(animalsCollection, animalsQuery3);
     await query_findOne(animalsCollection, {"_id": newAnimalRecord1._id}); // find by id
     await query_findMany(animalsCollection, animalsQuery4);
+    await query_findMany(animalsCollection, {});
 
     // UPDATE //
     const animalUpdate1 = {$set: {availability: 'Adopted'}}
@@ -248,17 +276,20 @@ async function executeQueries() {
 
     await query_updateOne(animalsCollection, newAnimalRecord1, animalUpdate1);
     await query_updateOne(animalsCollection, {_id: newAnimalRecord2._id}, animalUpdate2);
+    await query_updateOne(animalsCollection, {_id: ObjectId("626b3c9ee92cb1b5ba4e36fe")}, {$set: {name: 'Name test updated?'}});
 
     // DELETE //
     await query_deleteOne(animalsCollection, newAnimalRecord1); // this fails because all parameters in the query must match. And we updated the record
     await query_deleteOne(animalsCollection, {_id: newAnimalRecord2._id}); // delete by id
+    
 }
 
-executeQueries();
+//executeQueries();
 
 module.exports = {
     query_insertOne,
     query_findOne,
     query_findMany,
+    query_updateOne,
     query_deleteOne
 };
