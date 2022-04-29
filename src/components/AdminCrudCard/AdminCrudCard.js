@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 
-function AdminCrudCard() {
+function AdminCrudCard({props}) {
     return (
         <div>
 
