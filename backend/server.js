@@ -127,10 +127,10 @@ router.put('/api/update', async function(req, res) {
 // const path = require("path");
 if (process.env.NODE_ENV === 'production'){
     // Step 1:
-    app.use(express.static(path.resolve(__dirname, "../build")));
+    app.use(express.static(path.resolve(__dirname, "../../")));
     // Step 2:
     app.get("*", function (request, response) {
-        response.sendFile(path.resolve(__dirname, "../build", "index.html"));
+        response.sendFile(path.resolve(__dirname, "../../index.js", "index.js"));
 });
 }
 
