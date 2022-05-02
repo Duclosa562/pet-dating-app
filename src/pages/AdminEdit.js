@@ -16,6 +16,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AdminCrudCard from '../components/AdminCrudCard/AdminCrudCard';
 import Stack from '@mui/material/Stack';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -23,13 +24,12 @@ import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-//import { useForm } from "react-hook-form";
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -49,32 +49,32 @@ const Item2 = styled(Paper)(({ theme }) => ({
     boxShadow: "5px",
   }));
 
-function AdminCreate() {
+function AdminEdit({animal}) {
     const location = useLocation();
-    //console.log("location %s", JSON.stringify(location))
-    console.log("animal on the Create Page is...")
-    //animal = location.state
-    ///console.log(animal)
+    console.log("location %s", JSON.stringify(location))
+    console.log("animal on the Edit Page is...")
+    animal = location.state
+    console.log(animal)
 
 
-    const [name, setName] = useState();
-    const [age, setAge] = useState();
-    const [ageUnits, setAgeUnits] = useState("Weeks");
-    const [breed, setBreed] = useState();
-    const [avail, setAvail] = useState();
-    const [descr, setDescr] = useState();
+    const [name, setName] = useState(animal.name);
+    const [age, setAge] = useState(animal.age);
+    const [ageUnits, setAgeUnits] = useState(animal.ageUnits);
+    const [breed, setBreed] = useState(animal.breed);
+    const [avail, setAvail] = useState(animal.availability);
+    const [descr, setDescr] = useState(animal.description);
 
 
     // will need a handle for the disposition to get this set properly
-    const [goodWithAnimals, setGoodWithAnimals] = useState();
-    const [goodWithChildren, setGoodWithChildren] = useState();
-    const [mustBeLeashed, setMustBeLeashed] = useState();
+    const [goodWithAnimals, setGoodWithAnimals] = useState(animal.goodWithAnimals);
+    const [goodWithChildren, setGoodWithChildren] = useState(animal.goodWithChildren);
+    const [mustBeLeashed, setMustBeLeashed] = useState(animal.mustBeLeashed);
 
     const [disp, setDisp] = useState([])
 
 
     //not sure how to handle this one
-    const [imgPath, setImgPath] = useState();
+    const [imgPath, setImgPath] = useState(animal.path);
 
 
     // for nav back to dashboard on submit
@@ -86,21 +86,22 @@ function AdminCreate() {
     }
 
 
+
     //called by submit form button below, sends edit data to REST and gets edited json back
-    const createAnimal = async () => {
-        const createAnimal = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath};
-        const response = await fetch(`/animalsCreate`, {
-            method: 'POST',
-            body : JSON.stringify(createAnimal),
+    const editAnimal = async () => {
+        const editedAnimal = {};
+        const response = await fetch(`/animals/${animal._id}`, {
+            method: 'PUT',
+            body : JSON.stringify(editedAnimal),
             headers: {
                 'Content-Type': 'application/json',
             },
         });
         if (response.status === 200){
-            alert("Successfully Created an Existing Animal!");
+            alert("Successfully Edited an Existing Animal!");
         }
         else{
-            alert(`Failed to Create a New Animal, status code = ${response.status}`);
+            alert(`Failed to Edit an Existing Animal, status code = ${response.status}`);
         }
         history.push("/AdminDashboard");
     };
@@ -108,7 +109,7 @@ function AdminCreate() {
 
 
     return (
-    <div>
+        <div>
         <NavBar/>
         <Grid container columnSpacing={1}>
             <Grid item xs={1}></Grid>
@@ -129,7 +130,7 @@ function AdminCreate() {
                 <Box sx={{ }}>
                     {/* <AdminCrudCard ></AdminCrudCard> */}
                     <Card >
-                <CardHeader title='Create a New Animal'/>
+                <CardHeader title='Edit an Animal'/>
                 <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
                     {/* <Item><FormsComponents/> */}
                     <Item>
@@ -211,7 +212,7 @@ function AdminCreate() {
               required
               id="outlined-required"
               label="Enter Something Fun"
-              value={descr}
+              value={animal.description}
               onChange={e => setDescr(e.target.value)}
             />
             </div>
@@ -334,4 +335,4 @@ function AdminCreate() {
 
 }
 
-export default AdminCreate
+export default AdminEdit

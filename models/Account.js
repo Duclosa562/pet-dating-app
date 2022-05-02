@@ -10,7 +10,6 @@ const accountSchema = new Schema({
         type: String,
         required: true
     },
-
     type: {
         type: String,
         enum: [
@@ -44,4 +43,5 @@ const accountSchema = new Schema({
         required: false
     }
 })
+
 module.exports = mongoose.model("Account", accountSchema, "accounts")

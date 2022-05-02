@@ -10,15 +10,17 @@ import logo from './logo.svg';
 import './App.css';
 import HomePage from './pages/HomePage';
 import AdminCRUD from './pages/AdminCRUD';
+import AdminEdit from './pages/AdminEdit';
 import PetProfile from './pages/PetProfile';
 import SearchPage from './pages/SearchPage';
 import AdminDashboard from './pages/AdminDashboard';
-
+import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './components/SiteNavLinks/Navigation.js';
 
 
 function App() {
+  // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
       <header className="App-header"></header>
@@ -26,6 +28,7 @@ function App() {
         <Routes>
             <Route path="/" exact element={<HomePage/>}></Route>
             <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
+			<Route path="/AdminEdit"  element={<AdminEdit/>}></Route>
             <Route path="/PetProfile" element={<PetProfile/>}></Route>
 			<Route path="/Search" element={<SearchPage/>}></Route>
 			<Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
