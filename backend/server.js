@@ -53,7 +53,7 @@ router.get('/api/:quantity', async function(req, res) {
     console.log('GET /api/:quantity');
     console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
 
-    db_req = _get_request_query(req)
+    var db_req = _get_request_query(req)
     
     if (req.params.quantity == 'many') {
         var data = await q.query_findMany(db_req.collection, db_req.query);
@@ -118,6 +118,21 @@ router.put('/api/update', async function(req, res) {
 
     res.status(200).send({"data": data});
 });
+
+/*****************************
+ * HEROKU DEPLY HANDLER
+ *****************************/
+
+// Accessing the path module
+const path = require("path");
+
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "../build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "..//build", "index.html"));
+});
+
 
 app.use(router);
 
