@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const router = express.Router()
 
 const Account = require('../models/Account');
@@ -36,4 +36,4 @@ router.post('/', (req, res) => {
         }))
 });
 
-module.exports = router;
+module.exports = router;*/

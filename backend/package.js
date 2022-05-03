@@ -1,4 +1,4 @@
-{
+/*{
     "name": "Capstone-Backend",
     "version": "0.1",
     "type": "commonjs",
@@ -22,4 +22,4 @@
         "http-proxy-middleware": "^2.0.4",
         "axios": "^0.26.1"
     }
-}
+}*/
