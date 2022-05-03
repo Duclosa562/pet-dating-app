@@ -31,7 +31,7 @@ const config = require('../src/config');
 
 // Connection parameters
 const { MongoClient, ObjectId } = require("mongodb");
-const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
+const uri = config.config.MONGODB_URI;
 const client = new MongoClient(uri);
 const db_name = config.config.DB_INSTANCE // 'PetDatingApp-Local';
 
