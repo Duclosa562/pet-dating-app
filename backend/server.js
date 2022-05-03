@@ -9,6 +9,7 @@ const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
 
+app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(cors());
 const router = express.Router()
@@ -122,7 +123,7 @@ router.put('/api/update', async function(req, res) {
 /*****************************
  * HEROKU DEPLY HANDLER
  *****************************/
-
+/*
 // Accessing the path module
 // const path = require("path");
 if (process.env.NODE_ENV === 'production'){
@@ -133,7 +134,7 @@ if (process.env.NODE_ENV === 'production'){
         response.sendFile(path.join(__dirname, "../", "build", "index.html"));
 
 });
-}
+}*/
 
 
 app.use(router);

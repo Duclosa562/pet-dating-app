@@ -89,7 +89,7 @@ function SearchPage(props) {
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
-                                        queries.query_deleteOne('Animals', "626b3c9ee92cb1b5ba4e36fe").then(
+                                        queries.query_findOne('Animals', {"breed": "Dog"}).then(
                                             (data) => someCallbackHandler(data)
                                         )
                                     }

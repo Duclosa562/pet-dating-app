@@ -23,6 +23,8 @@ Current Issues
 */
 
 
+const config = require('../src/config');
+
 /**************************************
     GLOBAL CONSTANTS
 ***************************************/
@@ -31,7 +33,7 @@ Current Issues
 const { MongoClient, ObjectId } = require("mongodb");
 const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
-const db_name = 'PetDatingApp-Local';
+const db_name = config.config.DB_INSTANCE // 'PetDatingApp-Local';
 
 // Collections
 const animalsCollection = 'Animals';
