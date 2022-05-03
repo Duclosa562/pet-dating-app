@@ -18,7 +18,7 @@ const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
 
-const Account = require('../models/Account');
+//const Account = require('../models/Account');
 // .. Shelter
 // .. Animal
 
