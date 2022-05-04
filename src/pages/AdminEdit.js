@@ -83,6 +83,8 @@ function AdminEdit({animal}) {
     const submitHandler = () => {
         const animalTest = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath}
         console.log(animalTest)
+        history('/AdminDashboard')
+
     }
 
 
@@ -322,7 +324,7 @@ function AdminEdit({animal}) {
             </Item>
         </CardContent>
         <CardActions  direction="column" style={{justifyContent: 'center'}}>
-            <Button variant='contained' onClick={() => {submitHandler() }}>Submit</Button>
+            <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
         </CardActions>
     </Card>
         </Box>
