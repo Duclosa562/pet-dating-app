@@ -44,6 +44,13 @@ function SearchPage(props) {
     const animalsCollection = 'Animals';
     const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
 
+    const [searchResults, setSearchResults] = React.useState([]);
+
+    async function searchHandler() {
+        let results = await queries.query_findMany('Animals', {name: "Roxy"});
+        setSearchResults(results);
+    }
+
     return (
         <div className='search-page'>
             <NavBar />
@@ -89,15 +96,21 @@ function SearchPage(props) {
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
-                                        queries.query_deleteOne('Animals', "626b3c9ee92cb1b5ba4e36fe").then(
-                                            (data) => someCallbackHandler(data)
-                                        )
+                                        // const results = [];
+                                        queries.query_findMany('Animals', {name: "Roxy"})
+                                        .then((res) => setSearchResults(res.data))
+                                        console.log("H", searchResults);
+                                        // searchHandler();
+                                        // console.log(searchResults);
+                                        // ).then(
+                                        //     someCallbackHandler(searchResults)
+                                        // )
                                     }
                                 }>Search</Button>
                         </Stack>
                     </Box>
                 </Box>
-                <SearchResults searchRes={[1, 2, 3, 4, 5, 6]}/>
+                <SearchResults searchRes={searchResults}/>
             </Container>
             
         </div>

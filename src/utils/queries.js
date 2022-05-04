@@ -137,7 +137,7 @@ async function _query_find(collection, query, quantity) {
 }
 
 async function query_findMany(collection, query) {
-    console.log('query_findMany()');
+    // console.log('query_findMany()');
     return await _query_find(collection, query, 'many');
 }
 
