@@ -197,21 +197,6 @@ async function query_findMany(collectionName, query) {
     return results;
 }
 
-// Might not need function - Calvin 
-// async function query_findById(collectionName, id) {
-//     var result;
-//     try {
-//         await client.connect();
-//         const db = client.db(db_name);
-//         const collection = db.collection(collectionName);
-//         //result = await db.collection.findOne(...);
-//         printQueryResult(query_findOne.name, collectionName, query, result);
-//     } finally {
-//         await client.close();
-//     }
-//     return result;
-// }
-
 /***************************************
     UPDATE Queries
 ***************************************/
