@@ -22,7 +22,7 @@ Current Issues
 
 */
 
-
+var util = require('util');
 const config = require('../src/config');
 
 /**************************************
@@ -272,7 +272,7 @@ async function executeQueries() {
     
 }
 
-//executeQueries();
+executeQueries();
 
 module.exports = {
     query_insertOne,
