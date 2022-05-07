@@ -76,7 +76,7 @@ function AdminDashboard({setAnimalToEdit}) {
         let results = await queries.query_findMany("Animals", {})
             .then((res) => setAnimals(res.data) )
 
-        console.log(results)
+        //console.log(results)
         // setAnimals(results.json())
         // const response = await fetch('/animals', {method: 'GET'});
         //const data = await response.json();
@@ -92,40 +92,41 @@ function AdminDashboard({setAnimalToEdit}) {
 
 
     // function to delete an Animal from the DB, re-renders the table too 
-    const onDeleteAnimal = async _id => {
+    const onDeleteAnimal = async (_id) => {
 
         console.log("Results of DEL are....");
+        console.log("ID is ")
+        console.log(_id)
         let results = await queries.query_deleteOne("Animals", _id)
-            .then((res) => setAnimals(res.data) )
+            // add error handler here somehow now sure
+            .then((res) => {
+                // console.log("ON DEL RESP IS: ") ??? Where am I supposed to get an error from?
+                // console.log(res)
+                // if(res.status === 204){
+                //     // reload the table
+                    loadAnimals()
+                // }
+                // else{
+                //     // need to send status here??
+                //     console.error("Failed to Delete Animal")
+                // }
+            }
 
-        console.log(results)
-
-
-        //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
-        //console.log(response)
-        //Datbase.printDeleteResults()
-
-
-
-
-        //const response = await fetch(`/Animals/${_id}`, {method: 'DELETE'});
-       //if(response.status === 204){
-            //const newAnimals = animals.filter(e => e._id !== _id);
-            //setAnimals(newAnimals);
-        //} else{
-            //console.error("Failed to delete Animal")
-        //}
+         )
     }
 
 
     
     // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
     const onEditAnimal = async (row) => {
-        //setAnimalToEdit(animal);
-        console.log("In onEditAnimal, row is...")
-        console.log(row)
+
         navigate("/AdminEdit", {state: row, replace: true})
-    }
+
+        //setAnimalToEdit(animal);
+    //     console.log("In onEditAnimal, row is...")
+    //     console.log(row)
+    //     navigate("/AdminEdit", {state: row, replace: true})
+     }
 
     return (
     <div>

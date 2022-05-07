@@ -57,17 +57,17 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
         </TableHead>
         <TableBody>
           {animals.map((row) => (
-            <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell align="right"><Avatar sx={{ border: 5, borderRadius: '50%'}}></Avatar></TableCell>
               <TableCell component="th" scope="row"> <Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.name}</Typography></TableCell>
               <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.age}</Typography></TableCell>
               <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.breed}</Typography></TableCell>
               <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.availability}</Typography></TableCell>
-              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.goodWithAnimals}</Typography></TableCell>
-              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.goodWithChildren}</Typography></TableCell>
-              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.mustBeLeashed}</Typography></TableCell>
+              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.good_with_animals === false ? 'No': row.good_with_animals === true? 'Yes': row.good_with_animals}</Typography></TableCell>
+              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.good_with_children === false ? 'No': row.good_with_children === true? 'Yes': row.good_with_children}</Typography></TableCell>
+              <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.must_be_leashed === false ? 'No': row.must_be_leashed === true? 'Yes': row.must_be_leashed}</Typography></TableCell>
               <TableCell align="right"><EditIcon onClick = {() => onEditAnimal(row)}></EditIcon></TableCell>
-              <TableCell align="right"><DeleteIcon onDeleteAnimal={onDeleteAnimal}></DeleteIcon></TableCell>
+              <TableCell align="right"><DeleteIcon onClick = {() => onDeleteAnimal(row._id)}></DeleteIcon></TableCell>
             </TableRow>
           ))}
         </TableBody>
