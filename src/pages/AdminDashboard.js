@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileCard from '../components/AdminCrudCard/AdminCrudCard';
 //import Database from '../temp_db/db_examples';
+const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#95D1CC' : '#FAFFAF',
@@ -53,13 +54,16 @@ const animalRecord1 = {
 
 
 function AdminDashboard({setAnimalToEdit}) {
-    function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
-        return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
-      };
-    const animals = [
-        createData("Months", 'Otis', 3, "Dog", "A cute dog.", "Adopted", "False", "True", "True", "True"),
+    // function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
+    //     return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
+    //   };
+    // const animals = [
+    //     createData("Months", 'Otis', 3, "Dog", "A cute dog.", "Adopted", "False", "True", "True", "True"),
       
-      ];
+    //   ];
+
+
+    const [animals, setAnimals] = useState([]);
 
 
     // State hook to manage animal data
@@ -68,19 +72,35 @@ function AdminDashboard({setAnimalToEdit}) {
 
     //populates the table component with data from the DB
     const loadAnimals = async () => {
-        const response = await fetch('/animals', {method: 'GET'});
-        const data = await response.json();
+        console.log("Results of GET are....");
+        let results = await queries.query_findMany("Animals", {})
+            .then((res) => setAnimals(res.data) )
+
+        console.log(results)
+        // setAnimals(results.json())
+        // const response = await fetch('/animals', {method: 'GET'});
+        //const data = await response.json();
         //setAnimals(data);
+
     }
 
     // trigger render on load
     useEffect(() => {
+        console.log("Inside use effect")
         loadAnimals();
     }, []);
 
 
     // function to delete an Animal from the DB, re-renders the table too 
     const onDeleteAnimal = async _id => {
+
+        console.log("Results of DEL are....");
+        let results = await queries.query_deleteOne("Animals", _id)
+            .then((res) => setAnimals(res.data) )
+
+        console.log(results)
+
+
         //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
         //console.log(response)
         //Datbase.printDeleteResults()

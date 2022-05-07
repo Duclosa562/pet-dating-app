@@ -16,6 +16,7 @@ import SearchPage from './pages/SearchPage';
 import AdminCreateAcc from './pages/AdminCreateAcc'
 import AdminDashboard from './pages/AdminDashboard';
 import UserCreateAcc from './pages/UserCreateAcc';
+import LandingPage from './pages/LandingPage';
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './components/SiteNavLinks/Navigation.js';
@@ -36,6 +37,7 @@ function App() {
 			<Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
 			<Route path="/AdminCreateAcc" element={<AdminCreateAcc/>}></Route>
 			<Route path="/UserCreateAcc" element={<UserCreateAcc/>}></Route>
+			<Route path="/LandingPage" element={<LandingPage/>}></Route>
         </Routes>
       </Router>
     </div>
