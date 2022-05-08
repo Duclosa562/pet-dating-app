@@ -8,7 +8,7 @@ import './SearchCard.css';
 function SearchCard({entry}) {
     console.log(entry)
     return (
-        <Link to={'/PetProfile'} className='link' style={{textDecoration: 'none'}}>
+        <Link to={`/PetProfile/${entry._id}`} state={{data: entry}} className='link' style={{textDecoration: 'none'}}>
             <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.3)", m: "20px", cursor: "pointer"}}>
                 <CardMedia component="img" alt="pet pict" height="200" image={require("../../images/fuecoco.png")} />
                 <CardContent>
