@@ -39,10 +39,22 @@ function someCallbackHandler(data) {
     console.log(data);
 }
 
+// this function operates asyncronously
+// it allows the remainder of the JavaScript in the browser to function while the call to db is made
+// within this function, it waits for the db call to resolve before passing results into 
+async function search() {
+    var results = await queries.query_findMany('Animals', {name: 'Roxy'});
+    // pass results into the function here
+}
+
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
     const animalsCollection = 'Animals';
     const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
+    async function searchHereMightWork() {
+        var results = await queries.query_findMany('Animals', {name: 'Roxy'});
+        console.log(results);
+    }
 
     return (
         <div className='search-page'>
@@ -88,8 +100,8 @@ function SearchPage(props) {
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={ () => {
-                                        queries.query_deleteOne('Animals', "626b3c9ee92cb1b5ba4e36fe").then(
+                            <Button variant='contained' onClick={ () => { 
+                                        queries.query_findOne('Animals', {"breed": "Cat", "name": "Otus", "good_with_animals": "false"}).then(
                                             (data) => someCallbackHandler(data)
                                         )
                                     }
@@ -99,7 +111,6 @@ function SearchPage(props) {
                 </Box>
                 <SearchResults searchRes={[1, 2, 3, 4, 5, 6]}/>
             </Container>
-            
         </div>
     )
 }

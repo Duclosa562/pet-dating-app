@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path')
 const app = express();
-require('./database.js');
+//require('./database.js');
 const q = require ('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
 
+app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(cors());
 const router = express.Router()
@@ -17,7 +18,7 @@ const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
 
-const Account = require('../models/Account');
+//const Account = require('../models/Account');
 // .. Shelter
 // .. Animal
 
@@ -122,7 +123,7 @@ router.put('/api/update', async function(req, res) {
 /*****************************
  * HEROKU DEPLY HANDLER
  *****************************/
-
+/*
 // Accessing the path module
 // const path = require("path");
 if (process.env.NODE_ENV === 'production'){
@@ -133,12 +134,18 @@ if (process.env.NODE_ENV === 'production'){
         response.sendFile(path.join(__dirname, "../", "build", "index.html"));
 
 });
-}
+}*/
+
+// Heroku guide
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+});
 
 
 app.use(router);
 
-const port = process.env.PORT || 5000;
+const port = 5000; //process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });

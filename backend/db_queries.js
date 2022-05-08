@@ -22,6 +22,8 @@ Current Issues
 
 */
 
+var util = require('util');
+const config = require('../src/config');
 
 /**************************************
     GLOBAL CONSTANTS
@@ -29,14 +31,40 @@ Current Issues
 
 // Connection parameters
 const { MongoClient, ObjectId } = require("mongodb");
-const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
+const uri = config.config.MONGODB_URI;
 const client = new MongoClient(uri);
-const db_name = 'PetDatingApp-Local';
+const db_name = config.config.DB_INSTANCE // 'PetDatingApp-Local';
 
 // Collections
 const animalsCollection = 'Animals';
 const sheltersCollection = 'Shelters';
 const accountsCollection = 'Accounts';
+
+/**************************************
+    UTILITY
+***************************************/
+
+function massage_query(query) {
+    try {
+        for (var key in query) {
+            if (query.hasOwnProperty(key)) {
+                if (key == 'good_with_animals' ||
+                    key == 'good_with_children' || 
+                    key == 'must_be_leashed') {
+                        if (query[key] == 'false') {
+                            console.log('massaged "false" to false');
+                            query[key] = false;
+                        } else if (query[key] == 'true') {
+                            console.log('massaged "true" to true');
+                            query[key] = true;
+                        }
+                    }
+            }
+        }
+    } catch {
+        console.log('Error in massage_query() function. Likely from query_insertRecord, but no gauranteed.');
+    }
+}
 
 /**************************************
     QUERIES
@@ -142,6 +170,7 @@ function printError(funcName, err) {
 
 // returns the inserted record
 async function query_insertOne(collectionName, record) {
+    massage_query(record);
     var result;
     try {
         await client.connect();
@@ -164,6 +193,7 @@ async function query_insertOne(collectionName, record) {
 
 // returns the first record matching <query> from <collection>
 async function query_findOne(collectionName, query) {
+    massage_query(query);
     var result;
     try {
         await client.connect();
@@ -179,6 +209,7 @@ async function query_findOne(collectionName, query) {
 
 // returns all records matching <query> from <collection>
 async function query_findMany(collectionName, query) {
+    massage_query(query);
     var results = [];
     try {
         await client.connect();
@@ -195,21 +226,6 @@ async function query_findMany(collectionName, query) {
     return results;
 }
 
-// Might not need function - Calvin 
-// async function query_findById(collectionName, id) {
-//     var result;
-//     try {
-//         await client.connect();
-//         const db = client.db(db_name);
-//         const collection = db.collection(collectionName);
-//         //result = await db.collection.findOne(...);
-//         printQueryResult(query_findOne.name, collectionName, query, result);
-//     } finally {
-//         await client.close();
-//     }
-//     return result;
-// }
-
 /***************************************
     UPDATE Queries
 ***************************************/
@@ -218,6 +234,7 @@ async function query_findMany(collectionName, query) {
 //  - the format of <update>: {$set: {attribute: value, .. }}
 //  - for now, options are not used
 async function query_updateOne(collectionName, query, update) {
+    massage_query(query);
     var result;
     try {
         const options = {};
@@ -241,6 +258,7 @@ async function query_updateOne(collectionName, query, update) {
 
 // deletes the first record matching <query> from <collection>
 async function query_deleteOne(collectionName, query) {
+    massage_query(query);
     var result;
     try {
         await client.connect();
@@ -285,7 +303,7 @@ async function executeQueries() {
     
 }
 
-//executeQueries();
+executeQueries();
 
 module.exports = {
     query_insertOne,
