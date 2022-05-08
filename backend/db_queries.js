@@ -48,7 +48,7 @@ function massage_query(query) {
             if (query.hasOwnProperty(key)) {
                 if (key == 'good_with_animals' ||
                     key == 'good_with_children' || 
-                    key == 'must_be_leased') {
+                    key == 'must_be_leashed') {
                         if (query[key] == 'false') {
                             console.log('massaged "false" to false');
                             query[key] = false;
