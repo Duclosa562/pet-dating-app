@@ -121,17 +121,10 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
-<<<<<<< HEAD
-                                        //search();                                           
-                                        queries.query_findOne('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
-                                            {console.log(results)}
-                                        );
-=======
                                         search();                                           
                                         // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
                                         //     {console.log(results)}
                                         // );
->>>>>>> cc4694fda64fd8980499c713c6f7f67988facd87
                                         // .then((res) => setSearchResults(res.data))
                                         // console.log("H", searchResults);
                                     }
