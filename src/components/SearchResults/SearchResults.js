@@ -14,7 +14,7 @@ function SearchResults({searchRes}) {
             <div>
                 <Divider sx={{p:1}}/>
                 <Grid container columns={{xs:2, md: 3}} sx={{mt:3}}>
-                    {searchRes.map((item, index) => <Grid item key={index} ><SearchCard /></Grid>)}
+                    {searchRes.map((item, index) => <Grid item key={index} ><SearchCard entry={item}/></Grid>)}
                 </Grid>
             </div>
             
