@@ -59,18 +59,13 @@ function SearchPage(props) {
     const handleGoodWChild = () => {setOptGoodWithChildren(!optGoodWithChildren)};
     const handleLeashAllTime = () => {setOptLeashedAtAllTimes(!optLeashedAtAllTimes)}
 
-    async function searchHandler() {
-        let results = await queries.query_findMany('Animals', {name: "Roxy"});
-        setSearchResults(results);
-    }
-
     const search = () => {
         const searchPref = {
             breed: optBreed,
-            //availability: optAvail,
+            availability: optAvail,
             good_with_animals: optGoodWithAnimals,
-            // good_with_children: optGoodWithChildren,
-            // must_be_leashed: optLeashedAtAllTimes,
+            good_with_children: optGoodWithChildren,
+            must_be_leashed: optLeashedAtAllTimes,
         }
         console.log("SEARCH PREFS:", searchPref);
         queries.query_findMany('Animals', searchPref).then(
@@ -126,10 +121,17 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
+<<<<<<< HEAD
                                         //search();                                           
                                         queries.query_findOne('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
                                             {console.log(results)}
                                         );
+=======
+                                        search();                                           
+                                        // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
+                                        //     {console.log(results)}
+                                        // );
+>>>>>>> cc4694fda64fd8980499c713c6f7f67988facd87
                                         // .then((res) => setSearchResults(res.data))
                                         // console.log("H", searchResults);
                                     }
