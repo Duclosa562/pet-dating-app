@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import './SearchCard.css';
 
 function SearchCard({entry}) {
-    console.log(entry)
     return (
         <Link to={`/PetProfile/${entry._id}`} state={{data: entry}} className='link' style={{textDecoration: 'none'}}>
             <Card sx={{ width: 245, background: "rgba(0, 0, 0, 0.3)", m: "20px", cursor: "pointer"}}>
