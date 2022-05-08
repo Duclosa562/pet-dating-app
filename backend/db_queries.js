@@ -45,20 +45,24 @@ const accountsCollection = 'Accounts';
 ***************************************/
 
 function massage_query(query) {
-    for (var key in query) {
-        if (query.hasOwnProperty(key)) {
-            if (key == 'good_with_animals' ||
-                key == 'good_with_children' || 
-                key == 'must_be_leased') {
-                    if (query[key] == 'false') {
-                        console.log('massaged "false" to false');
-                        query[key] = false;
-                    } else if (query[key] == 'true') {
-                        console.log('massaged "true" to true');
-                        query[key] = true;
+    try {
+        for (var key in query) {
+            if (query.hasOwnProperty(key)) {
+                if (key == 'good_with_animals' ||
+                    key == 'good_with_children' || 
+                    key == 'must_be_leased') {
+                        if (query[key] == 'false') {
+                            console.log('massaged "false" to false');
+                            query[key] = false;
+                        } else if (query[key] == 'true') {
+                            console.log('massaged "true" to true');
+                            query[key] = true;
+                        }
                     }
-                }
+            }
         }
+    } catch {
+        console.log('Error in massage_query() function. Likely from query_insertRecord, but no gauranteed.');
     }
 }
 
@@ -166,7 +170,7 @@ function printError(funcName, err) {
 
 // returns the inserted record
 async function query_insertOne(collectionName, record) {
-    massage_query(query);
+    massage_query(record);
     var result;
     try {
         await client.connect();
