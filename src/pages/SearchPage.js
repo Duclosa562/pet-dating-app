@@ -67,10 +67,10 @@ function SearchPage(props) {
     const search = () => {
         const searchPref = {
             breed: optBreed,
-            //availability: optAvail,
+            availability: optAvail,
             good_with_animals: optGoodWithAnimals,
             good_with_children: optGoodWithChildren,
-            must_be_leashed: optLeashedAtAllTimes,
+            // must_be_leashed: optLeashedAtAllTimes,
         }
         console.log("SEARCH PREFS:", searchPref);
         queries.query_findMany('Animals', searchPref).then(
@@ -126,10 +126,10 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
-                                        //search();                                           
-                                        queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
-                                            {console.log(results)}
-                                        );
+                                        search();                                           
+                                        // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
+                                        //     {console.log(results)}
+                                        // );
                                         // .then((res) => setSearchResults(res.data))
                                         // console.log("H", searchResults);
                                     }
