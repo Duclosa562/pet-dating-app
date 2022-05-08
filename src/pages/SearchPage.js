@@ -59,18 +59,13 @@ function SearchPage(props) {
     const handleGoodWChild = () => {setOptGoodWithChildren(!optGoodWithChildren)};
     const handleLeashAllTime = () => {setOptLeashedAtAllTimes(!optLeashedAtAllTimes)}
 
-    async function searchHandler() {
-        let results = await queries.query_findMany('Animals', {name: "Roxy"});
-        setSearchResults(results);
-    }
-
     const search = () => {
         const searchPref = {
             breed: optBreed,
             availability: optAvail,
             good_with_animals: optGoodWithAnimals,
             good_with_children: optGoodWithChildren,
-            // must_be_leashed: optLeashedAtAllTimes,
+            must_be_leashed: optLeashedAtAllTimes,
         }
         console.log("SEARCH PREFS:", searchPref);
         queries.query_findMany('Animals', searchPref).then(
