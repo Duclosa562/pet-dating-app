@@ -69,8 +69,8 @@ function SearchPage(props) {
             breed: optBreed,
             //availability: optAvail,
             good_with_animals: optGoodWithAnimals,
-            // good_with_children: optGoodWithChildren,
-            // must_be_leashed: optLeashedAtAllTimes,
+            good_with_children: optGoodWithChildren,
+            must_be_leashed: optLeashedAtAllTimes,
         }
         console.log("SEARCH PREFS:", searchPref);
         queries.query_findMany('Animals', searchPref).then(
