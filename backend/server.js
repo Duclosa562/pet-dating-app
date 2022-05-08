@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path')
 const app = express();
-require('./database.js');
+//require('./database.js');
 const q = require ('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
 
+app.enable('trust proxy');
 app.use(bodyParser.json());
 app.use(cors());
 const router = express.Router()
@@ -17,7 +18,7 @@ const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
 
-const Account = require('../models/Account');
+//const Account = require('../models/Account');
 // .. Shelter
 // .. Animal
 
@@ -53,7 +54,7 @@ router.get('/api/:quantity', async function(req, res) {
     console.log('GET /api/:quantity');
     console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
 
-    db_req = _get_request_query(req)
+    var db_req = _get_request_query(req)
     
     if (req.params.quantity == 'many') {
         var data = await q.query_findMany(db_req.collection, db_req.query);
@@ -120,24 +121,31 @@ router.put('/api/update', async function(req, res) {
 });
 
 /*****************************
- * TO FIX HEROKU DEPLOY ISSUE (ALEX)
- * NOTE: NODE_ENV might need to change to work on production
+ * HEROKU DEPLY HANDLER
  *****************************/
+/*
+// Accessing the path module
+// const path = require("path");
+if (process.env.NODE_ENV === 'production'){
+    // Step 1:
+    app.use(express.static(path.join(__dirname, "../")));
+    // Step 2:
+    app.get("*", function (request, response) {
+        response.sendFile(path.join(__dirname, "../", "build", "index.html"));
 
-if (process.env.NODE_ENV === 'develop') {
-    // Exprees will serve up production assets
-    app.use(express.static('client/build'));
-  
-    // Express serve up index.html file if it doesn't recognize route
-    const path = require('path');
-    app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-  }
+});
+}*/
+
+// Heroku guide
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+});
+
 
 app.use(router);
 
-const port = process.env.PORT || 5000;
+const port = 5000; //process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
