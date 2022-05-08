@@ -100,10 +100,10 @@ function SearchPage(props) {
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={ () => { searchHereMightWork();
-                                        /*queries.query_findOne('Animals', {"breed": "Dog"}).then(
+                            <Button variant='contained' onClick={ () => { 
+                                        queries.query_findOne('Animals', {"breed": "Cat", "name": "Otus", "good_with_animals": "false"}).then(
                                             (data) => someCallbackHandler(data)
-                                        )*/
+                                        )
                                     }
                                 }>Search</Button>
                         </Stack>
