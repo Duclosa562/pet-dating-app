@@ -39,6 +39,32 @@ const sheltersCollection = 'Shelters';
 const accountsCollection = 'Accounts';
 
 /**************************************
+    UTILITY
+***************************************/
+
+function massage_query(query) {
+    try {
+        for (var key in query) {
+            if (query.hasOwnProperty(key)) {
+                if (key == 'good_with_animals' ||
+                    key == 'good_with_children' || 
+                    key == 'must_be_leased') {
+                        if (query[key] == 'false') {
+                            console.log('massaged "false" to false');
+                            query[key] = false;
+                        } else if (query[key] == 'true') {
+                            console.log('massaged "true" to true');
+                            query[key] = true;
+                        }
+                    }
+            }
+        }
+    } catch {
+        console.log('Error while massaging query. Likely from query_insertRecord() function, but not gauranteed.');
+    }
+}
+
+/**************************************
     QUERIES
 ***************************************/
 
@@ -142,6 +168,7 @@ function printError(funcName, err) {
 
 // returns the inserted record
 async function query_insertOne(collectionName, record) {
+    massage_query(record);
     var result;
     try {
         await client.connect();
@@ -164,6 +191,7 @@ async function query_insertOne(collectionName, record) {
 
 // returns the first record matching <query> from <collection>
 async function query_findOne(collectionName, query) {
+    massage_query(query);
     var result;
     try {
         await client.connect();
@@ -179,6 +207,7 @@ async function query_findOne(collectionName, query) {
 
 // returns all records matching <query> from <collection>
 async function query_findMany(collectionName, query) {
+    massage_query(query);
     var results = [];
     try {
         await client.connect();
@@ -218,6 +247,7 @@ async function query_findMany(collectionName, query) {
 //  - the format of <update>: {$set: {attribute: value, .. }}
 //  - for now, options are not used
 async function query_updateOne(collectionName, query, update) {
+    massage_query(query);
     var result;
     try {
         const options = {};
@@ -241,6 +271,7 @@ async function query_updateOne(collectionName, query, update) {
 
 // deletes the first record matching <query> from <collection>
 async function query_deleteOne(collectionName, query) {
+    massage_query(query);
     var result;
     try {
         await client.connect();

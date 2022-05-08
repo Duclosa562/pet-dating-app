@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -45,3 +46,4 @@ const accountSchema = new Schema({
 })
 
 module.exports = mongoose.model("Account", accountSchema, "accounts")
+*/
