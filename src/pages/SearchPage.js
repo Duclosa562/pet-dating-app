@@ -126,8 +126,10 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
-                                        search();                                           
-                                        // queries.query_findMany('Animals', {breed: "Cat", availability: "Adopted"})
+                                        //search();                                           
+                                        queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
+                                            {console.log(results)}
+                                        );
                                         // .then((res) => setSearchResults(res.data))
                                         // console.log("H", searchResults);
                                     }
