@@ -21,12 +21,14 @@ import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './components/SiteNavLinks/Navigation.js';
 
+import NavBar from './components/NavBar/NavBar'
 
 function App() {
   // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
       <header className="App-header"></header>
+	  <NavBar />
       <Router>
         <Routes>
             <Route path="/" exact element={<HomePage/>}></Route>
