@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileCard from '../components/AdminCrudCard/AdminCrudCard';
 //import Database from '../temp_db/db_examples';
+const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#95D1CC' : '#FAFFAF',
@@ -53,13 +54,16 @@ const animalRecord1 = {
 
 
 function AdminDashboard({setAnimalToEdit}) {
-    function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
-        return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
-      };
-    const animals = [
-        createData("Months", 'Otis', 3, "Dog", "A cute dog.", "Adopted", "False", "True", "True", "True"),
+    // function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
+    //     return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
+    //   };
+    // const animals = [
+    //     createData("Months", 'Otis', 3, "Dog", "A cute dog.", "Adopted", "False", "True", "True", "True"),
       
-      ];
+    //   ];
+
+
+    const [animals, setAnimals] = useState([]);
 
 
     // State hook to manage animal data
@@ -68,44 +72,61 @@ function AdminDashboard({setAnimalToEdit}) {
 
     //populates the table component with data from the DB
     const loadAnimals = async () => {
-        const response = await fetch('/animals', {method: 'GET'});
-        const data = await response.json();
+        console.log("Results of GET are....");
+        let results = await queries.query_findMany("Animals", {})
+            .then((res) => setAnimals(res.data) )
+
+        //console.log(results)
+        // setAnimals(results.json())
+        // const response = await fetch('/animals', {method: 'GET'});
+        //const data = await response.json();
         //setAnimals(data);
+
     }
 
     // trigger render on load
     useEffect(() => {
+        console.log("Inside use effect")
         loadAnimals();
     }, []);
 
 
     // function to delete an Animal from the DB, re-renders the table too 
-    const onDeleteAnimal = async _id => {
-        //const response = Database.query_deleteOne(animalsCollection, animalRecord1)
-        //console.log(response)
-        //Datbase.printDeleteResults()
+    const onDeleteAnimal = async (_id) => {
 
+        console.log("Results of DEL are....");
+        console.log("ID is ")
+        console.log(_id)
+        let results = await queries.query_deleteOne("Animals", _id)
+            // add error handler here somehow now sure
+            .then((res) => {
+                // console.log("ON DEL RESP IS: ") ??? Where am I supposed to get an error from?
+                // console.log(res)
+                // if(res.status === 204){
+                //     // reload the table
+                    loadAnimals()
+                // }
+                // else{
+                //     // need to send status here??
+                //     console.error("Failed to Delete Animal")
+                // }
+            }
 
-
-
-        //const response = await fetch(`/Animals/${_id}`, {method: 'DELETE'});
-       //if(response.status === 204){
-            //const newAnimals = animals.filter(e => e._id !== _id);
-            //setAnimals(newAnimals);
-        //} else{
-            //console.error("Failed to delete Animal")
-        //}
+         )
     }
 
 
     
     // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
     const onEditAnimal = async (row) => {
-        //setAnimalToEdit(animal);
-        console.log("In onEditAnimal, row is...")
-        console.log(row)
+
         navigate("/AdminEdit", {state: row, replace: true})
-    }
+
+        //setAnimalToEdit(animal);
+    //     console.log("In onEditAnimal, row is...")
+    //     console.log(row)
+    //     navigate("/AdminEdit", {state: row, replace: true})
+     }
 
     return (
     <div>
