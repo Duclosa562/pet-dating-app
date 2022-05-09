@@ -49,7 +49,6 @@ async function search() {
 
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
-<<<<<<< HEAD
     // const animalsCollection = 'Animals';
     // const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
 
@@ -80,13 +79,6 @@ function SearchPage(props) {
         queries.query_findMany('Animals', searchPref).then(
             (res) => setSearchResults(res.data)
         )
-=======
-    const animalsCollection = 'Animals';
-    const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
-    async function searchHereMightWork() {
-        var results = await queries.query_findMany('Animals', {name: 'Roxy'});
-        console.log(results);
->>>>>>> origin/develop
     }
 
     return (
