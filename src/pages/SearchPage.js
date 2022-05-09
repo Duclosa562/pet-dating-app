@@ -39,8 +39,17 @@ const queries = require('../utils/queries');
 //     console.log(data);
 // }
 
+// this function operates asyncronously
+// it allows the remainder of the JavaScript in the browser to function while the call to db is made
+// within this function, it waits for the db call to resolve before passing results into 
+async function search() {
+    var results = await queries.query_findMany('Animals', {name: 'Roxy'});
+    // pass results into the function here
+}
+
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
+<<<<<<< HEAD
     // const animalsCollection = 'Animals';
     // const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
 
@@ -71,6 +80,13 @@ function SearchPage(props) {
         queries.query_findMany('Animals', searchPref).then(
             (res) => setSearchResults(res.data)
         )
+=======
+    const animalsCollection = 'Animals';
+    const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
+    async function searchHereMightWork() {
+        var results = await queries.query_findMany('Animals', {name: 'Roxy'});
+        console.log(results);
+>>>>>>> origin/develop
     }
 
     return (
@@ -134,7 +150,6 @@ function SearchPage(props) {
                 </Box>
                 <SearchResults searchRes={searchResults}/>
             </Container>
-            
         </div>
     )
 }

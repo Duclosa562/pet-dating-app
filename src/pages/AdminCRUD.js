@@ -83,6 +83,7 @@ function AdminCreate() {
     const submitHandler = () => {
         const animalTest = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath}
         console.log(animalTest)
+        history('/AdminDashboard')
     }
 
 
@@ -126,7 +127,7 @@ function AdminCreate() {
             </Stack>
             </Grid>
             <Grid item container xs={7}>
-                <Box sx={{ }}>
+                <Box sx={{width: "75%"  }}>
                     {/* <AdminCrudCard ></AdminCrudCard> */}
                     <Card >
                 <CardHeader title='Create a New Animal'/>
@@ -321,7 +322,7 @@ function AdminCreate() {
             </Item>
         </CardContent>
         <CardActions  direction="column" style={{justifyContent: 'center'}}>
-            <Button variant='contained' onClick={() => {submitHandler() }}>Submit</Button>
+            <Button variant='contained' onClick={() => submitHandler()}>Submit</Button>
         </CardActions>
     </Card>
         </Box>

@@ -22,6 +22,8 @@ Current Issues
 
 */
 
+var util = require('util');
+const config = require('../src/config');
 
 /**************************************
     GLOBAL CONSTANTS
@@ -29,9 +31,9 @@ Current Issues
 
 // Connection parameters
 const { MongoClient, ObjectId } = require("mongodb");
-const uri = "mongodb+srv://admin:QmEAuuqPj9qEJDkBt@cluster0.9a9u5.mongodb.net/test?retryWrites=true&w=majority";
+const uri = config.config.MONGODB_URI;
 const client = new MongoClient(uri);
-const db_name = 'PetDatingApp-Local';
+const db_name = config.config.DB_INSTANCE // 'PetDatingApp-Local';
 
 // Collections
 const animalsCollection = 'Animals';
@@ -61,6 +63,7 @@ function massage_query(query) {
         }
     } catch {
         console.log('Error while massaging query. Likely from query_insertRecord() function, but not gauranteed.');
+        console.log('Error in massage_query() function. Likely from query_insertRecord, but no gauranteed.');
     }
 }
 
@@ -224,21 +227,6 @@ async function query_findMany(collectionName, query) {
     return results;
 }
 
-// Might not need function - Calvin 
-// async function query_findById(collectionName, id) {
-//     var result;
-//     try {
-//         await client.connect();
-//         const db = client.db(db_name);
-//         const collection = db.collection(collectionName);
-//         //result = await db.collection.findOne(...);
-//         printQueryResult(query_findOne.name, collectionName, query, result);
-//     } finally {
-//         await client.close();
-//     }
-//     return result;
-// }
-
 /***************************************
     UPDATE Queries
 ***************************************/
@@ -316,7 +304,7 @@ async function executeQueries() {
     
 }
 
-//executeQueries();
+executeQueries();
 
 module.exports = {
     query_insertOne,

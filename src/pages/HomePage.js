@@ -13,6 +13,9 @@ function HomePage() {
       <Link to="/PetProfile"><button>PetProfile</button></Link>
       <Link to="/Search"><button>Search</button></Link>
       <Link to="/AdminDashboard"><button>AdminDashboard</button></Link> 
+      <Link to="/AdminCreateAcc"><button>AdminCreateAccount</button></Link> 
+      <Link to="/UserCreateAcc"><button>UserCreateAccount</button></Link> 
+      <Link to="/LandingPage"><button>LandingPage</button></Link> 
     </div>
     );
 }

@@ -89,7 +89,7 @@ function _build_get_url(collection, query, quantity) {
         return 'ERROR';
     }
 
-    var url = config.config.url;
+    var url = config.config.PROXY_URL;
     url = url + '/api/' + quantity;
     url = url + '?collection=' + collection;
 
@@ -106,15 +106,15 @@ function _build_get_url(collection, query, quantity) {
 }
 
 function _build_post_url() {
-    return config.config.url + '/api/insert';
+    return config.config.PROXY_URL + '/api/insert';
 }
 
 function _build_put_url() {
-    return config.config.url + '/api/update'
+    return config.config.PROXY_URL + '/api/update'
 }
 
 function _build_delete_url() {
-    return config.config.url + '/api/delete'
+    return config.config.PROXY_URL + '/api/delete'
 }
 
 /****************************

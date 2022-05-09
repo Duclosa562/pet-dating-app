@@ -29,6 +29,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { ConstructionOutlined } from '@mui/icons-material';
+const queries = require('../utils/queries');
 
 
 
@@ -49,6 +51,8 @@ const Item2 = styled(Paper)(({ theme }) => ({
     boxShadow: "5px",
   }));
 
+
+
 function AdminEdit({animal}) {
     const location = useLocation();
     console.log("location %s", JSON.stringify(location))
@@ -59,18 +63,20 @@ function AdminEdit({animal}) {
 
     const [name, setName] = useState(animal.name);
     const [age, setAge] = useState(animal.age);
-    const [ageUnits, setAgeUnits] = useState(animal.ageUnits);
+    const [ageUnits, setAgeUnits] = useState(animal.age_descriptor);
     const [breed, setBreed] = useState(animal.breed);
     const [avail, setAvail] = useState(animal.availability);
     const [descr, setDescr] = useState(animal.description);
 
 
     // will need a handle for the disposition to get this set properly
-    const [goodWithAnimals, setGoodWithAnimals] = useState(animal.goodWithAnimals);
-    const [goodWithChildren, setGoodWithChildren] = useState(animal.goodWithChildren);
-    const [mustBeLeashed, setMustBeLeashed] = useState(animal.mustBeLeashed);
+    const [goodWithAnimals, setGoodWithAnimals] = useState(animal.good_with_animals);
+    const [goodWithChildren, setGoodWithChildren] = useState(animal.good_with_children);
+    const [mustBeLeashed, setMustBeLeashed] = useState(animal.must_be_leashed);
 
     const [disp, setDisp] = useState([])
+    
+    console.log(String(animal.good_with_animals))
 
 
     //not sure how to handle this one
@@ -80,31 +86,43 @@ function AdminEdit({animal}) {
     // for nav back to dashboard on submit
     const history = useNavigate();
 
-    const submitHandler = () => {
-        const animalTest = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath}
+    const submitHandler = async () => {
+        const animalId = animal._id;
+
+        const animalTest = { _id:animalId, 
+            name:name, age:age, age_descriptor:ageUnits, breed:breed, availability:avail, description:descr, good_with_animals:goodWithAnimals, good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed}
+        if (animalTest.good_with_animals === 'true')
+            animalTest.good_with_animals = true;
+        else{
+            animalTest.good_with_animals = false;
+        }
+        if (animalTest.good_with_children === 'true'){
+            animalTest.good_with_children = true;
+        }
+        else{
+            animalTest.good_with_children = false;
+        }
+        if (animalTest.must_be_leashed === 'true'){
+            animalTest.must_be_leashed = true;
+        }
+        else{
+            animalTest.must_be_leashed = false;
+        }
+        
+            // console.log(animalTest)
+        console.log("inside edit submit handler")
+        console.log("Animal test is ")
         console.log(animalTest)
+        let results = await queries.query_updateOne("Animals", animalTest)
+            .then((res) => console.log(res) )
+
+        history('/AdminDashboard')
+
     }
 
 
 
-    //called by submit form button below, sends edit data to REST and gets edited json back
-    const editAnimal = async () => {
-        const editedAnimal = {};
-        const response = await fetch(`/animals/${animal._id}`, {
-            method: 'PUT',
-            body : JSON.stringify(editedAnimal),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.status === 200){
-            alert("Successfully Edited an Existing Animal!");
-        }
-        else{
-            alert(`Failed to Edit an Existing Animal, status code = ${response.status}`);
-        }
-        history.push("/AdminDashboard");
-    };
+
 
 
 
@@ -237,11 +255,11 @@ function AdminEdit({animal}) {
                             aria-labelledby="demo-radio-buttons-group-label"
                             defaultValue="Weeks"
                             name="dispositionAdd"
-                            value={goodWithAnimals}
+                            value={String(animal.good_with_animals)}
                             onChange={e => setGoodWithAnimals(e.target.value)}
                         >
-                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                            <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="false" control={<Radio />} label="No" />
                         </RadioGroup>
                     </FormControl>
                     </Item2>
@@ -254,11 +272,11 @@ function AdminEdit({animal}) {
                             aria-labelledby="demo-radio-buttons-group-label"
                             defaultValue="Weeks"
                             name="dispositionAdd"
-                            value={goodWithChildren}
+                            value={String(animal.good_with_children)}
                             onChange={e => setGoodWithChildren(e.target.value)}
                         >
-                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                            <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="false" control={<Radio />} label="No" />
                         </RadioGroup>
                     </FormControl>
                     </Item2>
@@ -269,13 +287,13 @@ function AdminEdit({animal}) {
                         <FormLabel id="demo-radio-buttons-group-label">Must Be Leashed?</FormLabel>
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="Weeks"
+                            defaultValue="Yes"
                             name="dispositionAdd"
-                            value={mustBeLeashed}
+                            value={String(mustBeLeashed)}
                             onChange={e => setMustBeLeashed(e.target.value)}
                         >
-                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="False" control={<Radio />} label="No" />
+                            <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                            <FormControlLabel value="false" control={<Radio />} label="No" />
                         </RadioGroup>
                     </FormControl>
                     </Item2>
@@ -322,7 +340,7 @@ function AdminEdit({animal}) {
             </Item>
         </CardContent>
         <CardActions  direction="column" style={{justifyContent: 'center'}}>
-            <Button variant='contained' onClick={() => {submitHandler() }}>Submit</Button>
+            <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
         </CardActions>
     </Card>
         </Box>
