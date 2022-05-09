@@ -6,23 +6,23 @@ import Button from '@mui/material/Button';
 
 import './ProfileCard.css';
 
-function ProfileCard() {
-    let tempDesc = "This is a template and a pokemon. Actual description from database to be placed here.";
+function ProfileCard({petData}) {
+    const petInfo = petData.data;
     return (
         <div className='profile-card'>
             <Card >
-                <CardHeader title='Fuecoco' subheader='Pokemon' />
+                <CardHeader title={petInfo.name} subheader={petInfo.breed} />
                 <CardContent classes='pet-content'> 
-                    <div>Status: Available</div>
-                    <div>Date Added: 04-18-2022</div>
-                    <div>Breed: FireType</div>
+					<div>Age: {petInfo.age} {petInfo.age_descriptor} old</div> 
+                    <div>Status: {petInfo.availability}</div>
+                    <div>Date Added: {petInfo.date_created}</div>
                     <div>
                         <ul>Disposition:
                             <li>Good with other animals</li>
                             <li>Good with Children</li>
                             <li>Animal must be leased at all times</li>
                     </ul></div>
-                    <div>Description: {tempDesc}</div>
+                    <div>Description: {petInfo.description}</div>
                 </CardContent>
                 <CardActions>
                     <Button variant='contained'>ADOPT NOW</Button>
