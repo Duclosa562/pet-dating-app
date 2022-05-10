@@ -27,10 +27,12 @@ function configTheConfig(config) {
     } else {
         config.MONGODB_URI = process.env.MONGODB_URI;
     }
+
+    return config;
 }
 
 var config = {};
-configTheConfig(config);
+config = configTheConfig(config);
 console.log(config);
 
 module.exports = {
