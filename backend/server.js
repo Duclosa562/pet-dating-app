@@ -18,6 +18,12 @@ const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
 
+/*****************************
+ * Serve React App
+ *****************************/
+
+
+
 //const Account = require('../models/Account');
 // .. Shelter
 // .. Animal
@@ -138,8 +144,12 @@ if (process.env.NODE_ENV === 'production'){
 
 // Heroku guide
 app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build'))
+});*/
+
+app.get('/', function(req, res) {
+    
 });
 
 
