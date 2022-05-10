@@ -129,8 +129,8 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
-                                        //search();                                           
-                                        queries.query_accountIsAdmin('neukamsAdmin').then((results) => {console.log(results)});
+                                        search();                                           
+                                        //queries.query_accountIsAdmin('neukamsAdmin').then((results) => {console.log(results)});
                                         // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
                                         //     {console.log(results)}
                                         // );
