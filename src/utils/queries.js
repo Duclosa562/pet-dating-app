@@ -228,6 +228,10 @@ async function query_deleteOne(collection, id) {
 /**
  * 
  * @param {*} user = {'type': "<User or ShelterAdmin>", 'username': "value", 'password': "value"}
+ * 
+ * Returns True if the user JSON object with each parameter matches an account in the database
+ * Use it to 'Login' a user
+ * 
  */
 async function query_accountLogin(user) {
 
@@ -257,6 +261,10 @@ async function query_accountLogin(user) {
 /**
  * 
  * @param {*} user = {'type': '<User or ShelterAdmin', 'username': 'value'}
+ * 
+ * Returns True if the user account exists (JSON object type and username match a user)
+ * Use it to verify if an account exists
+ * 
  */
 async function query_accountExists(user) {
 
