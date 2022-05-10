@@ -304,7 +304,7 @@ async function executeQueries() {
     
 }
 
-executeQueries();
+//executeQueries();
 
 module.exports = {
     query_insertOne,

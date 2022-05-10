@@ -305,7 +305,7 @@ async function query_accountIsAdmin(username) {
     return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }
 
-module.exports = {
+/*module.exports = {
     query_findMany,
     query_findOne,
     query_insertOne,
@@ -314,4 +314,13 @@ module.exports = {
     query_accountLogin,
     query_accountExists,
     query_accountIsAdmin
-}
+}*/
+
+export {query_findMany,
+    query_findOne,
+    query_insertOne,
+    query_updateOne,
+    query_deleteOne,
+    query_accountLogin,
+    query_accountExists,
+    query_accountIsAdmin};
