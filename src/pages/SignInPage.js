@@ -15,6 +15,7 @@ function SignInPage() {
   function loginSubmit() {
     console.log(username);
     console.log(password);
+    console.log(isAdmin);
   }
 
   return (
@@ -30,7 +31,7 @@ function SignInPage() {
         <Grid item xs={12}>
           <h2>User/Admin Login</h2>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} >
           <TextField label="Username" onChange={(e) => setUsername(e.target.value)}></TextField>
         </Grid>
         <Grid item xs={12}>
