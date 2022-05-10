@@ -221,11 +221,70 @@ async function query_deleteOne(collection, id) {
     return await response.json();
 }
 
+/****************************
+ * ACCOUNT (CUSTOM) Queries
+ ****************************/
+
+/**
+ * 
+ * @param {*} user = {'type': "<User or ShelterAdmin>", 'username': "value", 'password': "value"}
+ */
+async function query_accountLogin(user) {
+
+    for(var key in user) {
+        if (user.hasOwnProperty(key)) {
+            if (key != 'type' &&
+                key != 'username' &&
+                key != 'password') {
+                    console.log('Error: parameter user (json) must have only 3 keys: type, username, password. Found key value ' + key);
+                }
+        }
+    }
+
+    var result = await query_findOne('Accounts', user);
+    console.log(result);
+    console.log(result == {});
+    console.log(result != {});
+
+    if (result.data == null) {
+        console.log('login = false');
+        return false;
+    }
+    console.log('login = true');
+    return true;
+}
+
+/**
+ * 
+ * @param {*} user = {'type': '<User or ShelterAdmin', 'username': 'value'}
+ */
+async function query_accountExists(user) {
+
+    for(var key in user) {
+        if (user.hasOwnProperty(key)) {
+            if (key != 'type' &&
+                key != 'username') {
+                    console.log('Error: parameter user (json) must have only 2 keys: username, password. Found key value ' + key);
+                }
+        }
+    }
+
+    var result = await query_findOne('Accounts', user);
+
+    if (result.data == null) {
+        console.log('account exists = false');
+        return false;
+    }
+    console.log('account exists = true');
+    return true;
+}
 
 module.exports = {
     query_findMany,
     query_findOne,
     query_insertOne,
     query_updateOne,
-    query_deleteOne
+    query_deleteOne,
+    query_accountLogin,
+    query_accountExists
 }
