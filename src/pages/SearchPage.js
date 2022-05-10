@@ -43,7 +43,7 @@ const queries = require('../utils/queries');
 // it allows the remainder of the JavaScript in the browser to function while the call to db is made
 // within this function, it waits for the db call to resolve before passing results into 
 async function search() {
-    var results = await queries.query_findMany('Animals', {name: 'Roxy'});
+    var results = await queries.query_findMany('Animals', {name: 'Otus', breed: 'Cat'});
     // pass results into the function here
 }
 
