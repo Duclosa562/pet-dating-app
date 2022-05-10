@@ -272,7 +272,7 @@ async function query_accountExists(user) {
         if (user.hasOwnProperty(key)) {
             if (key != 'type' &&
                 key != 'username') {
-                    console.log('Error: parameter user (json) must have only 2 keys: username, password. Found key value ' + key);
+                    console.log('Error: parameter user (json) must have only 2 keys: type, username. Found key value ' + key);
                 }
         }
     }
@@ -280,11 +280,29 @@ async function query_accountExists(user) {
     var result = await query_findOne('Accounts', user);
 
     if (result.data == null) {
-        console.log('account exists = false');
+        //console.log('account exists = false');
         return false;
     }
-    console.log('account exists = true');
+    //console.log('account exists = true');
     return true;
+}
+
+/**
+ * 
+ * @param {*} username = String, the username of the account that you want to check if is admin
+ * 
+ * Returns True if it's an admin account, False otherwise
+ * Use it to check if an account is an admin
+ * 
+ */
+
+async function query_accountIsAdmin(username) {
+
+    if (typeof username != 'string') {
+        return 'Error! username must be a string'
+    }
+
+    return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }
 
 module.exports = {
@@ -294,5 +312,6 @@ module.exports = {
     query_updateOne,
     query_deleteOne,
     query_accountLogin,
-    query_accountExists
+    query_accountExists,
+    query_accountIsAdmin
 }

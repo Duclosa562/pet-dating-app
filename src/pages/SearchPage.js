@@ -130,7 +130,7 @@ function SearchPage(props) {
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
                                         //search();                                           
-                                        queries.query_accountExists({'type': 'User', 'username': 'neukams'}).then((results) => {console.log(results)});
+                                        queries.query_accountIsAdmin('neukamsAdmin').then((results) => {console.log(results)});
                                         // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
                                         //     {console.log(results)}
                                         // );
