@@ -28,8 +28,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
-	  <NavBar />
       <Router>
+	  	<NavBar />
         <Routes>
             <Route path="/" exact element={<HomePage/>}></Route>
             <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
