@@ -31,6 +31,7 @@ function configTheConfig(config) {
 
 var config = {};
 configTheConfig(config);
+console.log(config);
 
 module.exports = {
     config
