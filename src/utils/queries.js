@@ -125,6 +125,8 @@ async function _query_find(collection, query, quantity) {
 
     console.log('The config object we loaded contains:');
     console.log(config.config);
+    console.log('document.location.href:');
+    console.log(document.location.href);
 
     if (_valid_collection(collection) === false) {
         return _error_json('Invalid Collection Paramter');
