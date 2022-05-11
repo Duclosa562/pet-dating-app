@@ -30,7 +30,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { ConstructionOutlined } from '@mui/icons-material';
+import Avatar from '../components/ImageAvatar/ImageAvatar';
 const queries = require('../utils/queries');
+
 
 
 
@@ -80,7 +82,7 @@ function AdminEdit({animal}) {
 
 
     //not sure how to handle this one
-    const [img, setImg] = useState(animal.filesystem_location);
+    const [img, setImg] = useState(animal.image);
 
 
     // for nav back to dashboard on submit
@@ -92,7 +94,8 @@ function AdminEdit({animal}) {
         const animalTest = { _id:animalId, 
             name:name, age:age, age_descriptor:ageUnits, breed:breed, 
             availability:avail, description:descr, good_with_animals:goodWithAnimals, 
-            good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, filesystem_location:img}
+            good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img}
+
         if (animalTest.good_with_animals === 'true')
             animalTest.good_with_animals = true;
         else{
@@ -132,6 +135,7 @@ function AdminEdit({animal}) {
         reader.readAsDataURL(file);
         reader.onload = function () {
           console.log(reader.result);
+          setImg(reader.result);
           return reader.result;
         };
         reader.onerror = function (error) {
@@ -144,7 +148,9 @@ function AdminEdit({animal}) {
         console.log(event);
         event.preventDefault();
         let encodedImg = getBase64(event.target.files[0]);
-        setImg(encodedImg);
+        console.log("encoded Img data is: ");
+        console.log(encodedImg);
+        //setImg(encodedImg);
 
     }
 
@@ -162,7 +168,7 @@ function AdminEdit({animal}) {
                 justifyContent="center">
                 <Stack>
                     <Box >
-                        <ImageAvatarCrud props={img}></ImageAvatarCrud>
+                        <Avatar props={img}></Avatar>
                     </Box>
                     <Box >
                         <Stack direction="row" alignItems="center" spacing={2}>

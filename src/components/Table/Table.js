@@ -58,7 +58,7 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
         <TableBody>
           {animals.map((row) => (
             <TableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell align="right"><Avatar sx={{ border: 5, borderRadius: '50%'}}></Avatar></TableCell>
+              <TableCell align="right"><Avatar props={row.image} sx={{ border: 5, borderRadius: '50%'}}></Avatar></TableCell>
               <TableCell component="th" scope="row"> <Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.name}</Typography></TableCell>
               <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.age}</Typography></TableCell>
               <TableCell align="right"><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>{row.breed}</Typography></TableCell>

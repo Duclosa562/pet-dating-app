@@ -24,6 +24,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -31,6 +32,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Carousel from '../components/Carousel/Carousel'
 //import { useForm } from "react-hook-form";
+const queries = require('../utils/queries');
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -53,12 +55,29 @@ const Item2 = styled(Paper)(({ theme }) => ({
 function LandingPage() {
     const location = useLocation();
 
+    //populates the table component with data from the DB
+    const loadAnimals = async () => {
+        console.log("Results of GET are....");
+        let results = await queries.query_findMany("Animals", {})
+            .then((res) => getCarouselImages(res.data) )
+    }
+
+
+    const imagesForCarousel = {}
 
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
 
+    const getCarouselImages = async (results) =>{
+        //extract images and store 
+        for(let i = 0; i < results.length && i < 3; i++){
+            imagesForCarousel[i]= results[i].image;
+        }
+        console.log("images for carousel are...");
+        console.log(imagesForCarousel);
 
+    }
 
     // for nav back to dashboard on submit
     const history = useNavigate();
@@ -74,6 +93,11 @@ function LandingPage() {
 
         //history('/AdminDashboard')
     }
+    // trigger render on load
+    useEffect(() => {
+        console.log("Inside use effect")
+        loadAnimals();
+    }, []);
 
 
 
@@ -85,7 +109,7 @@ function LandingPage() {
 
             <Grid item container xs={7}>
                 <Box sx={{width: "75%"  }}>
-                <Carousel></Carousel>
+                <Carousel items={imagesForCarousel}></Carousel>
                     <Card >
                         <CardHeader title='Welcome to insert_app_name_here'/>
                         <CardContent classes='landingPage'  direction="column" alignItems="center" justifyContent="center"> 

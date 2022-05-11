@@ -29,6 +29,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Avatar from '../components/ImageAvatar/ImageAvatar';
 const queries = require('../utils/queries');
 //import { useForm } from "react-hook-form";
 
@@ -75,7 +76,7 @@ function AdminCreate() {
 
 
     //not sure how to handle this one
-    const [imgPath, setImgPath] = useState();
+    const [img, setImg] = useState();
 
 
     // for nav back to dashboard on submit
@@ -85,7 +86,9 @@ function AdminCreate() {
         //const animalId = animal._id;
 
         const animalTest = {
-            name:name, age:age, age_descriptor:ageUnits, breed:breed, availability:avail, description:descr, good_with_animals:goodWithAnimals, good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed}
+            name:name, age:age, age_descriptor:ageUnits, breed:breed, 
+            availability:avail, description:descr, good_with_animals:goodWithAnimals,
+             good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img}
         if (animalTest.good_with_animals === 'true')
             animalTest.good_with_animals = true;
         else{
@@ -103,8 +106,6 @@ function AdminCreate() {
         else{
             animalTest.must_be_leashed = false;
         }
-        
-            // console.log(animalTest)
         console.log("inside create submit handler")
         console.log("Animal test is ")
         console.log(animalTest)
@@ -114,8 +115,33 @@ function AdminCreate() {
         history('/AdminDashboard')
     }
 
+    const Input = styled('input')({
+        display: 'none',
+      });
 
+    function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          console.log(reader.result);
+          setImg(reader.result);
+          return reader.result;
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        };
+    }
 
+    const imgSubmitHandler = async (event) => {
+        console.log("Inside image handler, event is: ");
+        console.log(event);
+        event.preventDefault();
+        let encodedImg = getBase64(event.target.files[0]);
+        console.log("encoded Img data is: ");
+        console.log(encodedImg);
+        //setImg(encodedImg);
+
+    }
 
 
     return (
@@ -129,10 +155,17 @@ function AdminCreate() {
             justifyContent="center">
             <Stack>
                 <Box >
-                    <ImageAvatarCrud></ImageAvatarCrud>
+                    <Avatar props={img}></Avatar>
                 </Box>
                 <Box >
-                    <UploadPhoto></UploadPhoto>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                    <label htmlFor="contained-button-file">
+                    <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => imgSubmitHandler(event)}/>
+                    <Button variant="contained" component="span">
+                    Upload Profile Picture
+                    </Button>
+                    </label>
+                </Stack>
                 </Box>
             </Stack>
             </Grid>
