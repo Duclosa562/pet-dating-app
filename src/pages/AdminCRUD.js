@@ -29,6 +29,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+const queries = require('../utils/queries');
 //import { useForm } from "react-hook-form";
 
 
@@ -80,31 +81,40 @@ function AdminCreate() {
     // for nav back to dashboard on submit
     const history = useNavigate();
 
-    const submitHandler = () => {
-        const animalTest = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath}
+    const submitHandler = async () => {
+        //const animalId = animal._id;
+
+        const animalTest = {
+            name:name, age:age, age_descriptor:ageUnits, breed:breed, availability:avail, description:descr, good_with_animals:goodWithAnimals, good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed}
+        if (animalTest.good_with_animals === 'true')
+            animalTest.good_with_animals = true;
+        else{
+            animalTest.good_with_animals = false;
+        }
+        if (animalTest.good_with_children === 'true'){
+            animalTest.good_with_children = true;
+        }
+        else{
+            animalTest.good_with_children = false;
+        }
+        if (animalTest.must_be_leashed === 'true'){
+            animalTest.must_be_leashed = true;
+        }
+        else{
+            animalTest.must_be_leashed = false;
+        }
+        
+            // console.log(animalTest)
+        console.log("inside create submit handler")
+        console.log("Animal test is ")
         console.log(animalTest)
+        let results = await queries.query_insertOne("Animals", animalTest)
+            .then((res) => console.log(res) )
+
         history('/AdminDashboard')
     }
 
 
-    //called by submit form button below, sends edit data to REST and gets edited json back
-    const createAnimal = async () => {
-        const createAnimal = {name, age, ageUnits, breed, avail, descr, goodWithAnimals, goodWithChildren, mustBeLeashed, disp, imgPath};
-        const response = await fetch(`/animalsCreate`, {
-            method: 'POST',
-            body : JSON.stringify(createAnimal),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        if (response.status === 200){
-            alert("Successfully Created an Existing Animal!");
-        }
-        else{
-            alert(`Failed to Create a New Animal, status code = ${response.status}`);
-        }
-        history.push("/AdminDashboard");
-    };
 
 
 

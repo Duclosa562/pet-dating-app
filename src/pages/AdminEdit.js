@@ -80,7 +80,7 @@ function AdminEdit({animal}) {
 
 
     //not sure how to handle this one
-    const [imgPath, setImgPath] = useState(animal.path);
+    const [img, setImg] = useState(animal.filesystem_location);
 
 
     // for nav back to dashboard on submit
@@ -90,7 +90,9 @@ function AdminEdit({animal}) {
         const animalId = animal._id;
 
         const animalTest = { _id:animalId, 
-            name:name, age:age, age_descriptor:ageUnits, breed:breed, availability:avail, description:descr, good_with_animals:goodWithAnimals, good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed}
+            name:name, age:age, age_descriptor:ageUnits, breed:breed, 
+            availability:avail, description:descr, good_with_animals:goodWithAnimals, 
+            good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, filesystem_location:img}
         if (animalTest.good_with_animals === 'true')
             animalTest.good_with_animals = true;
         else{
@@ -121,7 +123,30 @@ function AdminEdit({animal}) {
     }
 
 
+    const Input = styled('input')({
+        display: 'none',
+      });
 
+    function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+          console.log(reader.result);
+          return reader.result;
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        };
+    }
+
+    const imgSubmitHandler = async (event) => {
+        console.log("Inside image handler, event is: ");
+        console.log(event);
+        event.preventDefault();
+        let encodedImg = getBase64(event.target.files[0]);
+        setImg(encodedImg);
+
+    }
 
 
 
@@ -132,17 +157,24 @@ function AdminEdit({animal}) {
         <Grid container columnSpacing={1}>
             <Grid item xs={1}></Grid>
             <Grid item container xs={3} 
-            direction="column"
-            alignItems="center"
-            justifyContent="center">
-            <Stack>
-                <Box >
-                    <ImageAvatarCrud></ImageAvatarCrud>
-                </Box>
-                <Box >
-                    <UploadPhoto></UploadPhoto>
-                </Box>
-            </Stack>
+                direction="column"
+                alignItems="center"
+                justifyContent="center">
+                <Stack>
+                    <Box >
+                        <ImageAvatarCrud props={img}></ImageAvatarCrud>
+                    </Box>
+                    <Box >
+                        <Stack direction="row" alignItems="center" spacing={2}>
+                            <label htmlFor="contained-button-file">
+                            <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => imgSubmitHandler(event)}/>
+                            <Button variant="contained" component="span">
+                            Upload Profile Picture
+                            </Button>
+                            </label>
+                        </Stack>
+                    </Box>
+                </Stack>
             </Grid>
             <Grid item container xs={7}>
                 <Box sx={{ }}>
