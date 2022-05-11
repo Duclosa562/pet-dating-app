@@ -123,6 +123,9 @@ function _build_delete_url() {
 
 async function _query_find(collection, query, quantity) {
 
+    console.log('The config object we loaded contains:');
+    console.log(config.config);
+
     if (_valid_collection(collection) === false) {
         return _error_json('Invalid Collection Paramter');
     }
