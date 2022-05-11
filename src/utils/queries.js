@@ -6,12 +6,34 @@ This file allows us to interact with the Proxy server and make calls to the data
 
 const config = require('../config');
 
+console.log('The config object we loaded contains:');
+console.log(config.config);
+console.log('document.location.href:');
+
+var loc = document.location.href;
+if (String(loc.slice(8)).search('/') != -1) {
+    loc = loc.slice(0, String(loc.slice(8)).search('/') + 8);
+}
+console.log('browser locaiton = ' + loc);
+config.config.PROXY_URL = loc;
+
+
+/*
+console.log('full url = ' + loc);
+console.log('loc.slice(8) = ' + loc.slice(8));
+console.log('loc.slice(8).search("/") = ' + loc.slice(8).search('/'));
+loc = loc.slice(0, String(loc.slice(8)).search('/') + 8);
+console.log(loc);
+console.log(loc.slice(0, -1));
+// random comment here!
+*/
+
+
+
 
 /****************************
  * Validation
  ****************************/
-
-
 
 
 /****************************
@@ -90,6 +112,7 @@ function _build_get_url(collection, query, quantity) {
     }
 
     var url = config.config.PROXY_URL;
+    // HERE
     url = url + '/api/' + quantity;
     url = url + '?collection=' + collection;
 
@@ -106,14 +129,17 @@ function _build_get_url(collection, query, quantity) {
 }
 
 function _build_post_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/insert';
 }
 
 function _build_put_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/update'
 }
 
 function _build_delete_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/delete'
 }
 
@@ -122,13 +148,6 @@ function _build_delete_url() {
  ****************************/
 
 async function _query_find(collection, query, quantity) {
-
-    console.log('The config object we loaded contains:');
-    console.log(config.config);
-    console.log('document.location.href:');
-    var loc = document.location.href;
-    console.log(loc);
-    // random comment here!
 
     if (_valid_collection(collection) === false) {
         return _error_json('Invalid Collection Paramter');
