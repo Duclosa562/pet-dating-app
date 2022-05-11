@@ -15,29 +15,29 @@ import '../styles/SearchPage.css';
 
 const queries = require('../utils/queries');
 
-const animalRecord1 = {
-    "name": "Dog From the UI",
-    "breed": "Dog",
-    "good_with_animals": true,
-    "good_with_children": true,
-    "must_be_leashed": false,
-    "availability": "Available",
-    "description": "Most loveable pit bull on the planet",
-    "date_created": "04/28/2022",
-    "age": 12,
-    "age_descriptor": "years",
-    "filesystem_location": "src/images/some_oid.jpeg",
-    "shelter_oid": "6254368a11c4ca8be3b22ad1"
-}
+// const animalRecord1 = {
+//     "name": "Dog From the UI",
+//     "breed": "Dog",
+//     "good_with_animals": true,
+//     "good_with_children": true,
+//     "must_be_leashed": false,
+//     "availability": "Available",
+//     "description": "Most loveable pit bull on the planet",
+//     "date_created": "04/28/2022",
+//     "age": 12,
+//     "age_descriptor": "years",
+//     "filesystem_location": "src/images/some_oid.jpeg",
+//     "shelter_oid": "6254368a11c4ca8be3b22ad1"
+// }
 
-const animalUpdate1 = {
-    "_id": "626b3c9ee92cb1b5ba4e36fe",
-    "name": "Chomper (name updated via UI)"
-}
+// const animalUpdate1 = {
+//     "_id": "626b3c9ee92cb1b5ba4e36fe",
+//     "name": "Chomper (name updated via UI)"
+// }
 
-function someCallbackHandler(data) {
-    console.log(data);
-}
+// function someCallbackHandler(data) {
+//     console.log(data);
+// }
 
 // this function operates asyncronously
 // it allows the remainder of the JavaScript in the browser to function while the call to db is made
@@ -49,11 +49,36 @@ async function search() {
 
 function SearchPage(props) {
     const speciesOptions = ["Dog", "Cat", "Other"];
-    const animalsCollection = 'Animals';
-    const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
-    async function searchHereMightWork() {
-        var results = await queries.query_findMany('Animals', {name: 'Roxy'});
-        console.log(results);
+    // const animalsCollection = 'Animals';
+    // const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
+
+    // Search param states
+    const [optBreed, setOptBreed] = React.useState("");
+    const [optAvail, setOptAvail] = React.useState("")
+    const [optGoodWithAnimals, setOptGoodWithAnimals] = React.useState(false);
+    const [optGoodWithChildren, setOptGoodWithChildren] = React.useState(false);
+    const [optLeashedAtAllTimes, setOptLeashedAtAllTimes] = React.useState(false);
+
+    // Search result states
+    const [searchResults, setSearchResults] = React.useState([]);
+    
+    // Checkbox handlers
+    const handleGoodWAnimals = () => {setOptGoodWithAnimals(!optGoodWithAnimals)};
+    const handleGoodWChild = () => {setOptGoodWithChildren(!optGoodWithChildren)};
+    const handleLeashAllTime = () => {setOptLeashedAtAllTimes(!optLeashedAtAllTimes)}
+
+    const search = () => {
+        const searchPref = {
+            breed: optBreed,
+            availability: optAvail,
+            good_with_animals: optGoodWithAnimals,
+            good_with_children: optGoodWithChildren,
+            must_be_leashed: optLeashedAtAllTimes,
+        }
+        console.log("SEARCH PREFS:", searchPref);
+        queries.query_findMany('Animals', searchPref).then(
+            (res) => setSearchResults(res.data)
+        )
     }
 
     return (
@@ -70,6 +95,7 @@ function SearchPage(props) {
                             options={speciesOptions}
                             renderInput={(params) => <TextField {...params} label="Select a Species"/>}
                             sx={{width:300}}
+                            onChange={(event, value) => {setOptBreed(value)}}
                             />
                         </Stack>
                         <Stack direction='row' spacing={1} justifyContent='center' alignItems='center'>
@@ -80,36 +106,42 @@ function SearchPage(props) {
                             options={["Available", "Adopted", "Fostered"]}
                             renderInput={(params) => <TextField {...params} label="Select a Status"/>}
                             sx={{width:300}}
+                            onChange={(event, value) => {setOptAvail(value)}}
                             />
                         </Stack>
                     </Stack>
                     <Stack className='searchFieldsRow2' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                         <Stack direction='row' spacing={0} justifyContent='center' alignItems='center'>
                             <h3>Good with other animals</h3>
-                            <Checkbox />
+                            <Checkbox checked={optGoodWithAnimals} onChange={handleGoodWAnimals}/>
                         </Stack>
                         <Stack direction='row' spacing={0} justifyContent='center' alignItems='center'>
                             <h3>Good with children</h3>
-                            <Checkbox />
+                            <Checkbox checked={optGoodWithChildren} onChange={handleGoodWChild}/>
                         </Stack>
                         <Stack direction='row' spacing={0} justifyContent='center' alignItems='center'>
                             <h3>Animal must be leashed at all times</h3>
-                            <Checkbox />
+                            <Checkbox checked={optLeashedAtAllTimes} onChange={handleLeashAllTime}/>
                         </Stack>
                     </Stack>
                     <Box className='search-box' sx={{pt:2}}>
                         <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
                             {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={ () => { 
-                                        queries.query_findOne('Animals', {"breed": "Cat", "name": "Otus", "good_with_animals": "false"}).then(
-                                            (data) => someCallbackHandler(data)
-                                        )
+                            <Button variant='contained' onClick={ () => {
+                                        // Search handler. Sets data.
+                                        //search();                                           
+                                        queries.query_accountIsAdmin('neukamsAdmin').then((results) => {console.log(results)});
+                                        // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
+                                        //     {console.log(results)}
+                                        // );
+                                        // .then((res) => setSearchResults(res.data))
+                                        // console.log("H", searchResults);
                                     }
                                 }>Search</Button>
                         </Stack>
                     </Box>
                 </Box>
-                <SearchResults searchRes={[1, 2, 3, 4, 5, 6]}/>
+                <SearchResults searchRes={searchResults}/>
             </Container>
         </div>
     )

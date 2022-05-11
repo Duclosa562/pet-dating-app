@@ -32,7 +32,7 @@ function App() {
             <Route path="/" exact element={<HomePage/>}></Route>
             <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
 			<Route path="/AdminEdit"  element={<AdminEdit/>}></Route>
-            <Route path="/PetProfile" element={<PetProfile/>}></Route>
+            <Route path="/PetProfile/:pet_id" element={<PetProfile/>}></Route>
 			<Route path="/Search" element={<SearchPage/>}></Route>
 			<Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
 			<Route path="/AdminCreateAcc" element={<AdminCreateAcc/>}></Route>

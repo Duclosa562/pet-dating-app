@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+ 
 import Grid from '@mui/material/Grid';
 
 import ImageAvatar from '../components/ImageAvatar/ImageAvatar';
@@ -9,13 +11,16 @@ import pokeImage from "../images/fuecoco.png";
 import "../styles/PetProfile.css";
 
 function PetProfile() {
+    const location = useLocation();
+    const data = location.state;
+
     return (
         <div className="pet-profile">
             <NavBar />
             <div className="pet-data">
                 <Grid container columns={2} direction='row' alignItems='center' justifyContent='center'>
                     <ImageAvatar imagePath={pokeImage} />
-                    <ProfileCard />
+                    <ProfileCard petData={data}/>
                 </Grid>
             </div>
             

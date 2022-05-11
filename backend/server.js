@@ -18,6 +18,12 @@ const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
 
+/*****************************
+ * Serve React App
+ *****************************/
+
+
+
 //const Account = require('../models/Account');
 // .. Shelter
 // .. Animal
@@ -137,11 +143,34 @@ if (process.env.NODE_ENV === 'production'){
 }*/
 
 // Heroku guide
-app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build'))
+//app.use(express.static(path.join(__dirname, '../build')))
+//app.use(express.static(path.join(__dirname, '../build')))
+
+/*app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build'))
+});*/
+
+app.get('/', function(req, res) {
+    res.setHeader('Content-Type', 'text/html');
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
+app.get('/:file', function(req, res) {
+    console.log(req.url);
+    res.sendFile(path.join(__dirname, '../build', req.params.file));
+});
+
+app.get('/static/css/:file', function(req, res) {
+    console.log(req.url);
+    res.setHeader('Content-Type', 'text/css');
+    res.sendFile(path.join(__dirname, '../build', req.url));
+});
+
+app.get('/static/js/:file', function(req, res) {
+    console.log(req.url);
+    res.setHeader('Content-Type', 'text/javascript');
+    res.sendFile(path.join(__dirname, '../build', req.url));
+});
 
 app.use(router);
 

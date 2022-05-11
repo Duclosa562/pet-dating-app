@@ -62,6 +62,7 @@ function massage_query(query) {
             }
         }
     } catch {
+        console.log('Error while massaging query. Likely from query_insertRecord() function, but not gauranteed.');
         console.log('Error in massage_query() function. Likely from query_insertRecord, but no gauranteed.');
     }
 }
@@ -303,7 +304,7 @@ async function executeQueries() {
     
 }
 
-executeQueries();
+//executeQueries();
 
 module.exports = {
     query_insertOne,
