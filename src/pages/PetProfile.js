@@ -16,7 +16,6 @@ function PetProfile() {
 
     return (
         <div className="pet-profile">
-            <NavBar />
             <div className="pet-data">
                 <Grid container columns={2} direction='row' alignItems='center' justifyContent='center'>
                     <ImageAvatar imagePath={pokeImage} />
