@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Grid,
   TextField,
@@ -7,26 +9,34 @@ import {
   Button,
 } from "@mui/material";
 
+
 const queries = require('../utils/queries');
 
-function SignInPage({setIsLoggedIn, setIsAdmin}) {
+function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [adminLogin, setAdminLogin] = React.useState(false);
-  
+  const navigate = useNavigate();
+
   function loginSubmit() {
-    console.log(username);
-    console.log(password);
-    console.log(adminLogin);
+    // need to set user type to "User" or "ShelterAdmin"
     const adminCheck = adminLogin ? 'ShelterAdmin' : 'User';
     const loginCreds = {
       type: adminCheck,
       username: username,
       password: password
     }
+    // DB Account Call
     queries.query_accountLogin(loginCreds).then(
       (res) => {
-        console.log("Hello", res)
+        if (!res) {
+          alert('Invalid Login, Please try again');
+        }
+        else {
+          setIsLoggedIn(res);
+          setIsAdmin(adminLogin);
+          navigate("/Search");
+        }
       }
     )
 

@@ -33,6 +33,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
 
+  const loginCheck = () => {
+    console.log("IN APP.JS");
+    console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
+  }
   // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
@@ -49,7 +53,7 @@ function App() {
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
-          <Route path="/SignInPage" element={<SignInPage setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />}></Route>
+          <Route path="/SignInPage" element={<SignInPage setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} loginCheck={loginCheck}/>}></Route>
         </Routes>
       </Router>
     </div>
