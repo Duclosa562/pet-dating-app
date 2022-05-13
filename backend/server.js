@@ -8,6 +8,7 @@ const q = require ('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
+const fs = require('fs');
 
 app.enable('trust proxy');
 app.use(bodyParser.json());
@@ -17,6 +18,12 @@ const router = express.Router()
 const accountsCollection = 'Accounts';
 const sheltersCollection = 'Shelters';
 const animalsCollection = 'Animals';
+
+/*****************************
+ * Serve React App
+ *****************************/
+
+
 
 //const Account = require('../models/Account');
 // .. Shelter
@@ -137,15 +144,49 @@ if (process.env.NODE_ENV === 'production'){
 }*/
 
 // Heroku guide
-app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build'))
+//app.use(express.static(path.join(__dirname, '../build')))
+//app.use(express.static(path.join(__dirname, '../build')))
+
+/*app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build'))
+});*/
+
+app.get('/', function(req, res) {
+    res.setHeader('Content-Type', 'text/html');
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
+app.get('/:file', function(req, res) {
+    console.log('\n\nGET /:file');
+    console.log(req.url);
+    var fileExists = fs.existsSync(path.join(__dirname, '../build', req.params.file).toString());
+    
+    console.log('File:');
+    console.log(fileExists);
+
+    if (fileExists) {
+        res.sendFile(path.join(__dirname, '../build', req.params.file));
+        return;
+    }
+    
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
+app.get('/static/css/:file', function(req, res) {
+    console.log(req.url);
+    res.setHeader('Content-Type', 'text/css');
+    res.sendFile(path.join(__dirname, '../build', req.url));
+});
+
+app.get('/static/js/:file', function(req, res) {
+    console.log(req.url);
+    res.setHeader('Content-Type', 'text/javascript');
+    res.sendFile(path.join(__dirname, '../build', req.url));
+});
 
 app.use(router);
 
-const port = 5000; //process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });

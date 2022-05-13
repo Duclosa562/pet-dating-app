@@ -6,12 +6,34 @@ This file allows us to interact with the Proxy server and make calls to the data
 
 const config = require('../config');
 
+console.log('The config object we loaded contains:');
+console.log(config.config);
+console.log('document.location.href:');
+
+var loc = document.location.href;
+if (String(loc.slice(8)).search('/') != -1) {
+    loc = loc.slice(0, String(loc.slice(8)).search('/') + 8);
+}
+console.log('browser locaiton = ' + loc);
+config.config.PROXY_URL = loc;
+
+
+/*
+console.log('full url = ' + loc);
+console.log('loc.slice(8) = ' + loc.slice(8));
+console.log('loc.slice(8).search("/") = ' + loc.slice(8).search('/'));
+loc = loc.slice(0, String(loc.slice(8)).search('/') + 8);
+console.log(loc);
+console.log(loc.slice(0, -1));
+// random comment here!
+*/
+
+
+
 
 /****************************
  * Validation
  ****************************/
-
-
 
 
 /****************************
@@ -90,6 +112,7 @@ function _build_get_url(collection, query, quantity) {
     }
 
     var url = config.config.PROXY_URL;
+    // HERE
     url = url + '/api/' + quantity;
     url = url + '?collection=' + collection;
 
@@ -106,14 +129,17 @@ function _build_get_url(collection, query, quantity) {
 }
 
 function _build_post_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/insert';
 }
 
 function _build_put_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/update'
 }
 
 function _build_delete_url() {
+    // HERE
     return config.config.PROXY_URL + '/api/delete'
 }
 
@@ -221,11 +247,106 @@ async function query_deleteOne(collection, id) {
     return await response.json();
 }
 
+/****************************
+ * ACCOUNT (CUSTOM) Queries
+ ****************************/
 
-module.exports = {
+/**
+ * 
+ * @param {*} user = {'type': "<User or ShelterAdmin>", 'username': "value", 'password': "value"}
+ * 
+ * Returns True if the user JSON object with each parameter matches an account in the database
+ * Use it to 'Login' a user
+ * 
+ */
+async function query_accountLogin(user) {
+
+    for(var key in user) {
+        if (user.hasOwnProperty(key)) {
+            if (key != 'type' &&
+                key != 'username' &&
+                key != 'password') {
+                    console.log('Error: parameter user (json) must have only 3 keys: type, username, password. Found key value ' + key);
+                }
+        }
+    }
+
+    var result = await query_findOne('Accounts', user);
+    console.log(result);
+    console.log(result == {});
+    console.log(result != {});
+
+    if (result.data == null) {
+        console.log('login = false');
+        return false;
+    }
+    console.log('login = true');
+    return true;
+}
+
+/**
+ * 
+ * @param {*} user = {'type': '<User or ShelterAdmin', 'username': 'value'}
+ * 
+ * Returns True if the user account exists (JSON object type and username match a user)
+ * Use it to verify if an account exists
+ * 
+ */
+async function query_accountExists(user) {
+
+    for(var key in user) {
+        if (user.hasOwnProperty(key)) {
+            if (key != 'type' &&
+                key != 'username') {
+                    console.log('Error: parameter user (json) must have only 2 keys: type, username. Found key value ' + key);
+                }
+        }
+    }
+
+    var result = await query_findOne('Accounts', user);
+
+    if (result.data == null) {
+        //console.log('account exists = false');
+        return false;
+    }
+    //console.log('account exists = true');
+    return true;
+}
+
+/**
+ * 
+ * @param {*} username = String, the username of the account that you want to check if is admin
+ * 
+ * Returns True if it's an admin account, False otherwise
+ * Use it to check if an account is an admin
+ * 
+ */
+
+async function query_accountIsAdmin(username) {
+
+    if (typeof username != 'string') {
+        return 'Error! username must be a string'
+    }
+
+    return query_accountExists({'type': 'ShelterAdmin', 'username': username});
+}
+
+/*module.exports = {
     query_findMany,
     query_findOne,
     query_insertOne,
     query_updateOne,
-    query_deleteOne
-}
+    query_deleteOne,
+    query_accountLogin,
+    query_accountExists,
+    query_accountIsAdmin
+}*/
+
+export {query_findMany,
+    query_findOne,
+    query_insertOne,
+    query_updateOne,
+    query_deleteOne,
+    query_accountLogin,
+    query_accountExists,
+    query_accountIsAdmin};
