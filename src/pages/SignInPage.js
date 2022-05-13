@@ -7,15 +7,29 @@ import {
   Button,
 } from "@mui/material";
 
-function SignInPage() {
+const queries = require('../utils/queries');
+
+function SignInPage({setIsLoggedIn, setIsAdmin}) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [adminLogin, setAdminLogin] = React.useState(false);
   
   function loginSubmit() {
     console.log(username);
     console.log(password);
-    console.log(isAdmin);
+    console.log(adminLogin);
+    const adminCheck = adminLogin ? 'ShelterAdmin' : 'User';
+    const loginCreds = {
+      type: adminCheck,
+      username: username,
+      password: password
+    }
+    queries.query_accountLogin(loginCreds).then(
+      (res) => {
+        console.log("Hello", res)
+      }
+    )
+
   }
 
   return (
@@ -41,8 +55,8 @@ function SignInPage() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={isAdmin}
-                onChange={() => setIsAdmin(!isAdmin)}
+                checked={adminLogin}
+                onChange={() => setAdminLogin(!adminLogin)}
                 label={"Admin Login"}
               />
             }
