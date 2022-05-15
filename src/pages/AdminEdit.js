@@ -128,7 +128,6 @@ function AdminEdit({animal}) {
 
     return (
         <div>
-        <NavBar/>
         <Grid container columnSpacing={1}>
             <Grid item xs={1}></Grid>
             <Grid item container xs={3} 

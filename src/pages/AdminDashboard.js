@@ -130,7 +130,6 @@ function AdminDashboard({setAnimalToEdit}) {
 
     return (
     <div>
-        <NavBar/>
        {/* <ImageAvatar/> */}
         {/* <Box sx={{ flexGrow: 1 }} direction="column" justifyContent="center"> */}
             <Grid container spacing={1}> 

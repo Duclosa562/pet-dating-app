@@ -70,7 +70,6 @@ function LandingPage() {
 
   return (
     <div>
-      <NavBar />
       <Grid container columnSpacing={1}>
         <Grid item xs={3}></Grid>
 

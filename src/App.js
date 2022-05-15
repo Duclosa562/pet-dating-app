@@ -32,9 +32,8 @@ function App() {
   // Login states
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
-
+  // This should be removed eventually.
   const loginCheck = () => {
-    console.log("IN APP.JS");
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
   }
   // To propagate prop to edit up tree and down for edit page
@@ -42,7 +41,12 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <Router>
-        <NavBar />
+        <NavBar 
+          loginCheck={loginCheck} 
+          setIsLoggedIn={setIsLoggedIn} 
+          setIsAdmin={setIsAdmin}
+          isLoggedIn = {isLoggedIn}
+        />
         <Routes>
           <Route path="/" exact element={<HomePage />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
@@ -53,7 +57,10 @@ function App() {
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
-          <Route path="/SignInPage" element={<SignInPage setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} loginCheck={loginCheck}/>}></Route>
+          <Route path="/SignInPage" element={<SignInPage 
+            setIsLoggedIn={setIsLoggedIn} 
+            setIsAdmin={setIsAdmin} 
+            loginCheck={loginCheck}/>}></Route>
         </Routes>
       </Router>
     </div>
