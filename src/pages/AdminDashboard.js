@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import NavBar from '../components/NavBar/NavBar';
 import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
 import ImageGrid from '../components/ImageGrid/ImageGrid';
