@@ -17,10 +17,12 @@ import AdminCreateAcc from './pages/AdminCreateAcc'
 import AdminDashboard from './pages/AdminDashboard';
 import UserCreateAcc from './pages/UserCreateAcc';
 import LandingPage from './pages/LandingPage';
+import SignInPage from './pages/SignInPage';
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from './components/SiteNavLinks/Navigation.js';
 
+import NavBar from './components/NavBar/NavBar'
 
 function App() {
   // To propagate prop to edit up tree and down for edit page
@@ -28,6 +30,7 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
       <Router>
+	  	<NavBar />
         <Routes>
             <Route path="/" exact element={<HomePage/>}></Route>
             <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
@@ -38,6 +41,7 @@ function App() {
 			<Route path="/AdminCreateAcc" element={<AdminCreateAcc/>}></Route>
 			<Route path="/UserCreateAcc" element={<UserCreateAcc/>}></Route>
 			<Route path="/LandingPage" element={<LandingPage/>}></Route>
+			<Route path="/SignInPage" element={<SignInPage/>}></Route>
         </Routes>
       </Router>
     </div>
