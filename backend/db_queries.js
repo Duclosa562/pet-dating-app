@@ -30,9 +30,16 @@ const config = require('../src/config');
 
 // Connection parameters
 const { MongoClient, ObjectId } = require("mongodb");
+//const { connect } = require('./server');
 const uri = config.config.MONGODB_URI;
 const client = new MongoClient(uri);
 const db_name = config.config.DB_INSTANCE // 'PetDatingApp-Local';
+
+
+connectClient(client);
+async function connectClient(client) {
+    await client.connect();
+}
 
 // Collections
 const animalsCollection = 'Animals';
@@ -178,7 +185,7 @@ async function query_insertOne(collectionName, record) {
     console.log(record);
     var result;
     try {
-        await client.connect();
+        //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.insertOne(record);
@@ -187,7 +194,7 @@ async function query_insertOne(collectionName, record) {
         printError(query_insertOne.name, err);
         result = {};
     } finally {
-        await client.close();
+        //await client.close();
     }
     return record;  // <- record is updated with _id attribute when successful
 }
@@ -201,13 +208,13 @@ async function query_findOne(collectionName, query) {
     massage_query(query);
     var result;
     try {
-        await client.connect();
+        //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.findOne(query);
         printQueryResult(query_findOne.name, collectionName, query, result);
     } finally {
-        await client.close();
+        //await client.close();
     }
     return result;
 }
@@ -217,7 +224,7 @@ async function query_findMany(collectionName, query) {
     massage_query(query);
     var results = [];
     try {
-        await client.connect();
+        //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         var cursor = await collection.find(query);
@@ -226,7 +233,7 @@ async function query_findMany(collectionName, query) {
         });
         await printFindManyResult(query_findMany.name, collectionName, query, results);
     } finally {
-        await client.close();
+        //await client.close();
     }
     return results;
 }
@@ -243,7 +250,7 @@ async function query_updateOne(collectionName, query, update) {
     var result;
     try {
         const options = {};
-        await client.connect();
+        //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.updateOne(query, update, options);
@@ -252,7 +259,7 @@ async function query_updateOne(collectionName, query, update) {
         printError(query_updateOne.name, err);
         result = {};
     } finally {
-        await client.close();
+        //await client.close();
     }
     return result;
 }
@@ -266,13 +273,13 @@ async function query_deleteOne(collectionName, query) {
     massage_query(query);
     var result;
     try {
-        await client.connect();
+        //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.deleteOne(query);
         printDeleteResult(query_deleteOne.name, collectionName, result, query);
     } finally {
-        await client.close();
+        //await client.close();
     }
     return result;
 }

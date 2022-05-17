@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path')
 const app = express();
 //require('./database.js');
-const q = require ('./db_queries');
+const q = require('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
