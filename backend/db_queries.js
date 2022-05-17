@@ -22,7 +22,6 @@ Current Issues
 
 */
 
-var util = require('util');
 const config = require('../src/config');
 
 /**************************************
