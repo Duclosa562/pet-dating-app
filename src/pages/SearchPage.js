@@ -83,7 +83,6 @@ function SearchPage(props) {
 
     return (
         <div className='search-page'>
-            <NavBar />
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
                 <Box className='search-box' sx={{p:2}}>
                     <Stack className='searchFieldsRow1' direction='row' spacing={2} justifyContent='center' alignItems='center'>

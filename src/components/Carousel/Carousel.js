@@ -21,7 +21,7 @@ function Carousell(props) {
 
     return (
         <Carousel autoPlay>
-            {items.map((item, i) => (
+            {props.map((item, i) => (
                 <Item key={i} {...item} />
             ))}
         </Carousel>
