@@ -172,6 +172,18 @@ async function query_findOne(collection, query) {
     return await _query_find(collection, query, 'one');
 }
 
+// returns the <quantity> most recently inserted Animals
+//  - query is unnaffected by records that were updated recently, it's only most-recently-inserted
+async function query_mostRecent(quantity) {
+    // /api/most-recent/:quantity
+    var url = config.config.PROXY_URL + '/api/most-recent/' + quantity;
+    var response = await fetch(url, _create_get_json('GET'));
+    if (response.status !== 200) {
+        return {"error": "GET request failed from query_mostRecent()", "code": response.status}
+    }
+    return await response.json();
+}
+
 /****************************
  * WRITE Queries
  ****************************/
@@ -349,5 +361,6 @@ export {query_findMany,
     query_accountLogin,
     query_accountExists,
     query_accountIsAdmin,
-    query_setAnimalToPending
+    query_setAnimalToPending,
+    query_mostRecent
 };
