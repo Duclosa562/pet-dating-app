@@ -171,7 +171,12 @@ function printError(funcName, err) {
 
 // returns the inserted record
 async function query_insertOne(collectionName, record) {
+    console.log('query_insertOne()');
+    console.log('pre-massaged insert record');
+    console.log(record);
     massage_query(record);
+    console.log('post-massaged insert record');
+    console.log(record);
     var result;
     try {
         await client.connect();

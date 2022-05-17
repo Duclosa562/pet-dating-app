@@ -331,16 +331,15 @@ async function query_accountIsAdmin(username) {
     return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }
 
-/*module.exports = {
-    query_findMany,
-    query_findOne,
-    query_insertOne,
-    query_updateOne,
-    query_deleteOne,
-    query_accountLogin,
-    query_accountExists,
-    query_accountIsAdmin
-}*/
+/****************************
+ * ANIMAL (CUSTOM) Queries
+ ****************************/
+
+async function query_setAnimalToPending(id) {
+    var animal = {"id": id, "availability": "Pending"}
+    var result = await query_updateOne('Animals', animal);
+    return result;
+}
 
 export {query_findMany,
     query_findOne,
@@ -349,4 +348,6 @@ export {query_findMany,
     query_deleteOne,
     query_accountLogin,
     query_accountExists,
-    query_accountIsAdmin};
+    query_accountIsAdmin,
+    query_setAnimalToPending
+};
