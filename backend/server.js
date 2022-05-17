@@ -4,10 +4,11 @@ const cors = require('cors');
 const path = require('path')
 const app = express();
 //require('./database.js');
-const q = require ('./db_queries');
+const q = require('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
+const fs = require('fs');
 
 app.enable('trust proxy');
 app.use(bodyParser.json());
@@ -156,8 +157,19 @@ app.get('/', function(req, res) {
 });
 
 app.get('/:file', function(req, res) {
+    console.log('\n\nGET /:file');
     console.log(req.url);
-    res.sendFile(path.join(__dirname, '../build', req.params.file));
+    var fileExists = fs.existsSync(path.join(__dirname, '../build', req.params.file).toString());
+    
+    console.log('File:');
+    console.log(fileExists);
+
+    if (fileExists) {
+        res.sendFile(path.join(__dirname, '../build', req.params.file));
+        return;
+    }
+    
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.get('/static/css/:file', function(req, res) {
@@ -174,7 +186,7 @@ app.get('/static/js/:file', function(req, res) {
 
 app.use(router);
 
-const port = 5000; //process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
