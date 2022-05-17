@@ -236,13 +236,27 @@ function AdminCreate() {
         <Item2>
             <label> Breed: </label>
             <div>
-            <TextField
+            <FormControl>
+                <FormLabel id="demo-radio-buttons-group-label"></FormLabel>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue=""
+                    name="breedAdd"
+                    value={breed}
+                    onChange={e => setBreed(e.target.value)}
+                >
+                    <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
+                    <FormControlLabel value="Dog" control={<Radio />} label="Dog" />
+                    <FormControlLabel value="Other" control={<Radio />} label="Other" />
+                </RadioGroup>
+            </FormControl>
+            {/* <TextField
               required
               id="outlined-required"
               label="Enter a Breed Type"
               value={breed}
               onChange={e => setBreed(e.target.value)}
-            />
+            /> */}
             </div>
             {/* <FormInputBreed onChange={e => setBreed(e.target.value)}/> */}
         </Item2>

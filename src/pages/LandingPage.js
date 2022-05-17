@@ -30,6 +30,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
+import { useEffect } from 'react';
 //import { useForm } from "react-hook-form";
 const queries = require('../utils/queries');
 
@@ -54,13 +55,13 @@ function LandingPage() {
     const location = useLocation();
 
     //populates the table component with data from the DB
-    const loadAnimals = async () => {
+    const loadAnimals = () => {
         console.log("Results of GET are....");
-        let results = await queries.query_findMany("Animals", {})
+        let results = queries.query_findMany("Animals", {})
             .then((res) => getCarouselImages(res.data) )
     }
-    const imagesForCarousel = {}
-    const getCarouselImages = async (results) =>{
+    const imagesForCarousel = []
+    const getCarouselImages = (results) =>{
         //extract images and store 
         for(let i = 0; i < results.length && i < 3; i++){
             imagesForCarousel[i]= results[i].image;
@@ -71,6 +72,13 @@ function LandingPage() {
     }
   // const [userName, setUserName] = useState("");
   // const [password, setPassword] = useState("");
+
+  // trigger render on load
+    useEffect(() => {
+        console.log("Inside use effect")
+        loadAnimals();
+    }, []);
+
 
   // for nav back to dashboard on submit
   const history = useNavigate();
@@ -87,13 +95,12 @@ function LandingPage() {
 
   return (
     <div>
-      <NavBar />
       <Grid container columnSpacing={1}>
         <Grid item xs={3}></Grid>
 
         <Grid item container xs={7}>
           <Box sx={{ width: "75%" }}>
-            <Carousel></Carousel>
+            <Carousel images={ imagesForCarousel }></Carousel>
             {/* Removed sign in page, code can be found below commented out. */}
           </Box>
         </Grid>
