@@ -1,38 +1,3 @@
-<<<<<<< HEAD
-import NavBar from '../components/NavBar/NavBar';
-import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
-import ImageAvatarCrud from '../components/ImageAvatar/ImageAvatarCrudCard';
-import ImageGrid from '../components/ImageGrid/ImageGrid';
-import UploadPhoto from '../components/UploadPhotoButton/UploadPhoto'
-import { StyledEngineProvider } from '@mui/material/styles';
-import '../App.css';
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import FormsComponents from '../components/FormInput/FormsComponents';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import AdminCrudCard from '../components/AdminCrudCard/AdminCrudCard';
-import Stack from '@mui/material/Stack';
-import {useState} from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Carousel from '../components/Carousel/Carousel'
-=======
 import NavBar from "../components/NavBar/NavBar";
 import ImageAvatar from "../components/ImageAvatar/ImageAvatar.js";
 import ImageAvatarCrud from "../components/ImageAvatar/ImageAvatarCrudCard";
@@ -65,7 +30,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
->>>>>>> origin/calvin-search
 //import { useForm } from "react-hook-form";
 const queries = require('../utils/queries');
 

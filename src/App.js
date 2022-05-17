@@ -1,47 +1,65 @@
 // import Template from './Template';
-import React from 'react';
-import {BrowserRouter as Router, Route, Routes, Switch} from 'react-router-dom';
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Switch,
+} from "react-router-dom";
 
 // This is the default boilerplate code created by Calvin.
 // Do not delete
 
-import logo from './logo.svg';
-import './App.css';
-import HomePage from './pages/HomePage';
-import AdminCRUD from './pages/AdminCRUD';
-import AdminEdit from './pages/AdminEdit';
-import PetProfile from './pages/PetProfile';
-import SearchPage from './pages/SearchPage';
-import AdminCreateAcc from './pages/AdminCreateAcc'
-import AdminDashboard from './pages/AdminDashboard';
-import UserCreateAcc from './pages/UserCreateAcc';
-import LandingPage from './pages/LandingPage';
-import SignInPage from './pages/SignInPage';
-import {useState} from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from './components/SiteNavLinks/Navigation.js';
-
-import NavBar from './components/NavBar/NavBar'
+import logo from "./logo.svg";
+import "./App.css";
+import HomePage from "./pages/HomePage";
+import AdminCRUD from "./pages/AdminCRUD";
+import AdminEdit from "./pages/AdminEdit";
+import PetProfile from "./pages/PetProfile";
+import SearchPage from "./pages/SearchPage";
+import AdminCreateAcc from "./pages/AdminCreateAcc";
+import AdminDashboard from "./pages/AdminDashboard";
+import UserCreateAcc from "./pages/UserCreateAcc";
+import LandingPage from "./pages/LandingPage";
+import SignInPage from "./pages/SignInPage";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Navigation from "./components/SiteNavLinks/Navigation.js"; 
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
+  // Login states
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  // This should be removed eventually.
+  const loginCheck = () => {
+    console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
+  }
   // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
       <header className="App-header"></header>
       <Router>
-	  	<NavBar />
+        <NavBar 
+          loginCheck={loginCheck} 
+          setIsLoggedIn={setIsLoggedIn} 
+          setIsAdmin={setIsAdmin}
+          isLoggedIn = {isLoggedIn}
+        />
         <Routes>
-            <Route path="/" exact element={<HomePage/>}></Route>
-            <Route path="/AdminCRUD" element={<AdminCRUD/>}></Route>
-			<Route path="/AdminEdit"  element={<AdminEdit/>}></Route>
-            <Route path="/PetProfile/:pet_id" element={<PetProfile/>}></Route>
-			<Route path="/Search" element={<SearchPage/>}></Route>
-			<Route path="/AdminDashboard" element={<AdminDashboard/>}></Route>
-			<Route path="/AdminCreateAcc" element={<AdminCreateAcc/>}></Route>
-			<Route path="/UserCreateAcc" element={<UserCreateAcc/>}></Route>
-			<Route path="/LandingPage" element={<LandingPage/>}></Route>
-			<Route path="/SignInPage" element={<SignInPage/>}></Route>
+          <Route path="/" exact element={<HomePage />}></Route>
+          <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
+          <Route path="/AdminEdit" element={<AdminEdit />}></Route>
+          <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
+          <Route path="/Search" element={<SearchPage />}></Route>
+          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+          <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
+          <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
+          <Route path="/LandingPage" element={<LandingPage />}></Route>
+          <Route path="/SignInPage" element={<SignInPage 
+            setIsLoggedIn={setIsLoggedIn} 
+            setIsAdmin={setIsAdmin} 
+            loginCheck={loginCheck}/>}></Route>
         </Routes>
       </Router>
     </div>
