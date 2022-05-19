@@ -291,7 +291,7 @@ function AdminCreate() {
                                     onChange={e => setAvail(e.target.value)}>
                                     <FormControlLabel value="Adopted" control={<Radio />} label="Adopted" />
                                     <FormControlLabel value="Available" control={<Radio />} label="Available" />
-                                    <FormControlLabel value="Not Available" control={<Radio />} label="Not Available" />
+                                    <FormControlLabel value="Pending" control={<Radio />} label="Pending" />
                                 </RadioGroup>
                         </FormControl>
                     </Grid>

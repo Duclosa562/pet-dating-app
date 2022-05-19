@@ -32,6 +32,7 @@ import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
 import { useEffect } from 'react';
 //import { useForm } from "react-hook-form";
+import Typography from '@mui/material/Typography';
 const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -70,8 +71,6 @@ function LandingPage() {
         console.log(imagesForCarousel);
 
     }
-  // const [userName, setUserName] = useState("");
-  // const [password, setPassword] = useState("");
 
   // trigger render on load
     useEffect(() => {
@@ -83,25 +82,14 @@ function LandingPage() {
   // for nav back to dashboard on submit
   const history = useNavigate();
 
-  // const submitHandler = () => {
-  //   const signInAccInfo = { userName, password };
-  //   console.log(signInAccInfo);
-
-  //   // Acc usr and pw ends up here and the history function below will cause a redirect
-  //   // We will need to add authentication here somehow
-
-  //   //history('/AdminDashboard')
-  // };
-
   return (
     <div>
       <Grid container columnSpacing={1}>
         <Grid item xs={3}></Grid>
-
         <Grid item container xs={7}>
           <Box sx={{ width: "75%" }}>
+          <Typography variant="h4" gutterBottom> Welcome </Typography>
             <Carousel images={ imagesForCarousel }></Carousel>
-            {/* Removed sign in page, code can be found below commented out. */}
           </Box>
         </Grid>
         <Grid item container xs={1}></Grid>
@@ -109,41 +97,5 @@ function LandingPage() {
     </div>
   );
 }
-
-// eslint-disable-next-line no-lone-blocks
-{/* <Card>
-  <CardHeader title="Welcome to insert_app_name_here" />
-  <CardContent
-    classes="landingPage"
-    direction="column"
-    alignItems="center"
-    justifyContent="center"
-  >
-    <Item2>
-      <label> Enter User Name and Password: </label>
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Password"
-          value={userName}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-    </Item2>
-  </CardContent>
-  <CardActions direction="column" style={{ justifyContent: "center" }}>
-    <Button variant="contained" onClick={() => submitHandler()}>
-      Submit
-    </Button>
-  </CardActions>
-</Card>; */}
 
 export default LandingPage;
