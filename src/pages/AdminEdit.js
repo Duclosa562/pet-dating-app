@@ -57,6 +57,17 @@ const Item = styled(Paper)(({ theme }) => ({
   
 }));
 
+const Item3 = styled(Container)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(12),
+  display: "flex",
+  flexDirection: "column",
+  textAlign: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 const Item2 = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#5584AC' : '#5584AC',
     ...theme.typography.body2,
@@ -171,8 +182,7 @@ function AdminEdit({animal}) {
 
 
     return (
-      <Box display='flex' flex-direction="column" alignItems="center" direction="column" 
-      justifyContent='center'>
+      <Item3>
       <Item justifyContent='center' alignItems="center">
         <React.Fragment>
         <Typography variant="h4" gutterBottom>
@@ -184,10 +194,11 @@ function AdminEdit({animal}) {
 
           </Grid>
           <Grid item xs={12}   align = "center" justify = "center" alignItems = "center">
-          <Input accept="image/*" id="contained-button-file" multiple type="file" onChange={(event) => imgSubmitHandler(event)}/>
-                            <Button variant="contained" component="span">
-                            Upload Profile Picture
-                            </Button>
+                <label htmlFor="contained-button-file">
+                <Input accept="image/*" id="contained-button-file" 
+                multiple type="file" onChange={(event) => imgSubmitHandler(event)}/>
+                            <Button variant="contained" component="span">Upload Profile Picture</Button>
+                </label>
           </Grid>
           <Grid item xs={12} md={6}>
           <label> Name: </label>
@@ -318,12 +329,13 @@ function AdminEdit({animal}) {
           </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
+            {/* <Button variant='contained'onClick={() => submitHandler()}>Submit</Button> */}
           </Grid>
         </Grid>
       </React.Fragment>
+          <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
       </Item>
-      </Box>
+      </Item3>
 
         // </div>
     
