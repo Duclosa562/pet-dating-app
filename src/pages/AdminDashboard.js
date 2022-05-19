@@ -138,7 +138,7 @@ function AdminDashboard({setAnimalToEdit}) {
                 </Grid>
                 <Grid item container xs={10} direction="column" alignItems="center" justifyContent="center">
                     <Box sx={{ width: '100%' }}>
-                        <Stack spacing={5}>
+                        <Stack spacing={5} >
                             <Item><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>Welcome Back, Shelter_Name!</Typography></Item>
                             <Link to="/AdminCRUD"><Button size="large" variant="contained">Create New Animal</Button></Link >
                             <Table animals={animals} onDeleteAnimal={onDeleteAnimal} onEditAnimal={onEditAnimal}></Table>
