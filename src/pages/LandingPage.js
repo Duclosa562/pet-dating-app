@@ -64,8 +64,8 @@ function LandingPage() {
     const imagesForCarousel = []
     const getCarouselImages = (results) =>{
         //extract images and store 
-        for(let i = 0; i < results.length && i < 3; i++){
-            imagesForCarousel[i]= results[i].image;
+        for(let i = 0; i < results.length; i++){
+            imagesForCarousel.push(results[i].image);
         }
         console.log("images for carousel are...");
         console.log(imagesForCarousel);

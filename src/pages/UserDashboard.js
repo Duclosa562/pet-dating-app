@@ -12,8 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
-import { createMuiTheme } from '@mui/material/styles';
-import '../styles/SearchPage.css';
+
 import { ConstructionOutlined } from '@mui/icons-material';
 
 const queries = require('../utils/queries');
@@ -22,10 +21,10 @@ const queries = require('../utils/queries');
 // this function operates asyncronously
 // it allows the remainder of the JavaScript in the browser to function while the call to db is made
 // within this function, it waits for the db call to resolve before passing results into 
-async function search() {
-    var results = await queries.query_findMany('Animals', {name: 'Otus', breed: 'Cat'});
-    // pass results into the function here
-}
+// async function search() {
+//     var results = await queries.query_findMany('Animals', {name: 'Otus', breed: 'Cat'});
+//     // pass results into the function here
+// }
 
 function UserDashboard(props) {
 
@@ -52,11 +51,11 @@ function UserDashboard(props) {
             return {}
         }
         // determine item count to render based on result size
-        if (results.length < 10){
+        if (results.length <= 8){
             numItems = results.length - 1;
         }
         else{
-            numItems = 10;
+            numItems = 8;
         }
         //track animals already picked to not have repeats
         let pickedIdx = []
@@ -64,8 +63,11 @@ function UserDashboard(props) {
         let tempObj = []
         // will display no more than 10 items on the user dashboard, user can search if they want more
         for(let i = 0; i < results.length && i < numItems; i++){
+            console.log("Length is : ")
+            console.log(results.length)
             //randomize what animals are chosen 
             while (pickedIdx.includes(idx)){
+                console.log("In loop")
                 idx = getRandomInt(results.length - 1);
             }
             tempObj[idx]= results[idx];
@@ -84,8 +86,6 @@ function UserDashboard(props) {
         search();
     }, []);
 
-    const arcBlue = "#0B72B9";
-    const arcOrange = "#FFBA60";
     
 
 
