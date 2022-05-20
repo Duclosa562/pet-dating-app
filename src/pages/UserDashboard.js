@@ -7,37 +7,17 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useEffect } from 'react';
+import Typography from '@mui/material/Typography';
 
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
-
+import { createMuiTheme } from '@mui/material/styles';
 import '../styles/SearchPage.css';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 const queries = require('../utils/queries');
 
-// const animalRecord1 = {
-//     "name": "Dog From the UI",
-//     "breed": "Dog",
-//     "good_with_animals": true,
-//     "good_with_children": true,
-//     "must_be_leashed": false,
-//     "availability": "Available",
-//     "description": "Most loveable pit bull on the planet",
-//     "date_created": "04/28/2022",
-//     "age": 12,
-//     "age_descriptor": "years",
-//     "filesystem_location": "src/images/some_oid.jpeg",
-//     "shelter_oid": "6254368a11c4ca8be3b22ad1"
-// }
-
-// const animalUpdate1 = {
-//     "_id": "626b3c9ee92cb1b5ba4e36fe",
-//     "name": "Chomper (name updated via UI)"
-// }
-
-// function someCallbackHandler(data) {
-//     console.log(data);
-// }
 
 // this function operates asyncronously
 // it allows the remainder of the JavaScript in the browser to function while the call to db is made
@@ -47,31 +27,22 @@ async function search() {
     // pass results into the function here
 }
 
-function SearchPage(props) {
-    const speciesOptions = ["Dog", "Cat", "Other"];
-    // const animalsCollection = 'Animals';
-    // const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}
-
-    // Search param states
-    const [optBreed, setOptBreed] = React.useState("");
-    const [optAvail, setOptAvail] = React.useState("")
-    const [optGoodWithAnimals, setOptGoodWithAnimals] = React.useState(false);
-    const [optGoodWithChildren, setOptGoodWithChildren] = React.useState(false);
-    const [optLeashedAtAllTimes, setOptLeashedAtAllTimes] = React.useState(false);
+function UserDashboard(props) {
 
     // Search result states
     const [searchResults, setSearchResults] = React.useState([]);
 
     const search = () => {
-        console.log("SEARCH PREFS:", searchPref);
-        queries.query_findMany('Animals', searchPref).then(
+        console.log("SEARCH PREFS:", {});
+        queries.query_findMany('Animals', {}).then(
             (res) => processSearchResults(res.data)
         )
-    }
+    };
+
     // generate rand num in range
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
-      }
+    };
 
     //filter search results to have only a few items as opposed to entire db
     const processSearchResults = (results) =>{
@@ -90,7 +61,7 @@ function SearchPage(props) {
         //track animals already picked to not have repeats
         let pickedIdx = []
         let idx = 0;
-        let tempObj = {}
+        let tempObj = []
         // will display no more than 10 items on the user dashboard, user can search if they want more
         for(let i = 0; i < results.length && i < numItems; i++){
             //randomize what animals are chosen 
@@ -102,28 +73,31 @@ function SearchPage(props) {
         }
         console.log("Processed results for userDashboard are...");
         console.log(tempObj);
-    }
+        setSearchResults(tempObj)
+        console.log("prop to be passed is ...")
+        console.log(searchResults)
+    };
+
+      // trigger db load and render on page load
+    useEffect(() => {
+        console.log("Inside use effect")
+        search();
+    }, []);
+
+    const arcBlue = "#0B72B9";
+    const arcOrange = "#FFBA60";
+    
+
 
     return (
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
-                <Box className='search-box' sx={{p:2}}>
-                    <Box className='search-box' sx={{pt:2}}>
-                        <Stack className='searchFieldsRow3' direction='row' spacing={2} justifyContent='center' alignItems='center'>
-                            {/* This button will call and console log query_findMany */}
-                            <Button variant='contained' onClick={ () => {
-                                        // Search handler. Sets data.
-                                        search();                                           
-
-                                    }
-                                }>Search</Button>
-                        </Stack>
-                    </Box>
-                </Box>
+                <Typography variant="h4" gutterBottom> Welcome user_name! Here's a list of some local pets </Typography>
+                <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
                 <SearchResults searchRes={searchResults}/>
             </Container>
         </div>
     )
 }
 
-export default SearchPage;
+export default UserDashboard;
