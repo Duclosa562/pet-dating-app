@@ -2,11 +2,9 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
-function ImageAvatars({props}) {
-  console.log("avatar props: ");
-  console.log(props);
-  // need to strip of firs 23 chars to get the data from the base 64 encoded image
-  if (typeof props === 'undefined'){
+function ImageAvatars({image}) {
+  console.log('ImageAvatar component');
+  if (typeof image === 'undefined'){
     return(
       <Avatar alt="New Pet"/>
     );
@@ -14,8 +12,7 @@ function ImageAvatars({props}) {
   else{
     console.log("rendering image")
     return (
-      
-      <Avatar alt="New Pet" src={props}/>
+      <Avatar alt="New Pet" src={image} sx={{ width: 256, height: 256 }}/>
   );
   }
 

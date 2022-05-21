@@ -5,30 +5,58 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 
 import './ProfileCard.css';
-import { CardMedia } from '@mui/material';
+import AdoptPet from '../../pages/AdoptPet';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+
+function bools_to_strings(pet) {
+    for (var key in pet) {
+        if (key == 'good_with_animals' || key == 'good_with_children' || key == 'must_be_leashed') {
+            if (pet[key] == true) {
+                pet[key] = 'yes';
+            } else {
+                pet[key] = 'no';
+            }
+        }
+    }
+}
+
+function button_html(pet) {
+    if (pet.availability != 'Available') {
+        return <Button variant='contained' disabled>ADOPT</Button>
+    }
+    return (
+        <Link to={`/AdoptPet`}>
+            <Button variant='contained'>ADOPT</Button>
+        </Link>
+    );
+}
 
 function ProfileCard({petData}) {
-    const petInfo = petData.data;
+
+    
+    var petInfo = petData.data;
+    bools_to_strings(petInfo);
+    const button = button_html(petInfo);
     return (
         <div className='profile-card'>
             <Card sx={{width: 400, background: "rgba(255, 255, 255, 1.0)", m: "20px"}}>
-                
                 <CardHeader title={petInfo.name} subheader={petInfo.breed} />
                 <CardContent classes='pet-content'> 
                     <div className='card-content'>
-                        <h5>Age: {petInfo.age} {petInfo.age_descriptor}</h5> 
-                        <h5>Status: {petInfo.availability}</h5>
-                        <h5>Date Added: {petInfo.date_created}</h5>
-                        <h5>Good with animals: {petInfo.good_with_other_animals}</h5>
-                        <h5>Good with Children: {petInfo.good_with_children}</h5>
-                        <h5>Must be leashed: {petInfo.animal_must_be_leashed}</h5><br></br>
-                        <h5>Description:</h5><div>{petInfo.description}</div><br></br>
+                        <p><b>Age: </b>{petInfo.age} {petInfo.age_descriptor}</p> 
+                        <p><b>Date Added: </b>{petInfo.date_created}</p>
+                        <p><b>Good with animals: </b>{String(petInfo.good_with_animals)}</p>
+                        <p><b>Good with Children: </b>{String(petInfo.good_with_children)}</p>
+                        <p><b>Must be leashed: </b>{String(petInfo.must_be_leashed)}</p>
+                        <p><b>Description: </b>{petInfo.description}</p><br></br>
+                        <p><b>Status: </b>{petInfo.availability}</p>
                     </div>
                 </CardContent>
                 <CardActions>
-                    <Button variant='contained'>ADOPT</Button>
+                    {button}
                 </CardActions>
-                
             </Card>
         </div>
     )

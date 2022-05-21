@@ -128,7 +128,21 @@ function SearchPage(props) {
                             {/* This button will call and console log query_findMany */}
                             <Button variant='contained' onClick={ () => {
                                         // Search handler. Sets data.
-                                        search();                        
+                                        search();
+                                        
+                                        /*var new_account = {
+                                            'type': 'User',
+                                            'username': 'new_username',
+                                            'email': 'neukams@oregonstate.edu',
+                                            'password': '12345',
+                                            'first_name': 'Spencer',
+                                            'last_name': 'Neukam'
+                                        }
+                                        queries.query_insertOne('Accounts', new_account).then((result) => {
+                                            console.log(result);
+                                        }); */
+                                        
+
                                         //queries.query_mostRecent(5).then((results) => {console.log(results)});
                                         //queries.query_accountIsAdmin('neukamsAdmin').then((results) => {console.log(results)});
                                         // queries.query_findMany('Animals', {breed: "Cat", name: "Otus", good_with_animals: "false"}).then( (results) =>
