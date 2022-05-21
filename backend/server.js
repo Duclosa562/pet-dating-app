@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path')
 const app = express();
 //require('./database.js');
-const q = require ('./db_queries');
+const q = require('./db_queries');
 const util = require('util');
 const encoder = new util.TextEncoder('utf-8');
 const { MongoClient, ObjectId } = require("mongodb");
@@ -74,6 +74,13 @@ router.get('/api/:quantity', async function(req, res) {
     
     console.log('Query Results @ Server level for GET api/:quantity');
     console.log(data);
+    res.status(200).send({"data": data});
+});
+
+router.get('/api/most-recent/:quantity', async function(req, res) {
+    console.log('GET /api/most-recent/:quantity');
+    console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
+    var data = await q.query_mostRecent(Number(req.params.quantity));
     res.status(200).send({"data": data});
 });
 

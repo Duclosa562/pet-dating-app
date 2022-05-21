@@ -13,12 +13,11 @@ import "../styles/PetProfile.css";
 function PetProfile() {
     const location = useLocation();
     const data = location.state;
-
     return (
         <div className="pet-profile">
             <div className="pet-data">
                 <Grid container columns={2} direction='row' alignItems='center' justifyContent='center'>
-                    <ImageAvatar imagePath={pokeImage} />
+                    <ImageAvatar imagePath={data.data.image} />
                     <ProfileCard petData={data}/>
                 </Grid>
             </div>

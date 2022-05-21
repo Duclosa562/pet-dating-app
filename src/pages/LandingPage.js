@@ -30,10 +30,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
+import { useEffect } from 'react';
+import Divider from '@mui/material/Divider';
 //import { useForm } from "react-hook-form";
+import Typography from '@mui/material/Typography';
+const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#22577E",
+  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#FFFFFF",
   ...theme.typography.body2,
   padding: theme.spacing(5),
   textAlign: "center",
@@ -49,76 +53,85 @@ const Item2 = styled(Paper)(({ theme }) => ({
   boxShadow: "5px",
 }));
 
-function LandingPage() {
-  const location = useLocation();
+const Item3 = styled(Container)(({ theme }) => ({
+  ...theme.typography.body1,
+  padding: theme.spacing(20),
+  display: "flex",
+  flexDirection: "column",
+  textAlign: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: theme.palette.text.secondary,
+}));
 
-  // const [userName, setUserName] = useState("");
-  // const [password, setPassword] = useState("");
+function LandingPage() {
+    const location = useLocation();
+
+    //populates the table component with data from the DB
+    const loadAnimals = () => {
+        console.log("Results of GET are....");
+        let results = queries.query_findMany("Animals", {})
+            .then((res) => getCarouselImages(res.data) )
+    }
+    const imagesForCarousel = []
+    const getCarouselImages = (results) =>{
+        //extract images and store 
+        for(let i = 0; i < results.length; i++){
+            imagesForCarousel.push(results[i].image);
+        }
+        console.log("images for carousel are...");
+        console.log(imagesForCarousel);
+
+    }
+
+  // trigger render on load
+    useEffect(() => {
+        console.log("Inside use effect")
+        loadAnimals();
+    }, []);
+
 
   // for nav back to dashboard on submit
-  const history = useNavigate();
-
-  // const submitHandler = () => {
-  //   const signInAccInfo = { userName, password };
-  //   console.log(signInAccInfo);
-
-  //   // Acc usr and pw ends up here and the history function below will cause a redirect
-  //   // We will need to add authentication here somehow
-
-  //   //history('/AdminDashboard')
-  // };
+  // const history = useNavigate();
 
   return (
-    <div>
-      <Grid container columnSpacing={1}>
-        <Grid item xs={3}></Grid>
-
-        <Grid item container xs={7}>
-          <Box sx={{ width: "75%" }}>
-            <Carousel></Carousel>
-            {/* Removed sign in page, code can be found below commented out. */}
-          </Box>
+    // <Item3>
+      // <React.Fragment>
+        <Grid container columnSpacing={1}>
+          <Grid xs={1}></Grid>
+          <Grid item lg={10}>
+            <Item>
+              <Typography variant="h4" gutterBottom> Test </Typography>
+            </Item>
+           
+          </Grid>
+          <Grid item md={12}>
+            
+              <Carousel images={ imagesForCarousel }></Carousel>
+           
+          </Grid>
+          <Grid xs={1}></Grid>
         </Grid>
-        <Grid item container xs={1}></Grid>
-      </Grid>
-    </div>
+      /* </Item3> */
+    
   );
 }
 
-// eslint-disable-next-line no-lone-blocks
-{/* <Card>
-  <CardHeader title="Welcome to insert_app_name_here" />
-  <CardContent
-    classes="landingPage"
-    direction="column"
-    alignItems="center"
-    justifyContent="center"
-  >
-    <Item2>
-      <label> Enter User Name and Password: </label>
-      <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Username"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <TextField
-          required
-          id="outlined-required"
-          label="Password"
-          value={userName}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-    </Item2>
-  </CardContent>
-  <CardActions direction="column" style={{ justifyContent: "center" }}>
-    <Button variant="contained" onClick={() => submitHandler()}>
-      Submit
-    </Button>
-  </CardActions>
-</Card>; */}
 
+
+{/* <Grid container columnSpacing={1}>
+<Grid item xs={1}></Grid>
+<Item3>
+  
+<Divider orientation="vertical" flexItem>
+VERTICAL
+</Divider>
+    <Typography variant="h4" gutterBottom> Welcome </Typography>
+    <Carousel images={ imagesForCarousel }></Carousel>
+
+</Item3>
+
+
+<Grid item container xs={1}></Grid>
+</Grid> */}
 export default LandingPage;

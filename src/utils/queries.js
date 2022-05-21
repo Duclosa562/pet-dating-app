@@ -172,6 +172,18 @@ async function query_findOne(collection, query) {
     return await _query_find(collection, query, 'one');
 }
 
+// returns the <quantity> most recently inserted Animals
+//  - query is unnaffected by records that were updated recently, it's only most-recently-inserted
+async function query_mostRecent(quantity) {
+    // /api/most-recent/:quantity
+    var url = config.config.PROXY_URL + '/api/most-recent/' + quantity;
+    var response = await fetch(url, _create_get_json('GET'));
+    if (response.status !== 200) {
+        return {"error": "GET request failed from query_mostRecent()", "code": response.status}
+    }
+    return await response.json();
+}
+
 /****************************
  * WRITE Queries
  ****************************/
@@ -331,16 +343,15 @@ async function query_accountIsAdmin(username) {
     return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }
 
-/*module.exports = {
-    query_findMany,
-    query_findOne,
-    query_insertOne,
-    query_updateOne,
-    query_deleteOne,
-    query_accountLogin,
-    query_accountExists,
-    query_accountIsAdmin
-}*/
+/****************************
+ * ANIMAL (CUSTOM) Queries
+ ****************************/
+
+async function query_setAnimalToPending(id) {
+    var animal = {"id": id, "availability": "Pending"}
+    var result = await query_updateOne('Animals', animal);
+    return result;
+}
 
 export {query_findMany,
     query_findOne,
@@ -349,4 +360,7 @@ export {query_findMany,
     query_deleteOne,
     query_accountLogin,
     query_accountExists,
-    query_accountIsAdmin};
+    query_accountIsAdmin,
+    query_setAnimalToPending,
+    query_mostRecent
+};

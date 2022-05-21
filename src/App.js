@@ -26,7 +26,7 @@ import SignInPage from "./pages/SignInPage";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "./components/SiteNavLinks/Navigation.js";
-
+import UserDashboard from "./pages/UserDashboard";
 import NavBar from "./components/NavBar/NavBar";
 
 function App() {
@@ -55,6 +55,7 @@ function App() {
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+		  <Route path="/UserDashboard" element={<UserDashboard />}></Route>
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
