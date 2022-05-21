@@ -62,7 +62,7 @@ function App() {
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
-		  <Route path="/AdoptPet" element={<AdoptPet />}></Route>
+		      <Route path="/AdoptPet" element={<AdoptPet />}></Route>
           <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 
