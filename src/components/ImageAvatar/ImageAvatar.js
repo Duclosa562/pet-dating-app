@@ -6,7 +6,7 @@ function ImageAvatars({image}) {
   console.log('ImageAvatar component');
   if (typeof image === 'undefined'){
     return(
-      <Avatar alt="New Pet" sx={{ width: 256, height: 256 }}/>
+      <Avatar alt="New Pet"/>
     );
   }
   else{

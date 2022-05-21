@@ -15,6 +15,7 @@ function HomePage() {
       <Link to="/AdminCreateAcc"><button>AdminCreateAccount</button></Link> 
       <Link to="/UserCreateAcc"><button>UserCreateAccount</button></Link> 
       <Link to="/LandingPage"><button>LandingPage</button></Link> 
+      <Link to="/UserDashboard"><button>UserDashboard</button></Link> 
     </div>
     );
 }
