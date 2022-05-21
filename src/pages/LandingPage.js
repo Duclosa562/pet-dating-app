@@ -31,12 +31,13 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
 import { useEffect } from 'react';
+import Divider from '@mui/material/Divider';
 //import { useForm } from "react-hook-form";
 import Typography from '@mui/material/Typography';
 const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#22577E",
+  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#FFFFFF",
   ...theme.typography.body2,
   padding: theme.spacing(5),
   textAlign: "center",
@@ -50,6 +51,17 @@ const Item2 = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
   boxShadow: "5px",
+}));
+
+const Item3 = styled(Container)(({ theme }) => ({
+  ...theme.typography.body1,
+  padding: theme.spacing(20),
+  display: "flex",
+  flexDirection: "column",
+  textAlign: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: theme.palette.text.secondary,
 }));
 
 function LandingPage() {
@@ -80,22 +92,46 @@ function LandingPage() {
 
 
   // for nav back to dashboard on submit
-  const history = useNavigate();
+  // const history = useNavigate();
 
   return (
-    <div>
-      <Grid container columnSpacing={1}>
-        <Grid item xs={3}></Grid>
-        <Grid item container xs={7}>
-          <Box sx={{ width: "75%" }}>
-          <Typography variant="h4" gutterBottom> Welcome </Typography>
-            <Carousel images={ imagesForCarousel }></Carousel>
-          </Box>
+    // <Item3>
+      // <React.Fragment>
+        <Grid container columnSpacing={1}>
+          <Grid xs={1}></Grid>
+          <Grid item lg={10}>
+            <Item>
+              <Typography variant="h4" gutterBottom> Test </Typography>
+            </Item>
+           
+          </Grid>
+          <Grid item md={12}>
+            
+              <Carousel images={ imagesForCarousel }></Carousel>
+           
+          </Grid>
+          <Grid xs={1}></Grid>
         </Grid>
-        <Grid item container xs={1}></Grid>
-      </Grid>
-    </div>
+      /* </Item3> */
+    
   );
 }
 
+
+
+{/* <Grid container columnSpacing={1}>
+<Grid item xs={1}></Grid>
+<Item3>
+  
+<Divider orientation="vertical" flexItem>
+VERTICAL
+</Divider>
+    <Typography variant="h4" gutterBottom> Welcome </Typography>
+    <Carousel images={ imagesForCarousel }></Carousel>
+
+</Item3>
+
+
+<Grid item container xs={1}></Grid>
+</Grid> */}
 export default LandingPage;
