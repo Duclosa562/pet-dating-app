@@ -13,11 +13,16 @@ import "../styles/PetProfile.css";
 function PetProfile() {
     const location = useLocation();
     const data = location.state;
+    console.log('PetProfile page');
+    console.log('data:');
+    console.log(data);
+    console.log('image?');
+    //console.log(data.data.image);  // confirmed this is correct
     return (
         <div className="pet-profile">
             <div className="pet-data">
                 <Grid container columns={2} direction='row' alignItems='center' justifyContent='center'>
-                    <ImageAvatar imagePath={data.data.image} />
+                    <ImageAvatar image={data.data.image} />
                     <ProfileCard petData={data}/>
                 </Grid>
             </div>
@@ -27,3 +32,6 @@ function PetProfile() {
 }
 
 export default PetProfile;
+
+// did not work
+// div alignItems='center' on both divs
