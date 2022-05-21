@@ -48,7 +48,6 @@ const styles = {
 
 };
 
-
 function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -79,8 +78,6 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Good With Animals?</Typography></StyledTableCell>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Good With Children?</Typography></StyledTableCell>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Must Be Leashed?</Typography></StyledTableCell>
-            <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Edit Pet</Typography></StyledTableCell>
-            <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Delete Pet</Typography></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -95,8 +92,6 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
               <TableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.good_with_animals === false ? 'No': row.good_with_animals === true? 'Yes': row.good_with_animals}</Typography></TableCell>
               <TableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.good_with_children === false ? 'No': row.good_with_children === true? 'Yes': row.good_with_children}</Typography></TableCell>
               <TableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.must_be_leashed === false ? 'No': row.must_be_leashed === true? 'Yes': row.must_be_leashed}</Typography></TableCell>
-              <TableCell align="center"><IconButton aria-label="edit"><EditIcon onClick = {() => onEditAnimal(row)}/></IconButton></TableCell>
-              <TableCell align="center"><IconButton aria-label="delete" ><DeleteIcon onClick = {() => onDeleteAnimal(row._id)}/></IconButton></TableCell>
             </StyledTableRow>
           ))}
         </TableBody>

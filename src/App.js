@@ -22,6 +22,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import UserCreateAcc from "./pages/UserCreateAcc";
 import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/SignInPage";
+import UserDashboard from "./pages/UserDashboard"
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "./components/SiteNavLinks/Navigation.js"; 
@@ -53,6 +54,7 @@ function App() {
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+		  <Route path="/UserDashboard" element={<UserDashboard />}></Route>
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>

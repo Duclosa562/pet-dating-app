@@ -8,14 +8,14 @@ function ImageAvatars({props}) {
   // need to strip of firs 23 chars to get the data from the base 64 encoded image
   if (typeof props === 'undefined'){
     return(
-      <Avatar alt="New Pet" sx={{ width: 256, height: 256 }}/>
+      <Avatar alt="New Pet"/>
     );
   }
   else{
     console.log("rendering image")
     return (
       
-      <Avatar alt="New Pet" src={props} sx={{ width: 256, height: 256 }}/>
+      <Avatar alt="New Pet" src={props}/>
   );
   }
 
