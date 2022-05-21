@@ -40,7 +40,7 @@ function NavBar(props) {
         <i className="fa-solid fa-paw navbar-icon" />
       </div>
       <div className="navbar-button">{props.isLoggedIn && homeRoute()}</div>
-      <div className="navbar-button">{props.isLoggedIN && searchRoute()}</div>
+      <div className="navbar-button">{props.isLoggedIn && searchRoute()}</div>
       <div className="navbar-button">
         {!props.isLoggedIn && (
           <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
