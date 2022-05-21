@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 import Navigation from "./components/SiteNavLinks/Navigation.js";
 import UserDashboard from "./pages/UserDashboard";
 import NavBar from "./components/NavBar/NavBar";
+import AdoptPet from "./pages/AdoptPet";
 
 function App() {
   // Login states
@@ -61,6 +62,7 @@ function App() {
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
+		  <Route path="/AdoptPet" element={<AdoptPet />}></Route>
           <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 
