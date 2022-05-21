@@ -67,20 +67,31 @@ const Item3 = styled(Container)(({ theme }) => ({
 function LandingPage() {
     const location = useLocation();
 
+    const [picObj, setPicObj] = useState([]);
+
     //populates the table component with data from the DB
-    const loadAnimals = () => {
+    const loadAnimals = async () => {
         console.log("Results of GET are....");
-        let results = queries.query_findMany("Animals", {})
+        let results = await queries.query_findMany("Animals", {})
             .then((res) => getCarouselImages(res.data) )
     }
+
     const imagesForCarousel = []
     const getCarouselImages = (results) =>{
         //extract images and store 
         for(let i = 0; i < results.length; i++){
-            imagesForCarousel.push(results[i].image);
+          // deal with any missing images
+            if (typeof results[i].image === 'undefined'){
+              continue;
+            }
+            else{
+              imagesForCarousel.push(results[i].image);
+              //imagesForCarousel[i] = results[i].image;
+            }
         }
         console.log("images for carousel are...");
         console.log(imagesForCarousel);
+        setPicObj(imagesForCarousel)
 
     }
 
@@ -95,11 +106,13 @@ function LandingPage() {
   // const history = useNavigate();
 
   return (
-    // <Item3>
-      // <React.Fragment>
+     <Item3>
+       <React.Fragment>
         <Grid container columnSpacing={1}>
+
           <Grid xs={1}></Grid>
-          <Grid item lg={10}>
+
+          <Grid item md={10}>
             <Item>
               <Typography variant="h4" gutterBottom> Test </Typography>
             </Item>
@@ -107,12 +120,15 @@ function LandingPage() {
           </Grid>
           <Grid item md={12}>
             
-              <Carousel images={ imagesForCarousel }></Carousel>
+              <Carousel images={ picObj }></Carousel>
            
           </Grid>
+
           <Grid xs={1}></Grid>
+
         </Grid>
-      /* </Item3> */
+        </React.Fragment>
+       </Item3> 
     
   );
 }
