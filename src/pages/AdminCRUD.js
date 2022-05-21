@@ -161,160 +161,6 @@ function AdminCreate() {
 
 
     return (
-<<<<<<< HEAD
-    <div>
-        <Grid container columnSpacing={1}>
-            <Grid item xs={1}></Grid>
-            <Grid item container xs={3} 
-            direction="column"
-            alignItems="center"
-            justifyContent="center">
-            <Stack>
-                <Box >
-                    <ImageAvatarCrud></ImageAvatarCrud>
-                </Box>
-                <Box >
-                    <UploadPhoto></UploadPhoto>
-                </Box>
-            </Stack>
-            </Grid>
-            <Grid item container xs={7}>
-                <Box sx={{width: "75%"  }}>
-                    {/* <AdminCrudCard ></AdminCrudCard> */}
-                    <Card >
-                <CardHeader title='Create a New Animal'/>
-                <CardContent classes='pet-content'  direction="column" alignItems="center" justifyContent="center"> 
-                    {/* <Item><FormsComponents/> */}
-                    <Item>
-                    <Box  justifyContent="center" sx={{ flexGrow: 1,
-                width: '100%' }}>
-      <Stack spacing={2}>
-        <Item2>
-            <label> Name: </label>
-            <div>
-            <TextField
-              required={true}
-              id="outlined-required"
-              label="Enter a Name"
-              value={name}
-              onChange={e => setName(e.target.value)}
-            />
-            </div>
-            {/* <FormInputName onChange={e => setName(e.target.value)}/> */}
-        </Item2>
-        <Item2>
-            <label> Age: </label>
-            <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Enter A Number"
-              value={age}
-              onChange={e => setAge(e.target.value)}
-            />
-            </div>
-            {/* <FormInputAge onChange={e => setAge(e.target.value)}/> */}
-        </Item2>
-        <Item2>
-            {/* <label> Age Units: </label> */}
-            <div>
-            {/* <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              value={ageUnits}
-              onChange={e => setAgeUnits(e.target.value)}
-            /> */}
-             <FormControl>
-                <FormLabel id="demo-radio-buttons-group-label">Age Descriptor</FormLabel>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    defaultValue="Weeks"
-                    name="ageDescripterAdd"
-                    value={ageUnits}
-                    onChange={e => setAgeUnits(e.target.value)}
-                >
-                    <FormControlLabel value="Years" control={<Radio />} label="Years" />
-                    <FormControlLabel value="Months" control={<Radio />} label="Months" />
-                    <FormControlLabel value="Weeks" control={<Radio />} label="Weeks" />
-                </RadioGroup>
-            </FormControl>
-            </div>
-            {/* <DropDownMenuAgeUnits onChange={e => setAgeUnits(e.target.value)}/> */}
-        </Item2>
-        <Item2>
-            <label> Breed: </label>
-            <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Enter a Breed Type"
-              value={breed}
-              onChange={e => setBreed(e.target.value)}
-            />
-            </div>
-            {/* <FormInputBreed onChange={e => setBreed(e.target.value)}/> */}
-        </Item2>
-        <Item2>
-            <label> Description: </label>
-            <div>
-            <TextField
-             multiline
-             rows={8}
-              required
-              id="outlined-required"
-              label="Enter Something Fun"
-              value={descr}
-              onChange={e => setDescr(e.target.value)}
-            />
-            </div>
-            {/* <FormInputDescription justifyContent="center" onChange={e => setDescr(e.target.value)}></FormInputDescription> */}
-        </Item2>
-        <Item2>
-            <label> Disposition: </label>
-            <div>
-            {/* <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              value={disp}
-              onChange={e => setDisp(e.target.value)}
-            /> */}
-            <Grid>
-                <Grid>
-                    <Item2>
-                    <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Good With Animals?</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="Weeks"
-                            name="dispositionAdd"
-                            value={goodWithAnimals}
-                            onChange={e => setGoodWithAnimals(e.target.value)}
-                        >
-                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="False" control={<Radio />} label="No" />
-                        </RadioGroup>
-                    </FormControl>
-                    </Item2>
-                </Grid>
-                <Grid>
-                    <Item2>
-                    <FormControl>
-                        <FormLabel id="demo-radio-buttons-group-label">Good With Kids?</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="Weeks"
-                            name="dispositionAdd"
-                            value={goodWithChildren}
-                            onChange={e => setGoodWithChildren(e.target.value)}
-                        >
-                            <FormControlLabel value="True" control={<Radio />} label="Yes" />
-                            <FormControlLabel value="False" control={<Radio />} label="No" />
-                        </RadioGroup>
-                    </FormControl>
-                    </Item2>
-=======
         <Item3>
             <Item display='flex' flex-direction="column" alignItems="center" direction="column" >
                 <React.Fragment>
@@ -452,7 +298,6 @@ function AdminCreate() {
                     <Grid item xs={12}>
                         {/* <Button variant='contained'onClick={() => submitHandler()}>Submit</Button> */}
                     </Grid>
->>>>>>> eb9f0924e54a7cc013fdbe8ed70cb69cd77d09fa
                 </Grid>
             </React.Fragment>
             <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
@@ -461,5 +306,6 @@ function AdminCreate() {
     
     )
 }
+
 
 export default AdminCreate
