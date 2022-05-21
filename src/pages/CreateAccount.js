@@ -55,6 +55,7 @@ function CreateAccount() {
       return
     }
     const userType = createAdmin ? "ShelterAdmin" : "User" ; 
+    
     const newAccount = {
       "type" : userType,
       "username" : username,

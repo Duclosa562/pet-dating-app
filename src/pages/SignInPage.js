@@ -38,7 +38,7 @@ const Item3 = styled(Container)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function SignInPage({ setIsLoggedIn, setIsAdmin, loginCheck }) {
+function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
@@ -69,6 +69,7 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, loginCheck }) {
       } else {
         setIsLoggedIn(true);
         setIsAdmin(res.data.type === "ShelterAdmin");
+        setAccountData(res.data)
         navigate("/Search");
       }
     });

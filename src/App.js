@@ -34,6 +34,7 @@ function App() {
   // Login states
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
+  const [accountData, setAccountData] = React.useState({});
   // This should be removed eventually.
   const loginCheck = () => {
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
@@ -55,15 +56,16 @@ function App() {
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
-          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
-		      <Route path="/UserDashboard" element={<UserDashboard />}></Route>
+          <Route path="/AdminDashboard" element={<AdminDashboard accountData={accountData} />}></Route>
+		      <Route path="/UserDashboard" element={<UserDashboard accountData={accountData} />}></Route>
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
           <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 
-            loginCheck={loginCheck}/>}></Route>
+            setAccountData={setAccountData}
+            />}></Route>
           <Route path="/CreateAccount" element={<CreateAccount />}></Route>
         </Routes>
       </Router>

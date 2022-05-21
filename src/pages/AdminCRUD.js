@@ -104,7 +104,8 @@ function AdminCreate() {
         const animalTest = {
             name:name, age:age, age_descriptor:ageUnits, breed:breed, 
             availability:avail, description:descr, good_with_animals:goodWithAnimals,
-             good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img}
+             good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img,
+            date_create: Date.now().to_string()}
         if (animalTest.good_with_animals === 'true')
             animalTest.good_with_animals = true;
         else{
