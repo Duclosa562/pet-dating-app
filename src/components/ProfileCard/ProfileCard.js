@@ -42,7 +42,7 @@ function ProfileCard({petData}) {
                         <p><b>Good with animals: </b>{String(petInfo.good_with_animals)}</p>
                         <p><b>Good with Children: </b>{String(petInfo.good_with_children)}</p>
                         <p><b>Must be leashed: </b>{String(petInfo.must_be_leashed)}</p>
-                        <p><b>Description: </b>{petInfo.description}</p>
+                        <p><b>Description: </b>{petInfo.description}</p><br></br>
                         <p><b>Status: </b>{petInfo.availability}</p>
                     </div>
                 </CardContent>
