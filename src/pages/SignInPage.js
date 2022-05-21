@@ -15,31 +15,42 @@ const queries = require('../utils/queries');
 function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [adminLogin, setAdminLogin] = React.useState(false);
   const navigate = useNavigate();
 
   function loginSubmit() {
     // need to set user type to "User" or "ShelterAdmin"
-    const adminCheck = adminLogin ? 'ShelterAdmin' : 'User';
     const loginCreds = {
-      type: adminCheck,
+      // type: adminCheck,
       username: username,
       password: password
     }
     // DB Account Call
-    queries.query_accountLogin(loginCreds).then(
+    // queries.query_accountLogin(loginCreds).then(
+    //   (res) => {
+    //     if (!res) {
+    //       alert('Invalid Login, Please try again');
+    //     }
+    //     else {
+    //       setIsLoggedIn(res);
+    //       setIsAdmin(adminLogin);
+    //       navigate("/Search");
+    //     }
+    //   }
+    // )
+    
+    // New query call that doesn't need a checkbox.
+    queries.query_findOne("Accounts", loginCreds).then(
       (res) => {
-        if (!res) {
-          alert('Invalid Login, Please try again');
+        if (!res.data) {
+          alert("Invalid Login.\nCheck your credentials and try again.");
         }
         else {
-          setIsLoggedIn(res);
-          setIsAdmin(adminLogin);
+          setIsLoggedIn(true);
+          setIsAdmin(res.data.type === "ShelterAdmin");
           navigate("/Search");
         }
       }
     )
-
   }
 
   // Need to create this route.
@@ -58,7 +69,7 @@ function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
         sx={{mt: 2}}
       >
         <Grid item xs={12}>
-          <h2>User/Admin Login</h2>
+          <h2>Account Sign-In</h2>
         </Grid>
         <Grid item xs={12} >
           <TextField label="Username" onChange={(e) => setUsername(e.target.value)}></TextField>
@@ -67,22 +78,10 @@ function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
           <TextField label="Password" type={"password"} onChange={(e) => setPassword(e.target.value)}></TextField>
         </Grid>
         <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={adminLogin}
-                onChange={() => setAdminLogin(!adminLogin)}
-                label={"Admin Login"}
-              />
-            }
-            label="Admin Login"
-          />
-        </Grid>
-        <Grid item xs={12}>
           <Button fullWidth variant='contained' onClick={loginSubmit} > Login </Button>
         </Grid>
         <Grid item xs={12}>
-          <Button fullWidth variant='contained' onClick={navToSignUp}> Sign Up Here </Button>
+          <Button fullWidth variant='text' onClick={navToSignUp}> Sign Up Here </Button>
         </Grid>
       </Grid>
     </div>
