@@ -59,7 +59,7 @@ function NavBar(props) {
         Pet Dating App
         <i class="fa-solid fa-paw navbar-icon"></i>
       </div>
-      <div className="navbar-button">{!props.isLoggedIn && homeRoute()}</div>
+      <div className="navbar-button">{props.isLoggedIn && homeRoute()}</div>
       <div className="navbar-button">{searchRoute()}</div>
       <div className="navbar-button">
         {!props.isLoggedIn && (

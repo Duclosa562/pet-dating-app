@@ -42,6 +42,11 @@ function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
 
   }
 
+  // Need to create this route.
+  function navToSignUp() {
+    navigate("/CreateAccount");
+  }
+
   return (
     <div>
       <Grid
@@ -75,6 +80,9 @@ function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
         </Grid>
         <Grid item xs={12}>
           <Button fullWidth variant='contained' onClick={loginSubmit} > Login </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button fullWidth variant='contained' onClick={navToSignUp}> Sign Up Here </Button>
         </Grid>
       </Grid>
     </div>
