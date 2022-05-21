@@ -96,9 +96,9 @@ function CreateAccount() {
         <React.Fragment>
           <Typography variant="h4" gutterBottom style={{ color: "rgb(52 191 179 / 77%)" }}>
             {" "}
-            <i class="fa-solid fa-paw navbar-icon"></i>
+            <i className="fa-solid fa-paw navbar-icon" />
             Sign Up - Create an Account
-            <i class="fa-solid fa-paw navbar-icon"></i>
+            <i className="fa-solid fa-paw navbar-icon" />
           </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>

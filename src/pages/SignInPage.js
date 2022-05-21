@@ -18,9 +18,8 @@ function SignInPage({setIsLoggedIn, setIsAdmin, loginCheck}) {
   const navigate = useNavigate();
 
   function loginSubmit() {
-    // need to set user type to "User" or "ShelterAdmin"
+
     const loginCreds = {
-      // type: adminCheck,
       username: username,
       password: password
     }
