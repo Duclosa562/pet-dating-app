@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 
@@ -35,15 +35,6 @@ const Item3 = styled(Container)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   color: theme.palette.text.secondary,
-}));
-
-const Item2 = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#5584AC",
-  ...theme.typography.body2,
-  padding: theme.spacing(5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  boxShadow: "5px",
 }));
 
 function CreateAccount() {
