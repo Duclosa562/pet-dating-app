@@ -35,7 +35,7 @@ function NavBar(props) {
 
   return (
     <header className="navbar">
-      <div className="navbar-title">
+      <div className="navbar-title" onClick={() => navigate("/")}>
         Pet Dating App
         <i className="fa-solid fa-paw navbar-icon" />
       </div>
