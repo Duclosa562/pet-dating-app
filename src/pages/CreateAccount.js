@@ -54,8 +54,12 @@ function CreateAccount() {
       alert("Passwords do not match.\nPlease check your password and try again.");
       return
     }
+    if (firstname === "" || lastname === "" | username === "" || email === "" || password === "" | password2 === "" || email === "") {
+      alert("Please fill out all fields below.");
+      return
+    }
     const userType = createAdmin ? "ShelterAdmin" : "User" ; 
-    
+
     const newAccount = {
       "type" : userType,
       "username" : username,
@@ -87,7 +91,6 @@ function CreateAccount() {
       >
         <React.Fragment>
           <Typography variant="h4" gutterBottom style={{ color: "rgb(52 191 179 / 77%)" }}>
-            {" "}
             <i className="fa-solid fa-paw navbar-icon" />
             Sign Up - Create an Account
             <i className="fa-solid fa-paw navbar-icon" />

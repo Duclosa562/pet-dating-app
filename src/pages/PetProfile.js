@@ -13,11 +13,7 @@ import "../styles/PetProfile.css";
 function PetProfile() {
     const location = useLocation();
     const data = location.state;
-    console.log('PetProfile page');
-    console.log('data:');
-    console.log(data);
-    console.log('image?');
-    //console.log(data.data.image);  // confirmed this is correct
+
     return (
         <div className="pet-profile">
             <div className="pet-data">

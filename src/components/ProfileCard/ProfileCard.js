@@ -27,7 +27,7 @@ function button_html(pet) {
         return <Button variant='contained' disabled>ADOPT</Button>
     }
     return (
-        <Link to={`/AdoptPet`}>
+        <Link to={`/AdoptPet/${pet._id}`} state={{data: pet}} style={{textDecoration: 'none'}}>
             <Button variant='contained'>ADOPT</Button>
         </Link>
     );
