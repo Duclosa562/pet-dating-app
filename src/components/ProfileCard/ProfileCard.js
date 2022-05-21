@@ -5,7 +5,9 @@ import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 
 import './ProfileCard.css';
-import {queries} from '../../utils/queries';
+import AdoptPet from '../../pages/AdoptPet';
+import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 function bools_to_strings(pet) {
@@ -24,10 +26,16 @@ function button_html(pet) {
     if (pet.availability != 'Available') {
         return <Button variant='contained' disabled>ADOPT</Button>
     }
-    return <Button variant='contained'>ADOPT</Button>
+    return (
+        <Link to={`/AdoptPet`}>
+            <Button variant='contained'>ADOPT</Button>
+        </Link>
+    );
 }
 
 function ProfileCard({petData}) {
+
+    
     var petInfo = petData.data;
     bools_to_strings(petInfo);
     const button = button_html(petInfo);
