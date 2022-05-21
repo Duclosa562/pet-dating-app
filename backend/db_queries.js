@@ -211,7 +211,7 @@ async function query_findOne(collectionName, query) {
         //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
-        result = await collection.findOne(query);
+        result = collection.findOne(query);
         printQueryResult(query_findOne.name, collectionName, query, result);
     } finally {
         //await client.close();
@@ -227,11 +227,33 @@ async function query_findMany(collectionName, query) {
         //await client.connect();
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
-        var cursor = await collection.find(query);
+        var cursor = collection.find(query);
         await cursor.forEach(item => {
             results.push(JSON.parse(JSON.stringify(item)));
         });
         await printFindManyResult(query_findMany.name, collectionName, query, results);
+    } finally {
+        //await client.close();
+    }
+    return results;
+}
+
+// return the most recent <quantity> records that were inserted into the database
+//  - only most recent 'inserted' records. this query is unnaffected by how recently records were updated.
+async function query_mostRecent(quantity) {
+    console.log('query_mostRecent()');
+    var results = [];
+    try {
+        //await client.connect();
+        const db = client.db(db_name);
+        const collection = db.collection(animalsCollection);
+        var cursor = collection.find().sort({_id: -1}).limit(quantity);
+        await cursor.forEach(item => {
+            results.push(JSON.parse(JSON.stringify(item)));
+        });
+    } catch (err) {
+        console.log('Errr in query_mostRecent()');
+        console.log(err);
     } finally {
         //await client.close();
     }
@@ -322,5 +344,6 @@ module.exports = {
     query_findOne,
     query_findMany,
     query_updateOne,
-    query_deleteOne
+    query_deleteOne,
+    query_mostRecent
 };
