@@ -43,13 +43,14 @@ function NavBar(props) {
     navigate("/");
   }
 
-  useEffect(() => {
-    console.log("---NAVBAR --");
-    console.log( cookies.isLoggedIn);
-    console.log( cookies.isAdmin);
-    console.log( cookies.userData);
-    console.log("------------------");
-  }, [cookies.isLoggedIn, cookies.isAdmin, cookies.userData]);
+  // Can use this hook to check the states of cookies.
+  // useEffect(() => {
+  //   console.log("---NAVBAR --");
+  //   console.log( cookies.isLoggedIn);
+  //   console.log( cookies.isAdmin);
+  //   console.log( cookies.userData);
+  //   console.log("------------------");
+  // }, [cookies.isLoggedIn, cookies.isAdmin, cookies.userData]);
   
   return (
     <header className="navbar">

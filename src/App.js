@@ -13,6 +13,8 @@ import {
 
 import logo from "./logo.svg";
 import "./App.css";
+
+// Routes and Pages imports
 import HomePage from "./pages/HomePage";
 import AdminCRUD from "./pages/AdminCRUD";
 import AdminEdit from "./pages/AdminEdit";
@@ -24,6 +26,8 @@ import UserCreateAcc from "./pages/UserCreateAcc";
 import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/SignInPage";
 import CreateAccount from "./pages/CreateAccount";
+import Dashboard from "./pages/DashboardHandler";
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigation from "./components/SiteNavLinks/Navigation.js";
@@ -41,9 +45,6 @@ function App() {
 
   const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
 
-  function setLoggedOff() {
-    setCookies("isLoggedIn", false, { path: "/" })
-  }
   console.log(cookies['isLoggedIn'], cookies['isAdmin'], cookies['userData']);
   // if (typeof cookies['isLoggedIn'] === "undefined") {
   //   setCookies('isLoggedIn', false, { path: "/" });
@@ -56,6 +57,7 @@ function App() {
     setCookies('isLoggedIn', false, { path: "/" });
     setCookies('isAdmin', false, { path: "/" });
     setCookies('userData', {}, { path: "/" });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   // This should be removed eventually.
   const loginCheck = () => {
@@ -73,7 +75,6 @@ function App() {
           isLoggedIn = {isLoggedIn}
           cookies={cookies}
           setCookies={setCookies}
-          setLoggedOff={setLoggedOff}
         />
         <Routes>
           <Route path="/" exact element={<HomePage />}></Route>
@@ -95,6 +96,7 @@ function App() {
             setCookies={setCookies}
             />}></Route>
           <Route path="/CreateAccount" element={<CreateAccount />}></Route>
+          <Route path="/Dashboard" element={<Dashboard cookies={cookies}/>}></Route>
         </Routes>
       </Router>
     </div>
