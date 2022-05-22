@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Cookies from 'universal-cookie';
+import * as reactCookie from "react-cookie";
 
 import { Button } from "@mui/material";
 import "./NavBar.css";
 
 function NavBar(props) {
-  // COOKies
-  // const session = new Cookies();
-  // let isLoggedIn = session.get("IsLoggedIn");
-  // let isAdmin = session.get("IsAdmin");
-  // console.log("NAVBAR SESSION: ", session.get("IsLoggedIn"), " -- ", session.get("IsAdmin"));
-  
   // cookie hooks
   const cookies = props.cookies;
   const setCookies = props.setCookies;
-
+  const logOffHandler = props.setLoggedOff;
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [userData, setUserData] = React.useState({});
 
   function homeRoute() {
     return (
@@ -42,33 +39,59 @@ function NavBar(props) {
     setCookies("isLoggedIn", false, { path: "/" });
     setCookies("isAdmin", false, { path: "/" });
     setCookies("userData", {}, { path: "/" });
+    // logOffHandler();
     navigate("/");
   }
 
+  useEffect(() => {
+    console.log("---NAVBAR --");
+    console.log( cookies.isLoggedIn);
+    console.log( cookies.isAdmin);
+    console.log( cookies.userData);
+    console.log("------------------");
+  }, [cookies.isLoggedIn, cookies.isAdmin, cookies.userData]);
+  
   return (
     <header className="navbar">
       <div className="navbar-title" onClick={() => navigate("/")}>
         Pet Dating App
         <i className="fa-solid fa-paw navbar-icon" />
       </div>
-      <div className="navbar-button">{props.isLoggedIn && homeRoute()}</div>
-      <div className="navbar-button">{props.isLoggedIn && searchRoute()}</div>
+      <div className="navbar-button">{cookies.isLoggedIn === "true" && homeRoute()}</div>
+      <div className="navbar-button">{cookies.isLoggedIn === "true" && searchRoute()}</div>
       <div className="navbar-button">
-        {!cookies['isLoggedIn'] && (
-          <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
-            <Button variant="text" size="large" sx={{ color: "black" }}>
-              Login/Sign-Up
-            </Button>
-          </Link>
-        )}
-      </div>
-      <div className="navbar-button">
-        {cookies['isLoggedIn'] && (
-          <Button variant="text" size="large" sx={{ color: "black" }} onClick={logoutHandler}>
+        {(cookies.isLoggedIn === "false") ? (
+          <Button
+            variant="text"
+            size="large"
+            sx={{ color: "black" }}
+            onClick={() => navigate("/SignInPage")}
+          >
+            Login/Sign-Up
+          </Button>
+        ) : (
+          <Button
+            variant="text"
+            size="large"
+            sx={{ color: "black" }}
+            onClick={logoutHandler}
+          >
             Sign Out
           </Button>
         )}
       </div>
+      {/* <div className="navbar-button">
+        {cookies.isLoggedIn && (
+          <Button
+            variant="text"
+            size="large"
+            sx={{ color: "black" }}
+            onClick={logoutHandler}
+          >
+            Sign Out
+          </Button>
+        )}
+      </div> */}
     </header>
   );
 }

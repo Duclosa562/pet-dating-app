@@ -40,13 +40,23 @@ function App() {
   const [accountData, setAccountData] = React.useState({});
 
   const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+
+  function setLoggedOff() {
+    setCookies("isLoggedIn", false, { path: "/" })
+  }
   console.log(cookies['isLoggedIn'], cookies['isAdmin'], cookies['userData']);
-  if (typeof cookies['isLoggedIn'] === "undefined") {
+  // if (typeof cookies['isLoggedIn'] === "undefined") {
+  //   setCookies('isLoggedIn', false, { path: "/" });
+  //   setCookies('isAdmin', false, { path: "/" });
+  //   setCookies('userData', {}, { path: "/" });
+  // }
+  console.log("APP: ", cookies);
+
+  React.useEffect(() => {
     setCookies('isLoggedIn', false, { path: "/" });
     setCookies('isAdmin', false, { path: "/" });
     setCookies('userData', {}, { path: "/" });
-  }
-  console.log(cookies);
+  }, [])
   // This should be removed eventually.
   const loginCheck = () => {
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
@@ -63,6 +73,7 @@ function App() {
           isLoggedIn = {isLoggedIn}
           cookies={cookies}
           setCookies={setCookies}
+          setLoggedOff={setLoggedOff}
         />
         <Routes>
           <Route path="/" exact element={<HomePage />}></Route>
