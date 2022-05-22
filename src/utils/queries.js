@@ -189,6 +189,7 @@ async function query_mostRecent(quantity) {
  ****************************/
 
 async function _query_insertOne(collection, query) {
+    
     if (_valid_collection(collection) === false) {
         return _error_json('Invalid Collection Paramter');
     }

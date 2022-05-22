@@ -84,10 +84,6 @@ function AdoptPet() {
     )
   }
 
-  const updatePetAvailability = () => {
-      alert('Updating pet availability!');
-  }
-
   return (
     <Item3>
       <Item
@@ -153,7 +149,7 @@ function AdoptPet() {
               <Checkbox checked={createAdmin} onChange={() => setCreateAdmin(!createAdmin)}/>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" onClick={updatePetAvailability()}>
+              <Button variant="contained" onClick={console.log('you clicked the button.')}>
                 Adopt
               </Button>
             </Grid>
