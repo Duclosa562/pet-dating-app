@@ -71,10 +71,11 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
         alert("Invalid Login.\nCheck your credentials and try again.");
       } else {
 
-        const session = new Cookies();
-        session.set("isLoggedIn", true, { path: "/" });
-        session.set("isAdmin", res.data.type === "ShelterAdmin", { path: "/"});
-        session.set("accountData", res.data, {path: "/" });
+        // const session = new Cookies();
+        // session.set("isLoggedIn", true, { path: "/" });
+        // session.set("isAdmin", res.data.type === "ShelterAdmin", { path: "/"});
+        // session.set("accountData", res.data, {path: "/" });
+
         // setIsLoggedIn(true);
         // setIsAdmin(res.data.type === "ShelterAdmin");
         // setAccountData(res.data)

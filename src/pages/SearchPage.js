@@ -18,8 +18,9 @@ const queries = require("../utils/queries");
 
 
 function SearchPage(props) {
-  const session = Cookies();
-  console.log(session)
+  // const session = new Cookies();
+  // console.log(session.get("isLoggedIn"));
+
   const speciesOptions = ["Dog", "Cat", "Other"];
 
   // Search param states

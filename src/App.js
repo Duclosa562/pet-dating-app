@@ -30,12 +30,23 @@ import Navigation from "./components/SiteNavLinks/Navigation.js";
 import UserDashboard from "./pages/UserDashboard";
 import NavBar from "./components/NavBar/NavBar";
 import AdoptPet from "./pages/AdoptPet";
+import { useCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 
 function App() {
   // Login states
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const [accountData, setAccountData] = React.useState({});
+
+  const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+  console.log(cookies['isLoggedIn'], cookies['isAdmin'], cookies['userData']);
+  if (typeof cookies['isLoggedIn'] === "undefined") {
+    setCookies('isLoggedIn', false, { path: "/" });
+    setCookies('isAdmin', false, { path: "/" });
+    setCookies('userData', {}, { path: "/" });
+  }
+  console.log(cookies);
   // This should be removed eventually.
   const loginCheck = () => {
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
@@ -50,6 +61,8 @@ function App() {
           setIsLoggedIn={setIsLoggedIn} 
           setIsAdmin={setIsAdmin}
           isLoggedIn = {isLoggedIn}
+          cookies={cookies}
+          setCookies={setCookies}
         />
         <Routes>
           <Route path="/" exact element={<HomePage />}></Route>

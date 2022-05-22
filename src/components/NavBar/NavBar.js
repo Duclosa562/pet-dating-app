@@ -6,7 +6,12 @@ import { Button } from "@mui/material";
 import "./NavBar.css";
 
 function NavBar(props) {
-  const session = new Cookies();
+  // COOKies
+  // const session = new Cookies();
+  // let isLoggedIn = session.get("IsLoggedIn");
+  // let isAdmin = session.get("IsAdmin");
+  // console.log("NAVBAR SESSION: ", session.get("IsLoggedIn"), " -- ", session.get("IsAdmin"));
+  
   const navigate = useNavigate();
 
   function homeRoute() {
