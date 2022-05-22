@@ -12,6 +12,7 @@ import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
 
 import '../styles/SearchPage.css';
+import Cookies from 'universal-cookie';
 
 const queries = require('../utils/queries');
 
@@ -48,6 +49,11 @@ async function search() {
 }
 
 function SearchPage(props) {
+    const cookie = new Cookies();
+    console.log("person's account data is ", cookie.get("accountData"));
+    console.log("person's type is ", cookie.get("accountType"));
+
+
     const speciesOptions = ["Dog", "Cat", "Other"];
     // const animalsCollection = 'Animals';
     // const animalsQuery4 = {shelter_oid: '6254368a11c4ca8be3b22ad1'}

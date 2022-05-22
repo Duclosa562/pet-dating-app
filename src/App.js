@@ -33,9 +33,12 @@ function App() {
   // Login states
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
+  const [accountData, setAccountData] = React.useState({});
+
   // This should be removed eventually.
   const loginCheck = () => {
-    console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
+    console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin, );
+	
   }
   // To propagate prop to edit up tree and down for edit page
   return (
@@ -46,10 +49,16 @@ function App() {
           loginCheck={loginCheck} 
           setIsLoggedIn={setIsLoggedIn} 
           setIsAdmin={setIsAdmin}
+		  setAccountData={setAccountData}
           isLoggedIn = {isLoggedIn}
         />
+		
         <Routes>
-          <Route path="/" exact element={<HomePage />}></Route>
+          <Route path="/" exact element={<SignInPage element={<SignInPage 
+            setIsLoggedIn={setIsLoggedIn} 
+			setAccountData={setAccountData} 
+            setIsAdmin={setIsAdmin}
+            loginCheck={loginCheck}/>} />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
@@ -60,10 +69,11 @@ function App() {
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
 		  <Route path="/AdoptPet" element={<AdoptPet />}></Route>
-          <Route path="/SignInPage" element={<SignInPage 
+          {/* <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
+			setAccountData={setAccountData} 
             setIsAdmin={setIsAdmin}
-            loginCheck={loginCheck}/>}></Route>
+            loginCheck={loginCheck}/>}></Route> */}
         </Routes>
       </Router>
     </div>
