@@ -12,6 +12,10 @@ function NavBar(props) {
   // let isAdmin = session.get("IsAdmin");
   // console.log("NAVBAR SESSION: ", session.get("IsLoggedIn"), " -- ", session.get("IsAdmin"));
   
+  // cookie hooks
+  const cookies = props.cookies;
+  const setCookies = props.setCookies;
+
   const navigate = useNavigate();
 
   function homeRoute() {
@@ -35,8 +39,9 @@ function NavBar(props) {
   }
 
   function logoutHandler() {
-    props.setIsLoggedIn(false);
-    props.setIsAdmin(false);
+    setCookies("isLoggedIn", false, { path: "/" });
+    setCookies("isAdmin", false, { path: "/" });
+    setCookies("userData", {}, { path: "/" });
     navigate("/");
   }
 
@@ -49,7 +54,7 @@ function NavBar(props) {
       <div className="navbar-button">{props.isLoggedIn && homeRoute()}</div>
       <div className="navbar-button">{props.isLoggedIn && searchRoute()}</div>
       <div className="navbar-button">
-        {!props.isLoggedIn && (
+        {!cookies['isLoggedIn'] && (
           <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
             <Button variant="text" size="large" sx={{ color: "black" }}>
               Login/Sign-Up
@@ -58,7 +63,7 @@ function NavBar(props) {
         )}
       </div>
       <div className="navbar-button">
-        {props.isLoggedIn && (
+        {cookies['isLoggedIn'] && (
           <Button variant="text" size="large" sx={{ color: "black" }} onClick={logoutHandler}>
             Sign Out
           </Button>

@@ -39,7 +39,7 @@ const Item3 = styled(Container)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
+function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData, cookies, setCookies }) {
 
   
   const [username, setUsername] = React.useState("");
@@ -70,11 +70,11 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
       if (!res.data) {
         alert("Invalid Login.\nCheck your credentials and try again.");
       } else {
-
+        
         // const session = new Cookies();
-        // session.set("isLoggedIn", true, { path: "/" });
-        // session.set("isAdmin", res.data.type === "ShelterAdmin", { path: "/"});
-        // session.set("accountData", res.data, {path: "/" });
+        setCookies("isLoggedIn", true, { path: "/" });
+        setCookies("isAdmin", res.data.type === "ShelterAdmin", { path: "/" });
+        setCookies("userData", res.data, { path: "/" });
 
         // setIsLoggedIn(true);
         // setIsAdmin(res.data.type === "ShelterAdmin");

@@ -80,6 +80,8 @@ function App() {
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 
             setAccountData={setAccountData}
+            cookies={cookies}
+            setCookies={setCookies}
             />}></Route>
           <Route path="/CreateAccount" element={<CreateAccount />}></Route>
         </Routes>

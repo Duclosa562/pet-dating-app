@@ -20,6 +20,8 @@ const queries = require("../utils/queries");
 function SearchPage(props) {
   // const session = new Cookies();
   // console.log(session.get("isLoggedIn"));
+  // const cookies = props.cookies;
+  // const setCookies = props.setCookies;
 
   const speciesOptions = ["Dog", "Cat", "Other"];
 
