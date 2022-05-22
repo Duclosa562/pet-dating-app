@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 import { Button } from "@mui/material";
 import "./NavBar.css";
 
 function NavBar(props) {
+  const session = new Cookies();
   const navigate = useNavigate();
 
   function homeRoute() {

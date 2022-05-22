@@ -8,6 +8,8 @@ import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+import Cookies from 'universal-cookie';
+
 import SearchResults from "../components/SearchResults/SearchResults";
 
 import "../styles/SearchPage.css";
@@ -16,6 +18,8 @@ const queries = require("../utils/queries");
 
 
 function SearchPage(props) {
+  const session = Cookies();
+  console.log(session)
   const speciesOptions = ["Dog", "Cat", "Other"];
 
   // Search param states
