@@ -53,12 +53,12 @@ function App() {
   // }
   console.log("APP: ", cookies);
 
-  React.useEffect(() => {
-    setCookies('isLoggedIn', false, { path: "/" });
-    setCookies('isAdmin', false, { path: "/" });
-    setCookies('userData', {}, { path: "/" });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+//   React.useEffect(() => {
+//     setCookies('isLoggedIn', false, { path: "/" });
+//     setCookies('isAdmin', false, { path: "/" });
+//     setCookies('userData', {}, { path: "/" });
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [])
 
 
   // This should be removed eventually.

@@ -31,6 +31,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Avatar from '../components/ImageAvatar/ImageAvatarEdit';
 import Typography from '@mui/material/Typography';
+import { useCookies } from 'react-cookie';
 const queries = require('../utils/queries');
 //import { useForm } from "react-hook-form";
 
@@ -67,6 +68,13 @@ const Item2 = styled(Paper)(({ theme }) => ({
     boxShadow: "5px",
   }));
 
+function toDate(date) {
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+  
+    return month + '/' + day + '/' + year;
+}
 function AdminCreate() {
     const location = useLocation();
     //console.log("location %s", JSON.stringify(location))
@@ -74,7 +82,7 @@ function AdminCreate() {
     //animal = location.state
     ///console.log(animal)
 
-
+    const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
     const [name, setName] = useState();
     const [age, setAge] = useState();
     const [ageUnits, setAgeUnits] = useState("Weeks");
@@ -98,6 +106,8 @@ function AdminCreate() {
     // for nav back to dashboard on submit
     const history = useNavigate();
 
+    const accountData = cookies["userData"];
+
     const submitHandler = async () => {
         //const animalId = animal._id;
 
@@ -105,7 +115,7 @@ function AdminCreate() {
             name:name, age:age, age_descriptor:ageUnits, breed:breed, 
             availability:avail, description:descr, good_with_animals:goodWithAnimals,
              good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img,
-            date_create: Date.now().to_string()}
+            date_created: toDate(new Date()), acc_id: accountData._id }
         if (animalTest.good_with_animals === 'true')
             animalTest.good_with_animals = true;
         else{
