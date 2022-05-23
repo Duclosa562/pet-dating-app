@@ -7,6 +7,8 @@ import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
+import AdoptPet_Finished from "./AdoptPet_Finished";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import ImageAvatar from "../components/ImageAvatar/ImageAvatar";
@@ -104,9 +106,9 @@ function AdoptPet({pet}) {
                   />
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" onClick={submitHandler}>
-                Submit Application
-              </Button>
+              <Link to="/AdoptPet_Finished" state={pet}>
+                <Button variant="contained" size="large">Submit Application</Button>
+              </Link>
             </Grid>
           </Grid>
         </React.Fragment>

@@ -27,6 +27,7 @@ import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/SignInPage";
 import CreateAccount from "./pages/CreateAccount";
 import Dashboard from "./pages/DashboardHandler";
+import AdoptPet_Finished from "./pages/AdoptPet_Finished";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -88,6 +89,7 @@ function App() {
           <Route path="/" exact element={<LandingPage />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
+		  <Route path="/AdoptPet_Finished" element={<AdoptPet_Finished />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
