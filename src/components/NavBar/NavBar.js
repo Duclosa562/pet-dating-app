@@ -2,10 +2,15 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@mui/material";
+import { useCookies } from 'react-cookie';
+
 import "./NavBar.css";
 
 function NavBar(props) {
   const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+
+  let isLoggedIn = cookies["isLoggedIn"];
 
   function homeRoute() {
     return (
@@ -30,6 +35,10 @@ function NavBar(props) {
   function logoutHandler() {
     props.setIsLoggedIn(false);
     props.setIsAdmin(false);
+
+    setCookies('isLoggedIn', false, { path: "/" });
+    setCookies('isAdmin', false, { path: "/" });
+    setCookies('userData', {}, { path: "/" });
     navigate("/");
   }
 
@@ -39,10 +48,10 @@ function NavBar(props) {
         Pet Dating App
         <i className="fa-solid fa-paw navbar-icon" />
       </div>
-      <div className="navbar-button">{props.isLoggedIn && homeRoute()}</div>
-      <div className="navbar-button">{props.isLoggedIn && searchRoute()}</div>
+      <div className="navbar-button">{isLoggedIn === "true" && homeRoute()}</div>
+      <div className="navbar-button">{isLoggedIn === "true" && searchRoute()}</div>
       <div className="navbar-button">
-        {!props.isLoggedIn && (
+        {isLoggedIn === "false" && (
           <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
             <Button variant="text" size="large" sx={{ color: "black" }}>
               Login/Sign-Up
@@ -51,7 +60,7 @@ function NavBar(props) {
         )}
       </div>
       <div className="navbar-button">
-        {props.isLoggedIn && (
+        {isLoggedIn === "true" && (
           <Button variant="text" size="large" sx={{ color: "black" }} onClick={logoutHandler}>
             Sign Out
           </Button>

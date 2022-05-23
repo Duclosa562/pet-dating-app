@@ -12,15 +12,16 @@ import Typography from '@mui/material/Typography';
 
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
+import { useCookies } from 'react-cookie';
 
 import { ConstructionOutlined } from '@mui/icons-material';
 
 const queries = require('../utils/queries');
 
 
-function UserDashboard(props) {
-
-    const accountData = props.accountData;
+function UserDashboard() {
+    const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+    const accountData = cookies["userData"];
     // Search result states
     const [searchResults, setSearchResults] = React.useState([]);
 

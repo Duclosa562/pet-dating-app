@@ -11,6 +11,8 @@ import {
   Stack,
 } from "@mui/material";
 
+import { useCookies } from 'react-cookie';
+
 const queries = require("../utils/queries");
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -41,6 +43,8 @@ const Item3 = styled(Container)(({ theme }) => ({
 function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+
   const navigate = useNavigate();
 
   function loginSubmit() {
@@ -67,10 +71,18 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
       if (!res.data) {
         alert("Invalid Login.\nCheck your credentials and try again.");
       } else {
+
         setIsLoggedIn(true);
         setIsAdmin(res.data.type === "ShelterAdmin");
         setAccountData(res.data)
-        navigate("/Search");
+
+        setCookies('isLoggedIn', true, { path: "/" });
+        setCookies('isAdmin', res.data.type === "ShelterAdmin", { path: "/" });
+        setCookies('userData', res.data, { path: "/" });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+
+
+        navigate("/Dashboard", {state: res.data, replace: true});
       }
     });
   }

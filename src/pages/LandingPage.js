@@ -32,8 +32,13 @@ import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
 import { useEffect } from 'react';
 import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
 //import { useForm } from "react-hook-form";
 import Typography from '@mui/material/Typography';
+import Dashboard from "./DashboardHandler";
+
+import { useCookies } from 'react-cookie';
+
 const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -65,6 +70,8 @@ const Item3 = styled(Container)(({ theme }) => ({
 }));
 
 function LandingPage() {
+    const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+ 
     const location = useLocation();
 
     const [picObj, setPicObj] = useState([]);
@@ -104,7 +111,9 @@ function LandingPage() {
 
   // for nav back to dashboard on submit
   // const history = useNavigate();
-
+  if (cookies["isLoggedIn"] === "true") {
+    return <Dashboard />;
+  }
   return (
      <Item3>
        <React.Fragment>
@@ -116,7 +125,7 @@ function LandingPage() {
             <Item>
               <Typography variant="h3" gutterBottom> Welcome to app_name! </Typography>
               <Typography variant="h6" gutterBottom> Find your dream pet today </Typography>
-              <Button size="large" variant="contained">Get Started</Button>
+              <Link to="/SignInPage"> <Button size="large" variant="contained">Get Started</Button></Link >
             </Item>
            
           </Grid>

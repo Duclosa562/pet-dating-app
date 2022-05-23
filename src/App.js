@@ -59,10 +59,18 @@ function App() {
     setCookies('userData', {}, { path: "/" });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+
   // This should be removed eventually.
   const loginCheck = () => {
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin);
   }
+
+
+//   let redirectToUrl;
+//   	if(){
+
+// 	  }
   // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
@@ -77,17 +85,17 @@ function App() {
           setCookies={setCookies}
         />
         <Routes>
-          <Route path="/" exact element={<HomePage />}></Route>
+          <Route path="/" exact element={<LandingPage />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
-          <Route path="/AdminDashboard" element={<AdminDashboard accountData={accountData} />}></Route>
-		      <Route path="/UserDashboard" element={<UserDashboard accountData={accountData} />}></Route>
+          <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
+		  <Route path="/UserDashboard" element={<UserDashboard />}></Route>
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
-		      <Route path="/AdoptPet/:pet_id" element={<AdoptPet />}></Route>
+		  <Route path="/AdoptPet/:pet_id" element={<AdoptPet />}></Route>
           <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 
@@ -96,7 +104,7 @@ function App() {
             setCookies={setCookies}
             />}></Route>
           <Route path="/CreateAccount" element={<CreateAccount />}></Route>
-          <Route path="/Dashboard" element={<Dashboard cookies={cookies}/>}></Route>
+          <Route path="/Dashboard" element={<Dashboard />}></Route>
         </Routes>
       </Router>
     </div>
