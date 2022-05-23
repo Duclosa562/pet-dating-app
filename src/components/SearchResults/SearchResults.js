@@ -3,7 +3,6 @@ import {Grid, Divider} from "@mui/material";
 import SearchCard from "../SearchCard/SearchCard";
 
 function SearchResults({searchRes}) {
-    console.log("IN searchRESU", searchRes)
     if (!searchRes || searchRes.length === 0 ) {
         return (<div></div>)
     }

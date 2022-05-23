@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Typography from "@mui/material/Typography";
 
@@ -37,16 +37,7 @@ const Item3 = styled(Container)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Item2 = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#5584AC",
-  ...theme.typography.body2,
-  padding: theme.spacing(5),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  boxShadow: "5px",
-}));
-
-function AdoptPet() {
+function CreateAccount() {
 
   const navigate = useNavigate();
 
@@ -64,6 +55,7 @@ function AdoptPet() {
       return
     }
     const userType = createAdmin ? "ShelterAdmin" : "User" ; 
+    
     const newAccount = {
       "type" : userType,
       "username" : username,
@@ -82,6 +74,7 @@ function AdoptPet() {
         navigate("/SignInPage");
       }
     )
+
   }
 
   return (
@@ -144,13 +137,37 @@ function AdoptPet() {
                 variant="filled"
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <label> Password: </label>
+              <TextField
+                required
+                id="password"
+                type="password"
+                label=""
+                onChange={(e) => setPassword(e.target.value)}
+                fullWidth
+                variant="filled"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <label> Confirm Password: </label>
+              <TextField
+                required
+                id="password2"
+                type="password"
+                label=""
+                onChange={(e) => setPassword2(e.target.value)}
+                fullWidth
+                variant="filled"
+              />
+            </Grid>
             <Grid item xs={12}>
-              <label> Adopt Pet </label>
+              <label> Create Admin/Shelter Account </label>
               <Checkbox checked={createAdmin} onChange={() => setCreateAdmin(!createAdmin)}/>
             </Grid>
             <Grid item xs={12}>
-              <Button variant="contained" onClick={(e) => console.log(e)}>
-                Adopt
+              <Button variant="contained" onClick={createAccountHandler}>
+                Create Account
               </Button>
             </Grid>
           </Grid>
@@ -160,4 +177,4 @@ function AdoptPet() {
   );
 }
 
-export default AdoptPet;
+export default CreateAccount;

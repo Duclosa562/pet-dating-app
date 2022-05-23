@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 
 import {
   Grid,
@@ -38,10 +37,8 @@ const Item3 = styled(Container)(({ theme }) => ({
   justifyContent: "center",
   color: theme.palette.text.secondary,
 }));
-//old props
-//setIsLoggedIn, setIsAdmin, setAccountData, loginCheck
 
-function SignInPage() {
+function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
@@ -70,17 +67,10 @@ function SignInPage() {
       if (!res.data) {
         alert("Invalid Login.\nCheck your credentials and try again.");
       } else {
-        const cookies = new Cookies();
-        cookies.set("isLoggedIn", true);
-        cookies.set("isAdmin", res.data.type === "ShelterAdmin");
-        cookies.set("accountData", res.data);
-        cookies.set("accountType", res.data.type);
-        //setIsLoggedIn(true);
-        // setIsAdmin(res.data.type === "ShelterAdmin");
-        // setAccountData(res.data)
-        
+        setIsLoggedIn(true);
+        setIsAdmin(res.data.type === "ShelterAdmin");
+        setAccountData(res.data)
         navigate("/Search");
-        console.log("AccountData is: ", res.data)
       }
     });
   }

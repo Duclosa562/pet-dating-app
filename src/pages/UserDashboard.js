@@ -18,16 +18,9 @@ import { ConstructionOutlined } from '@mui/icons-material';
 const queries = require('../utils/queries');
 
 
-// this function operates asyncronously
-// it allows the remainder of the JavaScript in the browser to function while the call to db is made
-// within this function, it waits for the db call to resolve before passing results into 
-// async function search() {
-//     var results = await queries.query_findMany('Animals', {name: 'Otus', breed: 'Cat'});
-//     // pass results into the function here
-// }
-
 function UserDashboard(props) {
 
+    const accountData = props.accountData;
     // Search result states
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -92,7 +85,7 @@ function UserDashboard(props) {
     return (
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
-                <Typography variant="h4" gutterBottom> Welcome user_name! Here's a list of some local pets </Typography>
+                <Typography variant="h4" gutterBottom> Welcome {accountData.first_name} {accountData.last_name}! Here's a list of some local pets </Typography>
                 <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
                 <SearchResults searchRes={searchResults}/>
             </Container>

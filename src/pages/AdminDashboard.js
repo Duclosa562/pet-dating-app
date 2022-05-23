@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import NavBar from '../components/NavBar/NavBar';
 import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
 import ImageGrid from '../components/ImageGrid/ImageGrid';
@@ -53,7 +54,7 @@ const animalRecord1 = {
 }
 
 
-function AdminDashboard({setAnimalToEdit}) {
+function AdminDashboard({setAnimalToEdit, accountData}) {
     // function createData(ageDescriptor, name, age, breed, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed) {
     //     return {ageDescriptor, name, breed, age, description, availability, goodWithAnimals, goodWithChildren, mustBeLeashed};
     //   };
@@ -127,32 +128,29 @@ function AdminDashboard({setAnimalToEdit}) {
     //     console.log(row)
     //     navigate("/AdminEdit", {state: row, replace: true})
      }
-
+    
+    console.log(accountData)
     return (
     <div>
-        {/* <NavBar/> */}
-       {/* <ImageAvatar/> */}
-        {/* <Box sx={{ flexGrow: 1 }} direction="column" justifyContent="center"> */}
-            <Grid container spacing={1}> 
-                <Grid item xs={1}>
-                </Grid>
-                <Grid item container xs={10} direction="column" alignItems="center" justifyContent="center">
-                    <Box sx={{ width: '100%' }}>
-                        <Stack spacing={5} >
-                            <Item><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>Welcome Back, Shelter_Name!</Typography></Item>
-                            <Link to="/AdminCRUD"><Button size="large" variant="contained">Create New Animal</Button></Link >
-                            <Table animals={animals} onDeleteAnimal={onDeleteAnimal} onEditAnimal={onEditAnimal}></Table>
-                        </Stack>
-                    </Box>
-                </Grid>
-                <Grid item container xs={1}
-                    direction="column"
-                    alignItems="top"
-                    justifyContent="top">
-                    {/* <Link to="/AdminCRUD"><Button size="large" variant="contained">Create New Animal</Button></Link > */}
-                </Grid>
+        <Grid container spacing={1}> 
+            <Grid item xs={1}>
             </Grid>
-        {/* </Box> */}
+            <Grid item container xs={10} direction="column" alignItems="center" justifyContent="center">
+                <Box sx={{ mt: 2, width: '100%' }}>
+                    <Stack spacing={5} >
+                        <Item><Typography sx={{fontSize: {lg: 30, md: 20, sm: 15, xs: 10}}}>Welcome Back, {accountData.first_name} {accountData.last_name}</Typography></Item>
+                        <Link to="/AdminCRUD"><Button size="large" variant="contained">Create New Animal</Button></Link >
+                        <Table animals={animals} onDeleteAnimal={onDeleteAnimal} onEditAnimal={onEditAnimal}></Table>
+                    </Stack>
+                </Box>
+            </Grid>
+            <Grid item container xs={1}
+                direction="column"
+                alignItems="top"
+                justifyContent="top">
+                {/* <Link to="/AdminCRUD"><Button size="large" variant="contained">Create New Animal</Button></Link > */}
+            </Grid>
+        </Grid>
     </div>  
     )
 }

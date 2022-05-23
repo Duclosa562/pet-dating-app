@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import NavBar from '../components/NavBar/NavBar';
 import ImageAvatar from '../components/ImageAvatar/ImageAvatar.js';
 import ImageAvatarCrud from '../components/ImageAvatar/ImageAvatarCrudCard';
@@ -100,7 +102,6 @@ function UserCreateAcc() {
 
     return (
     <div>
-        <NavBar/>
         <Grid container columnSpacing={1}>
             <Grid item xs={1}></Grid>
             <Grid item container xs={3} 
