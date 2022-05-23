@@ -70,8 +70,8 @@ function AdoptPet({pet}) {
         }
       }
     )
-
   }
+
 
   return (
     <Item3>

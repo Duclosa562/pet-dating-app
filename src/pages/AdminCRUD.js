@@ -207,7 +207,7 @@ function AdminCreate() {
                         <TextField
                             fullWidth
                             multiline
-                            rows={8}
+                            rows={2}
                             required
                             id="outlined-required"
                             label="Enter Something Fun"
