@@ -32,14 +32,19 @@ import FormLabel from "@mui/material/FormLabel";
 import Carousel from "../components/Carousel/Carousel";
 import { useEffect } from 'react';
 import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
 //import { useForm } from "react-hook-form";
 import Typography from '@mui/material/Typography';
+import Dashboard from "./DashboardHandler";
+
+import { useCookies } from 'react-cookie';
+
 const queries = require('../utils/queries');
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#FFFFFF",
   ...theme.typography.body2,
-  padding: theme.spacing(5),
+  padding: theme.spacing(20),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
@@ -65,22 +70,35 @@ const Item3 = styled(Container)(({ theme }) => ({
 }));
 
 function LandingPage() {
+    const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
+ 
     const location = useLocation();
 
+    const [picObj, setPicObj] = useState([]);
+
     //populates the table component with data from the DB
-    const loadAnimals = () => {
+    const loadAnimals = async () => {
         console.log("Results of GET are....");
-        let results = queries.query_findMany("Animals", {})
+        let results = await queries.query_findMany("Animals", {})
             .then((res) => getCarouselImages(res.data) )
     }
+
     const imagesForCarousel = []
     const getCarouselImages = (results) =>{
         //extract images and store 
         for(let i = 0; i < results.length; i++){
-            imagesForCarousel.push(results[i].image);
+          // deal with any missing images
+            if (typeof results[i].image === 'undefined'){
+              continue;
+            }
+            else{
+              imagesForCarousel.push(results[i].image);
+              //imagesForCarousel[i] = results[i].image;
+            }
         }
         console.log("images for carousel are...");
         console.log(imagesForCarousel);
+        setPicObj(imagesForCarousel)
 
     }
 
@@ -93,26 +111,35 @@ function LandingPage() {
 
   // for nav back to dashboard on submit
   // const history = useNavigate();
-
+  if (cookies["isLoggedIn"] === "true") {
+    return <Dashboard />;
+  }
   return (
-    // <Item3>
-      // <React.Fragment>
-        <Grid container columnSpacing={1}>
-          <Grid xs={1}></Grid>
-          <Grid item lg={10}>
+     <Item3>
+       <React.Fragment>
+        <Grid container columnSpacing={9}>
+
+          {/* <Grid xs={1}></Grid> */}
+
+          <Grid item md={6}>
             <Item>
-              <Typography variant="h4" gutterBottom> Test </Typography>
+              <Typography variant="h3" gutterBottom> Welcome to app_name! </Typography>
+              <Typography variant="h6" gutterBottom> Find your dream pet today </Typography>
+              <Link to="/SignInPage"> <Button size="large" variant="contained">Get Started</Button></Link >
             </Item>
            
           </Grid>
-          <Grid item md={12}>
+          <Grid item md={6}>
             
-              <Carousel images={ imagesForCarousel }></Carousel>
+              <Carousel images={ picObj }></Carousel>
            
           </Grid>
-          <Grid xs={1}></Grid>
+
+          {/* <Grid xs={1}></Grid> */}
+
         </Grid>
-      /* </Item3> */
+        </React.Fragment>
+       </Item3> 
     
   );
 }

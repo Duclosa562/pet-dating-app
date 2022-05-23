@@ -26,6 +26,8 @@
     "react-material-ui-carousel": "^3.3.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.0",
+    "universal-cookie": "^4.0.4",
+    "react-cookie": "^4.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

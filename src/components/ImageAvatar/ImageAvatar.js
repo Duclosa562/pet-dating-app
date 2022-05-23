@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 
 function ImageAvatars({image}) {
   console.log('ImageAvatar component');
+  console.log(image);
   if (typeof image === 'undefined'){
     return(
       <Avatar alt="New Pet"/>

@@ -1,11 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "@mui/material";
+import { useCookies } from 'react-cookie';
+
 import "./NavBar.css";
 
+function NavBar(props) {
+  const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
 
-function NavBar() {
+  let isLoggedIn = cookies["isLoggedIn"];
+
   function homeRoute() {
     return (
       <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -26,24 +32,40 @@ function NavBar() {
     );
   }
 
-  function signInOrOut() {
-    return (
-      <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
-        <Button variant="text" size="large" sx={{ color: "black" }}>
-          Sign In
-        </Button>
-      </Link>
-    )
+  function logoutHandler() {
+    props.setIsLoggedIn(false);
+    props.setIsAdmin(false);
+
+    setCookies('isLoggedIn', false, { path: "/" });
+    setCookies('isAdmin', false, { path: "/" });
+    setCookies('userData', {}, { path: "/" });
+    navigate("/");
   }
+
   return (
     <header className="navbar">
       <div className="navbar-title">
         Pet Dating App
-        <i class="fa-solid fa-paw navbar-icon"></i>
+        <i className="fa-solid fa-paw navbar-icon" />
       </div>
-      <div className="navbar-button">{homeRoute()}</div>
-      <div className="navbar-button">{searchRoute()}</div>
-      <div className="navbar-button">{signInOrOut()}</div>
+      <div className="navbar-button">{isLoggedIn === "true" && homeRoute()}</div>
+      <div className="navbar-button">{isLoggedIn === "true" && searchRoute()}</div>
+      <div className="navbar-button">
+        {isLoggedIn === "false" && (
+          <Link to={"/SignInPage"} style={{ textDecoration: "none" }}>
+            <Button variant="text" size="large" sx={{ color: "black" }}>
+              Login/Sign-Up
+            </Button>
+          </Link>
+        )}
+      </div>
+      <div className="navbar-button">
+        {isLoggedIn === "true" && (
+          <Button variant="text" size="large" sx={{ color: "black" }} onClick={logoutHandler}>
+            Sign Out
+          </Button>
+        )}
+      </div>
     </header>
   );
 }

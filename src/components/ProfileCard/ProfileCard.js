@@ -23,11 +23,13 @@ function bools_to_strings(pet) {
 }
 
 function button_html(pet) {
+    console.log("pet is")
+    console.log(pet)
     if (pet.availability != 'Available') {
-        return <Button variant='contained' disabled>ADOPT</Button>
+        return (<Button variant='contained' disabled>ADOPT</Button>);
     }
     return (
-        <Link to={`/AdoptPet`}>
+        <Link to={`/AdoptPet/${pet._id}`} state={pet}>
             <Button variant='contained'>ADOPT</Button>
         </Link>
     );
