@@ -123,7 +123,7 @@ function LandingPage() {
 
           <Grid item md={6}>
             <Item>
-              <Typography variant="h3" gutterBottom> Welcome to app_name! </Typography>
+              <Typography variant="h3" gutterBottom> Welcome to Pet Connect! </Typography>
               <Typography variant="h6" gutterBottom> Find your dream pet today </Typography>
               <Link to="/SignInPage"> <Button size="large" variant="contained">Get Started</Button></Link >
             </Item>
