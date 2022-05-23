@@ -3,10 +3,23 @@ import Carousel from 'react-material-ui-carousel';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import { ClassNames } from '@emotion/react';
+
+
+
+
 const Item = ({image}) => {
     return (
-        
-            <img src={image} />
+        <Card sx ={{ height: "100%", width:"100%", margin:"auto"}}>
+            <CardMedia
+            image={image}
+            component="img"
+            />
+            {/* <img src={image} /> */}
+        </Card>
+           
         
     );
 };

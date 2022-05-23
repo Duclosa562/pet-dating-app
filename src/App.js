@@ -28,18 +28,34 @@ import { Link } from "react-router-dom";
 import Navigation from "./components/SiteNavLinks/Navigation.js"; 
 import NavBar from "./components/NavBar/NavBar";
 import AdoptPet from "./pages/AdoptPet";
+import { ConstructionOutlined } from "@mui/icons-material";
+import Cookies from "universal-cookie";
 
 function App() {
   // Login states
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isAdmin, setIsAdmin] = React.useState(false);
   const [accountData, setAccountData] = React.useState({});
+  const [cookie, setCookie] = React.useState({});
 
+  const cookies = new Cookies();
+  console.log("AppJS cookie status")
+  console.log('cookie is')
+  console.log(cookie)
+  console.log(cookies.get("IsLoggedIn"))
+  console.log(cookies.get("IsAdmin"))
+  
   // This should be removed eventually.
   const loginCheck = () => {
     console.log("isLoggedIn: ", isLoggedIn, " isAdmin: ", isAdmin, );
 	
   }
+//old sign in page props
+//setIsLoggedIn={setIsLoggedIn} 
+//setAccountData={setAccountData} 
+//setIsAdmin={setIsAdmin}
+//loginCheck={loginCheck}
+
   // To propagate prop to edit up tree and down for edit page
   return (
     <div className="App">
@@ -50,15 +66,11 @@ function App() {
           setIsLoggedIn={setIsLoggedIn} 
           setIsAdmin={setIsAdmin}
 		  setAccountData={setAccountData}
-          isLoggedIn = {isLoggedIn}
+          isLoggedIn = {cookies.get("IsLoggedIn")}
         />
 		
         <Routes>
-          <Route path="/" exact element={<SignInPage element={<SignInPage 
-            setIsLoggedIn={setIsLoggedIn} 
-			setAccountData={setAccountData} 
-            setIsAdmin={setIsAdmin}
-            loginCheck={loginCheck}/>} />}></Route>
+          <Route path="/" exact element={<HomePage />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
@@ -69,11 +81,7 @@ function App() {
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
 		  <Route path="/AdoptPet" element={<AdoptPet />}></Route>
-          {/* <Route path="/SignInPage" element={<SignInPage 
-            setIsLoggedIn={setIsLoggedIn} 
-			setAccountData={setAccountData} 
-            setIsAdmin={setIsAdmin}
-            loginCheck={loginCheck}/>}></Route> */}
+          <Route path="/SignInPage" element={<SignInPage />}></Route>
         </Routes>
       </Router>
     </div>

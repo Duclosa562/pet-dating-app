@@ -39,7 +39,7 @@ const queries = require('../utils/queries');
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#5584AC" : "#FFFFFF",
   ...theme.typography.body2,
-  padding: theme.spacing(5),
+  padding: theme.spacing(20),
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
@@ -108,23 +108,25 @@ function LandingPage() {
   return (
      <Item3>
        <React.Fragment>
-        <Grid container columnSpacing={1}>
+        <Grid container columnSpacing={9}>
 
-          <Grid xs={1}></Grid>
+          {/* <Grid xs={1}></Grid> */}
 
-          <Grid item md={10}>
+          <Grid item md={6}>
             <Item>
-              <Typography variant="h4" gutterBottom> Test </Typography>
+              <Typography variant="h3" gutterBottom> Welcome to app_name! </Typography>
+              <Typography variant="h6" gutterBottom> Find your dream pet today </Typography>
+              <Button size="large" variant="contained">Get Started</Button>
             </Item>
            
           </Grid>
-          <Grid item md={12}>
+          <Grid item md={6}>
             
               <Carousel images={ picObj }></Carousel>
            
           </Grid>
 
-          <Grid xs={1}></Grid>
+          {/* <Grid xs={1}></Grid> */}
 
         </Grid>
         </React.Fragment>

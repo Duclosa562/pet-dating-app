@@ -1,11 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 import { Button } from "@mui/material";
 import "./NavBar.css";
 
 
 function NavBar() {
+  const cookies = new Cookies();
+  console.log("NAV COOKIE IS logged in")
+  const loggedIn = cookies.get('isLoggedIn') 
+  console.log("loggedIn: ", loggedIn);
+
+  const isAdmin = cookies.get("IsAdmin");
+  console.log("isAdmin: ", isAdmin);
+
+  const accountData = cookies.get("accountData");
+  console.log("accountData: " ,accountData)
   function homeRoute() {
     return (
       <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -35,6 +46,9 @@ function NavBar() {
       </Link>
     )
   }
+
+  // if ()
+
   return (
     <header className="navbar">
       <div className="navbar-title">

@@ -38,8 +38,10 @@ const Item3 = styled(Container)(({ theme }) => ({
   justifyContent: "center",
   color: theme.palette.text.secondary,
 }));
+//old props
+//setIsLoggedIn, setIsAdmin, setAccountData, loginCheck
 
-function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData, loginCheck }) {
+function SignInPage() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
@@ -73,7 +75,7 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData, loginCheck }) {
         cookies.set("isAdmin", res.data.type === "ShelterAdmin");
         cookies.set("accountData", res.data);
         cookies.set("accountType", res.data.type);
-        // setIsLoggedIn(true);
+        //setIsLoggedIn(true);
         // setIsAdmin(res.data.type === "ShelterAdmin");
         // setAccountData(res.data)
         
