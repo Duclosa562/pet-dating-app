@@ -64,21 +64,21 @@ function AdminDashboard() {
     const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
 
     const accountData = cookies["userData"];
+
     // State hook to manage animal data
     // const [animals, setAnimals] = useState([]);
     const navigate = useNavigate();
 
     //populates the table component with data from the DB
     const loadAnimals = async () => {
+        let shelterSpecificAnimals = {};
         console.log("Results of GET are....");
         let results = await queries.query_findMany("Animals", {})
-            .then((res) => setAnimals(res.data) )
+            .then((res) => {
+                const filteredAnimals = res.data.filter(animal => animal.acc_id === accountData._id);
+                setAnimals(filteredAnimals)
+            } )
 
-        //console.log(results)
-        // setAnimals(results.json())
-        // const response = await fetch('/animals', {method: 'GET'});
-        //const data = await response.json();
-        //setAnimals(data);
 
     }
 
