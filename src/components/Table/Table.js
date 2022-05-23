@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Avatar from '../ImageAvatar/ImageAvatar'
+import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
@@ -86,7 +86,7 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
         <TableBody>
           {animals.map((row) => (
             <StyledTableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell align="center"><Avatar props={row.image} sx={{ width: '100%', height: '100%'  }}></Avatar></TableCell>
+              <TableCell align="center"><Avatar src={row.image}></Avatar></TableCell>
               <TableCell component="th" scope="row"> <Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.name}</Typography></TableCell>
               <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.breed}</Typography></TableCell>
               <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.age}</Typography></TableCell>

@@ -7,7 +7,9 @@ import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useState, useNavigate } from "react-router-dom";
+
+import { useLocation, useNavigate } from "react-router-dom";
+import ImageAvatar from "../components/ImageAvatar/ImageAvatar";
 
 import Typography from "@mui/material/Typography";
 
@@ -46,42 +48,29 @@ const Item2 = styled(Paper)(({ theme }) => ({
   boxShadow: "5px",
 }));
 
-function AdoptPet() {
+function AdoptPet({pet}) {
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const data = location.state;
+  console.log("data is")
+  console.log(data)
+  console.log(pet)
 
-  const [firstname, setFirstname] = React.useState("");
-  const [lastname, setLastname] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [password2, setPassword2] = React.useState("");
-  const [createAdmin, setCreateAdmin] = React.useState(false);
-
-  const createAccountHandler = () => {
-    if (password !== password2) {
-      alert("Passwords do not match.\nPlease check your password and try again.");
-      return
-    }
-    const userType = createAdmin ? "ShelterAdmin" : "User" ; 
-    const newAccount = {
-      "type" : userType,
-      "username" : username,
-      "email": email,
-      "password": password,
-      "first_name" : firstname,
-      "last_name" : lastname
-    };
-
-    queries.query_insertOne("Accounts", newAccount).then(
+  const submitHandler = () => {
+    console.log(data._id)
+    queries.query_setAnimalToPending(data._id).then(
       (res) => {
-        if (!res.data._id) {
-          alert("Unable to create account. Please try again.")
+        if (res) {
+          alert("Application accepted.\n", data.name , "'s Status has been set to pending." )
+          navigate("/Search");
         }
-        alert("Account successfully created. Please login!");
-        navigate("/SignInPage");
+        else {
+          alert("Something went wrong...");
+        }
       }
     )
+
   }
 
   return (
@@ -89,68 +78,34 @@ function AdoptPet() {
       <Item
         display="flex"
         flex-direction="column"
-        alignItems="center"
         direction="column"
       >
         <React.Fragment>
           <Typography variant="h4" gutterBottom style={{ color: "rgb(52 191 179 / 77%)" }}>
-            {" "}
             <i className="fa-solid fa-paw navbar-icon" />
-            Sign Up - Create an Account
+            Adoption Form For {data.name}
             <i className="fa-solid fa-paw navbar-icon" />
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6}>
-              <label> First Name: </label>
-              <TextField
-                required
-                id="firstName"
-                label=""
-                onChange={(e) => setFirstname(e.target.value)}
-                fullWidth
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <label> Last Name: </label>
-              <TextField
-                required
-                id="lastName"
-                label=""
-                onChange={(e) => setLastname(e.target.value)}
-                fullWidth
-                variant="filled"
-              />
+            <Grid item xs={12}   align = "center" justify = "center" alignItems = "center">
+              <ImageAvatar image={data.image} />
             </Grid>
             <Grid item xs={12}>
-              <label> Email: </label>
+              <label align='start'>Why are you a great candidate?</label>
               <TextField
-                required
-                id="email"
-                label=""
-                onChange={(e) => setEmail(e.target.value)}
-                fullWidth
-                variant="filled"
-              />
+                  fullWidth
+                  multiline
+                  rows={8}
+                  required
+                  id="outlined-required"
+                  label="Explain in detail here."
+                  variant="filled"
+                  onChange={(e) => {}}
+                  />
             </Grid>
             <Grid item xs={12}>
-              <label> Username: </label>
-              <TextField
-                required
-                id="username"
-                label=""
-                onChange={(e) => setUsername(e.target.value)}
-                fullWidth
-                variant="filled"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <label> Adopt Pet </label>
-              <Checkbox checked={createAdmin} onChange={() => setCreateAdmin(!createAdmin)}/>
-            </Grid>
-            <Grid item xs={12}>
-              <Button variant="contained" onClick={(e) => console.log(e)}>
-                Adopt
+              <Button variant="contained" onClick={submitHandler}>
+                Submit Application
               </Button>
             </Grid>
           </Grid>
