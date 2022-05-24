@@ -236,7 +236,7 @@ function AdminEdit({animal}) {
                 required
                 id="outlined-required"
                 label="Enter Something Fun"
-                value={animal.description}
+                value={descr}
                 variant="filled"
                 onChange={e => setDescr(e.target.value)}
                 />

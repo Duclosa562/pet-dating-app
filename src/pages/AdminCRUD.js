@@ -175,7 +175,7 @@ function AdminCreate() {
         <Item3>
             <Item display='flex' flex-direction="column" alignItems="center" direction="column" >
                 <React.Fragment>
-                    <Typography variant="h4" gutterBottom> Create a New Profile </Typography>
+                    <Typography variant="h4" gutterBottom> Create a New Pet </Typography>
                 <Grid container spacing={3} >
                     <Grid item xs={12}   align = "center" justify = "center" alignItems = "center">
                             <Avatar props={img} sx={{ width: 256, height: 256 }}></Avatar>
