@@ -44,10 +44,16 @@ function NavBar(props) {
 
   return (
     <header className="navbar">
+      
       <div className="navbar-title">
-        Pet Dating App
-        <i className="fa-solid fa-paw navbar-icon" />
+      <Link to={"/"} style={{ textDecoration: "none" }}>
+        <div>
+          Pet Dating App
+          <i className="fa-solid fa-paw navbar-icon" />
+        </div>
+        </Link>
       </div>
+      
       <div className="navbar-button">{isLoggedIn === "true" && homeRoute()}</div>
       <div className="navbar-button">{isLoggedIn === "true" && searchRoute()}</div>
       <div className="navbar-button">

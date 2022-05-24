@@ -11,6 +11,8 @@
     margin-right: auto;
     font-size: 150%;
     padding: 12px 16px;
+    color: black;           /* spencer added, doesn't seem to make a difference */
+    color-scheme: black;    /* spencer added, doesn't seem to make a difference */
 }
 
 .navbar-icon {
