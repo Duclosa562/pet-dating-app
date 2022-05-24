@@ -92,6 +92,13 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
     navigate("/CreateAccount");
   }
 
+  // 
+  const handleKeySubmit = (event) => {
+    if (event.key === 'Enter') {
+      loginSubmit();
+    }
+  }
+
   return (
     <div>
       <Stack alignItems={"center"}>
@@ -119,6 +126,7 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
                 label="Username"
                 size='medium'
                 onChange={(e) => setUsername(e.target.value)}
+                onKeyDown={handleKeySubmit}
               ></TextField>
             </Grid>
             <Grid item xs={12}>
@@ -126,6 +134,7 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
                 label="Password"
                 type={"password"}
                 onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeySubmit}
               ></TextField>
             </Grid>
             <Grid item xs={12}>
