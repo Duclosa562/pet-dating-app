@@ -57,7 +57,7 @@ function AdoptPet_Finished({pet}) {
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}} alignItems='center' align='center'>
                 <br></br>
                 <ImageAvatar image={location.state.image} /><br></br><br></br>
-                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt {location.state.name}! </Typography>
+                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting an application to adopt {location.state.name}! </Typography>
                 <Typography variant="h6-" gutterBottom> </Typography>
                 <br></br>
             </Container>
