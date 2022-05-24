@@ -344,6 +344,23 @@ async function query_accountIsAdmin(username) {
     return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }
 
+/**
+ * 
+ * Returns animal records that are not Adopted
+ * 
+ * @param {*} quantity = the number of records we want to return
+ * @returns 
+ */
+ async function query_userLandingPage(quantity) {
+    // /api/most-recent/:quantity
+    var url = config.config.PROXY_URL + '/api/user-landing/' + quantity;
+    var response = await fetch(url, _create_get_json('GET'));
+    if (response.status !== 200) {
+        return {"error": "GET request failed from query_mostRecent()", "code": response.status}
+    }
+    return await response.json();
+}
+
 /****************************
  * ANIMAL (CUSTOM) Queries
  ****************************/
@@ -363,5 +380,6 @@ export {query_findMany,
     query_accountExists,
     query_accountIsAdmin,
     query_setAnimalToPending,
-    query_mostRecent
+    query_mostRecent,
+    query_userLandingPage
 };

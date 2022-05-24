@@ -27,9 +27,11 @@ function UserDashboard() {
 
     const search = () => {
         console.log("SEARCH PREFS:", {});
-        var data = {}
-        queries.query_findMany('Animals', {}).then(
-            (res) => processSearchResults(res.data)
+        queries.query_userLandingPage(12).then(
+            (res) => {
+                console.log(res.data);
+                processSearchResults(res.data)
+            }
         )
     };
 
@@ -80,9 +82,6 @@ function UserDashboard() {
         console.log("Inside use effect")
         search();
     }, []);
-
-    
-
 
     return (
         <div className='search-page'>

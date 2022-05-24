@@ -84,6 +84,13 @@ router.get('/api/most-recent/:quantity', async function(req, res) {
     res.status(200).send({"data": data});
 });
 
+router.get('/api/user-landing/:quantity', async function(req, res) {
+    console.log('GET /api/landing-page/:quantity');
+    console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
+    var data = await q.query_mostRecentFiltered(Number(req.params.quantity));
+    res.status(200).send({"data": data});
+});
+
 /*****************************
  * POST
  *****************************/

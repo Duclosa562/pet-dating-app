@@ -231,7 +231,7 @@ async function query_findMany(collectionName, query) {
         await cursor.forEach(item => {
             results.push(JSON.parse(JSON.stringify(item)));
         });
-        await printFindManyResult(query_findMany.name, collectionName, query, results);
+        //await printFindManyResult(query_findMany.name, collectionName, query, results);
     } finally {
         //await client.close();
     }
@@ -248,6 +248,26 @@ async function query_mostRecent(quantity) {
         const db = client.db(db_name);
         const collection = db.collection(animalsCollection);
         var cursor = collection.find().sort({_id: -1}).limit(quantity);
+        await cursor.forEach(item => {
+            results.push(JSON.parse(JSON.stringify(item)));
+        });
+    } catch (err) {
+        console.log('Errr in query_mostRecent()');
+        console.log(err);
+    } finally {
+        //await client.close();
+    }
+    return results;
+}
+
+async function query_mostRecentFiltered(quantity) {
+    console.log('query_mostRecentFiltered()');
+    var results = [];
+    try {
+        //await client.connect();
+        const db = client.db(db_name);
+        const collection = db.collection(animalsCollection);
+        var cursor = collection.find({availability: {$ne: 'Adopted'}}).sort({_id: -1}).limit(quantity);
         await cursor.forEach(item => {
             results.push(JSON.parse(JSON.stringify(item)));
         });
@@ -345,5 +365,6 @@ module.exports = {
     query_findMany,
     query_updateOne,
     query_deleteOne,
-    query_mostRecent
+    query_mostRecent,
+    query_mostRecentFiltered
 };
