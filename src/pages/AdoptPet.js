@@ -106,8 +106,8 @@ function AdoptPet({pet}) {
                   />
             </Grid>
             <Grid item xs={12}>
-              <Link to="/AdoptPet_Finished" state={pet}>
-                <Button variant="contained" size="large">Submit Application</Button>
+              <Link to="/AdoptPet_Finished" state={data}>
+                <Button variant="contained" size="large" onClick={submitHandler}>Submit Application</Button>
               </Link>
             </Grid>
           </Grid>
