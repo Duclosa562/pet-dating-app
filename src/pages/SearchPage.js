@@ -111,7 +111,7 @@ function SearchPage(props) {
               justifyContent="center"
               alignItems="center"
             >
-              <h3>Species:</h3>
+              <h3>Type:</h3>
               <Autocomplete
                 disablePortal
                 clearOnEscape
