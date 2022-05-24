@@ -65,7 +65,7 @@ function AdoptPet({pet}) {
     queries.query_setAnimalToPending(data._id).then(
       (res) => {
         if (res) {
-          alert("Application accepted.\n", data.name , "'s Status has been set to pending." )
+          
           navigate("/AdoptPet_Finished", {state: pet});
         }
         else {
