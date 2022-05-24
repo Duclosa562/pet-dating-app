@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import NavBar from '../components/NavBar/NavBar';
 import SearchResults from '../components/SearchResults/SearchResults';
 import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from "react-router-dom";
 
 import { ConstructionOutlined } from '@mui/icons-material';
 
@@ -87,7 +88,7 @@ function UserDashboard() {
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
                 <Typography variant="h4" gutterBottom> Welcome {accountData.first_name} {accountData.last_name}! Here's a list of some local pets </Typography>
-                <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
+                <Typography variant="h6-" gutterBottom> Try our <Link to={"/Search"} style={{ textDecoration: "none" }}>search feature</Link> if you want to see more </Typography>
                 <SearchResults searchRes={searchResults}/>
             </Container>
         </div>
