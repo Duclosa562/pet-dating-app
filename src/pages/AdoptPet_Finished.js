@@ -54,7 +54,7 @@ function AdoptPet_Finished(pet) {
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
                 <br></br>
-                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for putting in an application to adopt -pet- {pet.name}! This page is not yet finalized. </Typography>
+                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt -pet- {pet.name}! This page is not yet finalized. </Typography>
                 <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
                 <br></br>
             </Container>
