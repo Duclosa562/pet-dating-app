@@ -21,19 +21,23 @@ import { useLocation, useNavigate } from "react-router-dom";
 const queries = require('../utils/queries');
 
 
-function AdoptPet_Finished(pet) {
+function AdoptPet_Finished({pet}) {
     // page will not load with {pet} either -_-
 
     const navigate = useNavigate();
     const location = useLocation();
     const data = location.state;
-    console.log('data');     
-    console.log(data);      // nope
+    // console.log('data');     
+    // console.log(data);      // nope
+    // console.log('pet');     
+    // console.log(pet);      // nope
+    console.log('location.state');     
+    console.log(location.state);
 
     //console.log(navigate.arguments);  // page will not load
 
-    console.log('pet = ');
-    console.log(pet);       // it's still null
+    //console.log('pet = ');
+    //console.log(pet);       // it's still null
 
     const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
     const accountData = cookies["userData"];
@@ -49,12 +53,11 @@ function AdoptPet_Finished(pet) {
     
     
 
-
     return (
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
                 <br></br>
-                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt -pet- {pet.name}! This page is not yet finalized. </Typography>
+                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt {location.state.name}! This page is not yet finalized. </Typography>
                 <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
                 <br></br>
             </Container>

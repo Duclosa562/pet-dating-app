@@ -57,15 +57,16 @@ function AdoptPet({pet}) {
   const data = location.state;
   console.log("data is")
   console.log(data)
-  console.log(pet)
+  //console.log(pet)
 
   const submitHandler = (pet) => {
+    console.log("in handler")
     console.log(data._id)
     queries.query_setAnimalToPending(data._id).then(
       (res) => {
         if (res) {
           alert("Application accepted.\n", data.name , "'s Status has been set to pending." )
-          navigate("/AdoptPet_Finished", pet);
+          navigate("/AdoptPet_Finished", {state: pet});
         }
         else {
           alert("Something went wrong...");
@@ -106,9 +107,7 @@ function AdoptPet({pet}) {
                   />
             </Grid>
             <Grid item xs={12}>
-              <Link to="/AdoptPet_Finished" state={pet}>
-                <Button variant="contained" size="large" onClick={() => {submitHandler(pet)}}>Submit Application</Button>
-              </Link>
+                <Button variant="contained" size="large" onClick={() => {submitHandler(data)}}>Submit Application</Button>
             </Grid>
           </Grid>
         </React.Fragment>

@@ -19,34 +19,67 @@ function SearchPage(props) {
   const speciesOptions = ["Dog", "Cat", "Other"];
 
   // Search param states
-  const [optBreed, setOptBreed] = React.useState("");
-  const [optAvail, setOptAvail] = React.useState("");
-  const [optGoodWithAnimals, setOptGoodWithAnimals] = React.useState(false);
-  const [optGoodWithChildren, setOptGoodWithChildren] = React.useState(false);
-  const [optLeashedAtAllTimes, setOptLeashedAtAllTimes] = React.useState(false);
+  const [optBreed, setOptBreed] = React.useState();
+  const [optAvail, setOptAvail] = React.useState();
+  const [optGoodWithAnimals, setOptGoodWithAnimals] = React.useState();
+  const [optGoodWithChildren, setOptGoodWithChildren] = React.useState();
+  const [optLeashedAtAllTimes, setOptLeashedAtAllTimes] = React.useState();
 
   // Search result states
   const [searchResults, setSearchResults] = React.useState([]);
 
   // Checkbox handlers
-  const handleGoodWAnimals = () => {
-    setOptGoodWithAnimals(!optGoodWithAnimals);
+  const handleGoodWAnimals = (event) => {
+    setOptGoodWithAnimals(event.target.checked);
+    console.log("optGoodWithAnimals is ", event.target.checked);
+
   };
-  const handleGoodWChild = () => {
-    setOptGoodWithChildren(!optGoodWithChildren);
+  const handleGoodWChild = (event) => {
+    setOptGoodWithChildren(event.target.checked);
   };
-  const handleLeashAllTime = () => {
-    setOptLeashedAtAllTimes(!optLeashedAtAllTimes);
+  const handleLeashAllTime = (event) => {
+    setOptLeashedAtAllTimes(event.target.checked);
   };
 
+  const buildSearchPref = () => {
+      let searchPref = {};
+      console.log("optBreed is ", optBreed);
+      if (optBreed) {
+        searchPref.breed = optBreed;
+      }
+
+      console.log("optAvail is ", optAvail);
+
+      if (optAvail) {
+        searchPref.availability = optAvail;
+      }
+
+      console.log("optGoodWithAnimals is ", optGoodWithAnimals);
+
+      if (optGoodWithAnimals) {
+        searchPref.good_with_animals = optGoodWithAnimals;
+      }
+
+      console.log("optGoodWithChildren is ", optGoodWithChildren);
+
+      if (optGoodWithChildren) {
+        searchPref.good_with_children = optGoodWithChildren;
+      }
+
+      console.log("optLeashedAtAllTimes is ", optLeashedAtAllTimes);
+
+      if (optLeashedAtAllTimes) {
+        searchPref.must_be_leashed = optLeashedAtAllTimes;
+      }
+
+      return searchPref;
+
+  }
+
   const search = () => {
-    const searchPref = {
-      breed: optBreed,
-      availability: optAvail,
-      good_with_animals: optGoodWithAnimals,
-      good_with_children: optGoodWithChildren,
-      must_be_leashed: optLeashedAtAllTimes,
-    };
+   
+
+    const searchPref = buildSearchPref();
     console.log("SEARCH PREFS:", searchPref);
     queries
       .query_findMany("Animals", searchPref)

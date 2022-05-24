@@ -90,6 +90,7 @@ function AdminEdit({animal}) {
     const [name, setName] = useState(animal.name);
     const [age, setAge] = useState(animal.age);
     const [ageUnits, setAgeUnits] = useState(animal.age_descriptor);
+
     const [breed, setBreed] = useState(animal.breed);
     const [avail, setAvail] = useState(animal.availability);
     const [descr, setDescr] = useState(animal.description);
@@ -277,7 +278,7 @@ function AdminEdit({animal}) {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="Weeks"
                 name="dispositionAdd"
-                value={String(animal.good_with_animals)}
+                value={String(goodWithAnimals)}
                 onChange={e => setGoodWithAnimals(e.target.value)}>
                 <FormControlLabel value="true" control={<Radio />} label="Yes" />
                 <FormControlLabel value="false" control={<Radio />} label="No" />
@@ -291,7 +292,7 @@ function AdminEdit({animal}) {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="Weeks"
                 name="dispositionAdd"
-                value={String(animal.good_with_children)}
+                value={String(goodWithChildren)}
                 onChange={e => setGoodWithChildren(e.target.value)}>
                 <FormControlLabel value="true" control={<Radio />} label="Yes" />
                 <FormControlLabel value="false" control={<Radio />} label="No" />

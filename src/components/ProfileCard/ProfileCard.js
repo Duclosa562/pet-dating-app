@@ -10,21 +10,12 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
-function bools_to_strings(pet) {
-    for (var key in pet) {
-        if (key == 'good_with_animals' || key == 'good_with_children' || key == 'must_be_leashed') {
-            if (pet[key] == true) {
-                pet[key] = 'yes';
-            } else {
-                pet[key] = 'no';
-            }
-        }
-    }
+function bools_to_strings(val) {
+    return val ? 'Yes' : 'No'
 }
 
 function button_html(pet) {
-    console.log("pet is")
-    console.log(pet)
+
     if (pet.availability != 'Available') {
         return (<Button variant='contained' disabled>ADOPT</Button>);
     }
@@ -39,7 +30,7 @@ function ProfileCard({petData}) {
 
     
     var petInfo = petData.data;
-    bools_to_strings(petInfo);
+    // bools_to_strings(petInfo);
     const button = button_html(petInfo);
     return (
         <div className='profile-card'>
@@ -49,9 +40,9 @@ function ProfileCard({petData}) {
                     <div className='card-content'>
                         <p><b>Age: </b>{petInfo.age} {petInfo.age_descriptor}</p> 
                         <p><b>Date Added: </b>{petInfo.date_created}</p>
-                        <p><b>Good with animals: </b>{String(petInfo.good_with_animals)}</p>
-                        <p><b>Good with Children: </b>{String(petInfo.good_with_children)}</p>
-                        <p><b>Must be leashed: </b>{String(petInfo.must_be_leashed)}</p>
+                        <p><b>Good with animals: </b>{bools_to_strings(petInfo.good_with_animals)}</p>
+                        <p><b>Good with Children: </b>{bools_to_strings(petInfo.good_with_children)}</p>
+                        <p><b>Must be leashed: </b>{bools_to_strings(petInfo.must_be_leashed)}</p>
                         <p><b>Description: </b>{petInfo.description}</p><br></br>
                         <p><b>Status: </b>{petInfo.availability}</p>
                     </div>
