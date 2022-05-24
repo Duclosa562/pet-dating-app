@@ -16,21 +16,29 @@ import { useCookies } from 'react-cookie';
 
 import { ConstructionOutlined } from '@mui/icons-material';
 
+import { useLocation, useNavigate } from "react-router-dom";
+
 const queries = require('../utils/queries');
 
 
-function AdoptPet_Finished({pet}) {
+function AdoptPet_Finished(pet) {
+    // page will not load with {pet} either -_-
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const data = location.state;
+    console.log('data');     
+    console.log(data);      // nope
+
+    //console.log(navigate.arguments);  // page will not load
+
+    console.log('pet = ');
+    console.log(pet);       // it's still null
+
     const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
     const accountData = cookies["userData"];
-    // Search result states
-    const [searchResults, setSearchResults] = React.useState([]);
 
-    const search = () => {
-        console.log("SEARCH PREFS:", {});
-        queries.query_findMany('Animals', {}).then(
-            (res) => processSearchResults(res.data)
-        )
-    };
+    
 
     // generate rand num in range
     function getRandomInt(max) {
@@ -38,57 +46,17 @@ function AdoptPet_Finished({pet}) {
     };
 
     //filter search results to have only a few items as opposed to entire db
-    const processSearchResults = (results) =>{
-        let numItems = 0;
-        // if no results do nothing
-        if (results.length === 0){
-            return {}
-        }
-        // determine item count to render based on result size
-        if (results.length <= 8){
-            numItems = results.length - 1;
-        }
-        else{
-            numItems = 8;
-        }
-        //track animals already picked to not have repeats
-        let pickedIdx = []
-        let idx = 0;
-        let tempObj = []
-        // will display no more than 10 items on the user dashboard, user can search if they want more
-        for(let i = 0; i < results.length && i < numItems; i++){
-            console.log("Length is : ")
-            console.log(results.length)
-            //randomize what animals are chosen 
-            while (pickedIdx.includes(idx)){
-                console.log("In loop")
-                idx = getRandomInt(results.length - 1);
-            }
-            tempObj[idx]= results[idx];
-            pickedIdx.push(idx);
-        }
-        console.log("Processed results for userDashboard are...");
-        console.log(tempObj);
-        setSearchResults(tempObj)
-        console.log("prop to be passed is ...")
-        console.log(searchResults)
-    };
-
-      // trigger db load and render on page load
-    useEffect(() => {
-        console.log("Inside use effect")
-        search();
-    }, []);
-
+    
     
 
 
     return (
         <div className='search-page'>
             <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
-                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} {accountData.last_name} for putting in an application to adopt {pet.name}! This page is not yet finalized. </Typography>
+                <br></br>
+                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt -pet- {pet.name}! This page is not yet finalized. </Typography>
                 <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
-                <SearchResults searchRes={searchResults}/>
+                <br></br>
             </Container>
         </div>
     )
