@@ -65,7 +65,6 @@ function AdoptPet({pet}) {
     queries.query_setAnimalToPending(data._id).then(
       (res) => {
         if (res) {
-          
           navigate("/AdoptPet_Finished", {state: pet});
         }
         else {

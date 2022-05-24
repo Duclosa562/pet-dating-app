@@ -13,7 +13,7 @@ function SearchCard({entry}) {
                 <CardContent>
                     <div className="card-content">
                         <h5>{entry.name}</h5>
-                        <h5>Species: {entry.breed}</h5>
+                        <h5>Type: {entry.breed}</h5>
                         <h5>Status: {entry.availability}</h5>
                         <h5>Date Added: {entry.date_created}</h5>
                     </div>

@@ -27,6 +27,7 @@ function UserDashboard() {
 
     const search = () => {
         console.log("SEARCH PREFS:", {});
+        var data = {}
         queries.query_findMany('Animals', {}).then(
             (res) => processSearchResults(res.data)
         )
