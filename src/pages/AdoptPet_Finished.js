@@ -17,6 +17,7 @@ import { useCookies } from 'react-cookie';
 import { ConstructionOutlined } from '@mui/icons-material';
 
 import { useLocation, useNavigate } from "react-router-dom";
+import ImageAvatar from '../components/ImageAvatar/ImageAvatar';
 
 const queries = require('../utils/queries');
 
@@ -50,15 +51,14 @@ function AdoptPet_Finished({pet}) {
     };
 
     //filter search results to have only a few items as opposed to entire db
-    
-    
 
     return (
         <div className='search-page'>
-            <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}}>
+            <Container className='search-container' maxwidth='sm' sx={{p:2, mt:2.5}} alignItems='center' align='center'>
                 <br></br>
-                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt {location.state.name}! This page is not yet finalized. </Typography>
-                <Typography variant="h6-" gutterBottom> Try out search feature if you want to see more </Typography>
+                <ImageAvatar image={location.state.image} /><br></br><br></br>
+                <Typography variant="h4" gutterBottom> Thank you {accountData.first_name} for submitting in an application to adopt {location.state.name}! </Typography>
+                <Typography variant="h6-" gutterBottom> </Typography>
                 <br></br>
             </Container>
         </div>
