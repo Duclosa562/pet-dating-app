@@ -98,32 +98,16 @@ function AdminDashboard() {
         let results = await queries.query_deleteOne("Animals", _id)
             // add error handler here somehow now sure
             .then((res) => {
-                // console.log("ON DEL RESP IS: ") ??? Where am I supposed to get an error from?
-                // console.log(res)
-                // if(res.status === 204){
-                //     // reload the table
                     loadAnimals()
-                // }
-                // else{
-                //     // need to send status here??
-                //     console.error("Failed to Delete Animal")
-                // }
             }
 
          )
     }
-
-
     
     // navigation hook to set open admin crud page when clicking on the edit button on the dashboard
     const onEditAnimal = async (row) => {
 
         navigate("/AdminEdit", {state: row, replace: true})
-
-        //setAnimalToEdit(animal);
-    //     console.log("In onEditAnimal, row is...")
-    //     console.log(row)
-    //     navigate("/AdminEdit", {state: row, replace: true})
      }
     
 

@@ -89,15 +89,15 @@ function App() {
           <Route path="/" exact element={<LandingPage />}></Route>
           <Route path="/AdminCRUD" element={<AdminCRUD />}></Route>
           <Route path="/AdminEdit" element={<AdminEdit />}></Route>
-		  <Route path="/AdoptPet_Finished" element={<AdoptPet_Finished />}></Route>
+		      <Route path="/AdoptPet_Finished" element={<AdoptPet_Finished />}></Route>
           <Route path="/PetProfile/:pet_id" element={<PetProfile />}></Route>
           <Route path="/Search" element={<SearchPage />}></Route>
           <Route path="/AdminDashboard" element={<AdminDashboard />}></Route>
-		  <Route path="/UserDashboard" element={<UserDashboard />}></Route>
+		      <Route path="/UserDashboard" element={<UserDashboard />}></Route>
           <Route path="/AdminCreateAcc" element={<AdminCreateAcc />}></Route>
           <Route path="/UserCreateAcc" element={<UserCreateAcc />}></Route>
           <Route path="/LandingPage" element={<LandingPage />}></Route>
-		  <Route path="/AdoptPet/:pet_id" element={<AdoptPet />}></Route>
+		      <Route path="/AdoptPet/:pet_id" element={<AdoptPet />}></Route>
           <Route path="/SignInPage" element={<SignInPage 
             setIsLoggedIn={setIsLoggedIn} 
             setIsAdmin={setIsAdmin} 

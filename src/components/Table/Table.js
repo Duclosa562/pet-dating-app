@@ -72,6 +72,7 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
           <TableRow>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Picture</Typography></StyledTableCell>
             <StyledTableCell><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Name</Typography></StyledTableCell>
+            <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Type</Typography></StyledTableCell>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Breed</Typography></StyledTableCell>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Age</Typography></StyledTableCell>
             <StyledTableCell align="center"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>Age Units</Typography></StyledTableCell>
@@ -88,6 +89,7 @@ function BasicTable({animals, onDeleteAnimal, onEditAnimal}) {
             <StyledTableRow key={row._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell align="center"><Avatar src={row.image}></Avatar></TableCell>
               <TableCell component="th" scope="row"> <Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.name}</Typography></TableCell>
+              <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.type}</Typography></TableCell>
               <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.breed}</Typography></TableCell>
               <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.age}</Typography></TableCell>
               <TableCell align="r"><Typography sx={{fontSize: {lg: 24, md: 16, sm: 12, xs: 10}}}>{row.age_descriptor}</Typography></TableCell>

@@ -35,7 +35,7 @@ function ProfileCard({petData}) {
     return (
         <div className='profile-card'>
             <Card sx={{width: 400, background: "rgba(255, 255, 255, 1.0)", m: "20px"}}>
-                <CardHeader title={petInfo.name} subheader={petInfo.breed} />
+                <CardHeader title={petInfo.name} header ={petInfo.type} subheader={petInfo.breed} />
                 <CardContent classes='pet-content'> 
                     <div className='card-content'>
                         <p><b>Age: </b>{petInfo.age} {petInfo.age_descriptor}</p> 

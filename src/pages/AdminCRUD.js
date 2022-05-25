@@ -78,7 +78,7 @@ function toDate(date) {
 function AdminCreate() {
     const location = useLocation();
     //console.log("location %s", JSON.stringify(location))
-    console.log("animal on the Create Page is...")
+    //console.log("animal on the Create Page is...")
     //animal = location.state
     ///console.log(animal)
 
@@ -89,6 +89,7 @@ function AdminCreate() {
     const [breed, setBreed] = useState();
     const [avail, setAvail] = useState();
     const [descr, setDescr] = useState();
+    const [type, setType] = useState();
 
 
     // will need a handle for the disposition to get this set properly
@@ -108,11 +109,11 @@ function AdminCreate() {
 
     const accountData = cookies["userData"];
 
-    const submitHandler = async () => {
+    const submitHandler = async (event) => {
         //const animalId = animal._id;
-
+        event.preventDefault();
         const animalTest = {
-            name:name, age:age, age_descriptor:ageUnits, breed:breed, 
+            name:name, age:age, age_descriptor:ageUnits, breed:breed, type:type,
             availability:avail, description:descr, good_with_animals:goodWithAnimals,
              good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img,
             date_created: toDate(new Date()), acc_id: accountData._id }
@@ -137,9 +138,8 @@ function AdminCreate() {
         console.log("Animal test is ")
         console.log(animalTest)
         let results = await queries.query_insertOne("Animals", animalTest)
-            .then((res) => console.log(res) )
-
-        history('/AdminDashboard')
+            .then((res) => console.log("AFTER PROMISE") )
+            history('/AdminDashboard')
     }
 
     const Input = styled('input')({
@@ -173,6 +173,7 @@ function AdminCreate() {
 
     return (
         <Item3>
+            <form onSubmit={submitHandler}>
             <Item display='flex' flex-direction="column" alignItems="center" direction="column" >
                 <React.Fragment>
                     <Typography variant="h4" gutterBottom> Create a New Pet </Typography>
@@ -204,6 +205,7 @@ function AdminCreate() {
                         <label> Age: </label>
                         <TextField
                             required
+                            type="number"
                             id="cardNumber"
                             label=""
                             onChange={e => setAge(e.target.value)}
@@ -219,11 +221,26 @@ function AdminCreate() {
                             multiline
                             rows={2}
                             required
+                            inputProps={{ maxLength: 40 }}
                             id="outlined-required"
                             label="Enter Something Fun"
                             variant="filled"
                             onChange={e => setDescr(e.target.value)}
                             />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <label> Breed Information: </label>
+                        <TextField
+                            fullWidth
+                            multiline
+                            rows={2}
+                            inputProps={{ maxLength: 25 }}
+                            required
+                            id="outlined-required"
+                            label="Enter Breed Information"
+                            variant="filled"
+                            onChange={e => setBreed(e.target.value)}
+                        />
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <FormControl>
@@ -241,12 +258,12 @@ function AdminCreate() {
                     </Grid>
                     <Grid item xs={12} md={2}>
                         <FormControl>
-                            <FormLabel id="demo-radio-buttons-group-label">Breed:</FormLabel>
+                            <FormLabel id="demo-radio-buttons-group-label">Type:</FormLabel>
                                 <RadioGroup
                                     aria-labelledby="demo-radio-buttons-group-label"
                                     defaultValue=""
                                     name="breedAdd"
-                                    onChange={e => setBreed(e.target.value)}>
+                                    onChange={e => setType(e.target.value)}>
                                     <FormControlLabel value="Cat" control={<Radio />} label="Cat" />
                                     <FormControlLabel value="Dog" control={<Radio />} label="Dog" />
                                     <FormControlLabel value="Other" control={<Radio />} label="Other" />
@@ -306,13 +323,11 @@ function AdminCreate() {
                                 </RadioGroup>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={12}>
-                        {/* <Button variant='contained'onClick={() => submitHandler()}>Submit</Button> */}
-                    </Grid>
                 </Grid>
             </React.Fragment>
-            <Button variant='contained'onClick={() => submitHandler()}>Submit</Button>
+            <Button variant='contained' type="submit">Submit</Button>
         </Item>
+        </form>
       </Item3>
     
     )
