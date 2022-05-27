@@ -45,7 +45,7 @@ function SearchPage(props) {
       let searchPref = {};
       console.log("optBreed is ", optBreed);
       if (optBreed) {
-        searchPref.breed = optBreed;
+        searchPref.type = optBreed;
       }
 
       console.log("optAvail is ", optAvail);

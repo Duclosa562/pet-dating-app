@@ -189,7 +189,7 @@ async function query_insertOne(collectionName, record) {
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.insertOne(record);
-        printInsertResult(query_insertOne.name, collectionName, record, result);
+        //printInsertResult(query_insertOne.name, collectionName, record, result);
     } catch (err) {
         printError(query_insertOne.name, err);
         result = {};
@@ -212,7 +212,7 @@ async function query_findOne(collectionName, query) {
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = collection.findOne(query);
-        printQueryResult(query_findOne.name, collectionName, query, result);
+        //printQueryResult(query_findOne.name, collectionName, query, result);
     } finally {
         //await client.close();
     }
@@ -296,7 +296,7 @@ async function query_updateOne(collectionName, query, update) {
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.updateOne(query, update, options);
-        await printUpdateOneResult(query_updateOne.name, collectionName, query, update, result);
+        //await printUpdateOneResult(query_updateOne.name, collectionName, query, update, result);
     } catch (err) {
         printError(query_updateOne.name, err);
         result = {};
@@ -319,7 +319,7 @@ async function query_deleteOne(collectionName, query) {
         const db = client.db(db_name);
         const collection = db.collection(collectionName);
         result = await collection.deleteOne(query);
-        printDeleteResult(query_deleteOne.name, collectionName, result, query);
+        //printDeleteResult(query_deleteOne.name, collectionName, result, query);
     } finally {
         //await client.close();
     }
