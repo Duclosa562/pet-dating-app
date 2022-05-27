@@ -261,7 +261,7 @@ async function query_mostRecent(quantity) {
 }
 
 async function query_mostRecentFiltered(quantity) {
-    console.log('query_mostRecentFiltered()');
+    console.log('\nquery_mostRecentFiltered()');
     var results = [];
     try {
         //await client.connect();
@@ -271,6 +271,11 @@ async function query_mostRecentFiltered(quantity) {
         await cursor.forEach(item => {
             results.push(JSON.parse(JSON.stringify(item)));
         });
+        if (results.length > 0) {
+            console.log('mostRecentFiltered has results');
+        } else {
+            console.log('mostRecentFiltered has does not have result');
+        }
     } catch (err) {
         console.log('Errr in query_mostRecent()');
         console.log(err);

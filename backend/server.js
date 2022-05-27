@@ -58,7 +58,7 @@ function _get_put_update_json(query) {
  *****************************/
 
 router.get('/api/:quantity', async function(req, res) {
-    console.log('GET /api/:quantity');
+    console.log('\nGET /api/:quantity');
     console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
 
     var db_req = _get_request_query(req)
@@ -72,8 +72,11 @@ router.get('/api/:quantity', async function(req, res) {
         return;
     }
     
-    console.log('Query Results @ Server level for GET api/:quantity');
-    console.log(data);
+    console.log('\nQuery Results @ Server level for GET api/:quantity');
+    if (data.length > 0) {
+        console.log('data is not empty, but too afraid to print');
+    }
+    //console.log(data);
     res.status(200).send({"data": data});
 });
 
@@ -88,6 +91,10 @@ router.get('/api/user-landing/:quantity', async function(req, res) {
     console.log('GET /api/landing-page/:quantity');
     console.log('url = ' + req.protocol + '://' + req.get('host') + req.originalUrl);
     var data = await q.query_mostRecentFiltered(Number(req.params.quantity));
+    if (data.lenght > 0) {
+        console.log('data.length > 0');
+        console.log('too afraid to actually print it, but returning data to user');
+    }
     res.status(200).send({"data": data});
 });
 

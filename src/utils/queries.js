@@ -177,6 +177,7 @@ async function query_findOne(collection, query) {
 async function query_mostRecent(quantity) {
     // /api/most-recent/:quantity
     var url = config.config.PROXY_URL + '/api/most-recent/' + quantity;
+    console.log('querying url ' + url);
     var response = await fetch(url, _create_get_json('GET'));
     if (response.status !== 200) {
         return {"error": "GET request failed from query_mostRecent()", "code": response.status}
@@ -353,6 +354,8 @@ async function query_accountIsAdmin(username) {
  */
  async function query_userLandingPage(quantity) {
     // /api/most-recent/:quantity
+    console.log('query_userLandingPage()');
+    console.log('quantity=' + quantity);
     var url = config.config.PROXY_URL + '/api/user-landing/' + quantity;
     var response = await fetch(url, _create_get_json('GET'));
     if (response.status !== 200) {

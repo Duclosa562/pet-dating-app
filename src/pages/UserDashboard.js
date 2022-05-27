@@ -30,8 +30,10 @@ function UserDashboard() {
         console.log("SEARCH PREFS:", {});
         queries.query_userLandingPage(12).then(
             (res) => {
+                console.log('User landing page data:');
                 console.log(res.data);
-                processSearchResults(res.data)
+                //processSearchResults(res.data)  // turning this off, I think this might be where issues are coming from.
+                setSearchResults(res.data);
             }
         )
     };
