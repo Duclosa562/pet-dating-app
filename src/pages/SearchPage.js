@@ -86,8 +86,9 @@ function SearchPage(props) {
       .then((res) => setSearchResults(res.data));
   };
   const getAllPets = () => {
+    //.query_findMany("Animals", {}) <- previously
     queries
-      .query_findMany("Animals", {})
+      .query_userLandingPage(1000)
       .then((res) => setSearchResults(res.data));
   };
   return (
