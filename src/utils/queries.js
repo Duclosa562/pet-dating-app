@@ -150,6 +150,7 @@ function _build_delete_url() {
 async function _query_find(collection, query, quantity) {
 
     if (_valid_collection(collection) === false) {
+        console.log('_query_find() -> error');
         return _error_json('Invalid Collection Paramter');
     }
     var url = _build_get_url(collection, query, quantity);
@@ -157,13 +158,14 @@ async function _query_find(collection, query, quantity) {
 
     var response = await fetch(url, _create_get_json('GET'));
     if (response.status !== 200) {
+        console.log('fetch returned an error');
         return {"error": "GET request failed from query_findMany()", "code": response.status}
     }
     return await response.json();
 }
 
 async function query_findMany(collection, query) {
-    // console.log('query_findMany()');
+    console.log('query_findMany()');
     return await _query_find(collection, query, 'many');
 }
 

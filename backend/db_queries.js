@@ -221,6 +221,7 @@ async function query_findOne(collectionName, query) {
 
 // returns all records matching <query> from <collection>
 async function query_findMany(collectionName, query) {
+    console.log('db_queries.js -> query_findMany()');
     massage_query(query);
     var results = [];
     try {
