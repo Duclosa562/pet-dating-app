@@ -64,10 +64,19 @@ function AdoptPet({pet}) {
     console.log(data._id)
     queries.query_setAnimalToPending(data._id).then(
       (res) => {
-        if (res) {
-          navigate("/AdoptPet_Finished", {state: pet});
-        }
-        else {
+        console.log('res=');
+        console.log(res);
+        console.log(res.data);
+        console.log(res.data.modifiedCount);
+        try {
+          if (res.data.modifiedCount > 0) {
+            console.log('successfully set status to pending');
+            navigate("/AdoptPet_Finished", {state: pet});
+          }
+          else {
+            alert("Something went wrong...");
+          }
+        } catch {
           alert("Something went wrong...");
         }
       }

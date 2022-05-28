@@ -393,7 +393,7 @@ async function query_accountIsAdmin(username) {
  ****************************/
 
 async function query_setAnimalToPending(id) {
-    var animal = {"id": id, "availability": "Pending"}
+    var animal = {"_id": id, "availability": "Pending"}
     var result = await query_updateOne('Animals', animal);
     return result;
 }

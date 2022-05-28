@@ -122,14 +122,18 @@ router.post('/api/insert', async function(req, res) {
  *****************************/
 
 router.put('/api/update', async function(req, res) {
-    var query = {_id: ObjectId(req.body.query._id)}
+    console.log('\nPUT /api/update');
+    var query = {_id: ObjectId(req.body.query._id)};
     var update = _get_put_update_json(req.body.query);
 
     // will the parse the stringify take care of my issue?
+    console.log(req.query.collection);
+    console.log(query);
     console.log(update);
     var data = await q.query_updateOne(req.body.collection, query, update);
 
     if (data == JSON.stringify({})) {
+        console.log('internal db error, setting return status to 500');
         res.status(500).send({"error": "db insert not successful"});
         return
     }
