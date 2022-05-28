@@ -8,11 +8,11 @@ import CardMedia from '@mui/material/CardMedia';
 import { ClassNames } from '@emotion/react';
 
 
-
+//sx ={{ height: "100%", width:"100%", margin:"auto"}}
 
 const Item = ({image}) => {
     return (
-        <Card sx ={{ height: "100%", width:"100%", margin:"auto"}}>
+        <Card>
             <CardMedia
             image={image}
             component="img"
@@ -23,6 +23,22 @@ const Item = ({image}) => {
         
     );
 };
+
+
+
+// const Item = ({image}) => {
+//     return (
+//         <Box sx ={{ height: "100%", width:"100%", margin:"auto"}}>
+            
+//             <img src={image} />
+            
+            
+//             {/* <img src={image} /> */}
+//         </Box>
+           
+        
+//     );
+// };
 function Carousell({images}) {
     console.log("carousel props are");
     console.log(images)
@@ -36,10 +52,10 @@ function Carousell({images}) {
 //    console.log(picArray)
 
     return (
-        <Carousel autoPlay>
-            {images.map((image, i) => (
-                <Item key={i} image={image} />
-            ))}
+        <Carousel autoPlay animation='fade' interval="2000" duration="250">
+            {
+            images.map((image, i) => <Item key={i} image={image} />)
+            }
         </Carousel>
     );
 }
