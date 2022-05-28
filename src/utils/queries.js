@@ -283,14 +283,19 @@ async function query_accountLogin(user) {
                 key != 'username' &&
                 key != 'password') {
                     console.log('Error: parameter user (json) must have only 3 keys: type, username, password. Found key value ' + key);
+                    console.log('login = false');
+                    return false;
                 }
+
+            if (user[key] == '') {
+                console.log('login = false');
+                return false;
+            }
         }
     }
 
     var result = await query_findOne('Accounts', user);
     console.log(result);
-    console.log(result == {});
-    console.log(result != {});
 
     if (result.data == null) {
         console.log('login = false');
@@ -310,22 +315,43 @@ async function query_accountLogin(user) {
  */
 async function query_accountExists(user) {
 
+    if (typeof user.username != 'string') {
+        console.log('account exists = false');
+        return false;
+    }
+
+    try {
+        if (user.username === undefined || user.type === undefined) {
+            console.log('account exists = false');
+            return false;
+        }
+    } catch {
+        console.log('account exists = false');
+        return false;
+    }
+
     for(var key in user) {
         if (user.hasOwnProperty(key)) {
             if (key != 'type' &&
                 key != 'username') {
                     console.log('Error: parameter user (json) must have only 2 keys: type, username. Found key value ' + key);
                 }
+
+            // empty usernames or types should return false, invalid query
+            if (user[key] == '') {
+                console.log('account exists = false');
+                return false;
+            }
         }
     }
 
     var result = await query_findOne('Accounts', user);
 
     if (result.data == null) {
-        //console.log('account exists = false');
+        console.log('account exists = false');
         return false;
     }
-    //console.log('account exists = true');
+    console.log('account exists = true');
     return true;
 }
 
@@ -339,10 +365,6 @@ async function query_accountExists(user) {
  */
 
 async function query_accountIsAdmin(username) {
-
-    if (typeof username != 'string') {
-        return 'Error! username must be a string'
-    }
 
     return query_accountExists({'type': 'ShelterAdmin', 'username': username});
 }

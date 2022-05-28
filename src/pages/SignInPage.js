@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import {
   Grid,
@@ -12,6 +13,7 @@ import {
 } from "@mui/material";
 
 import { useCookies } from 'react-cookie';
+import { ArrowDropDown } from "@mui/icons-material";
 
 const queries = require("../utils/queries");
 
@@ -43,15 +45,19 @@ const Item3 = styled(Container)(({ theme }) => ({
 function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [userType, setUserType] = React.useState("");
   const [cookies, setCookies] = useCookies(['isLoggedIn', 'isAdmin', 'userData']);
 
   const navigate = useNavigate();
 
   function loginSubmit() {
     const loginCreds = {
+      type: userType,
       username: username,
       password: password,
     };
+    console.log('sending login creds');
+    console.log(loginCreds);
     // OLD --  DB Account Call
     // queries.query_accountLogin(loginCreds).then(
     //   (res) => {
@@ -66,12 +72,19 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
     //   }
     // )
 
+    if (userType == '' || username == '' || password == '') {
+      alert("Invalid Login.\nCheck your credentials and try again.");
+      console.log('empty credential(s)');
+      return;
+    }
+
     // New query call that doesn't need a checkbox.
-    queries.query_findOne("Accounts", loginCreds).then((res) => {
+    queries.query_findOne('Accounts', loginCreds).then((res) => {
+      console.log('db response for login creds');
+      console.log(res);
       if (!res.data) {
         alert("Invalid Login.\nCheck your credentials and try again.");
       } else {
-
         setIsLoggedIn(true);
         setIsAdmin(res.data.type === "ShelterAdmin");
         setAccountData(res.data)
@@ -120,6 +133,20 @@ function SignInPage({ setIsLoggedIn, setIsAdmin, setAccountData }) {
                 Account Sign-In
                 <i className="fa-solid fa-paw navbar-icon" />
               </h2>
+            </Grid>
+            <Grid item xs={12}>
+              <Autocomplete
+                disablePortal
+                clearOnEscape
+                options={["User", "ShelterAdmin"]}
+                renderInput={(params) => (
+                  <TextField {...params} label="User Type"/>
+                )}
+                sx={{ width: 225 }}
+                onChange={(event, value) => {
+                  setUserType(value);
+                }}
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField

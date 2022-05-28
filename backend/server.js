@@ -74,8 +74,12 @@ router.get('/api/:quantity', async function(req, res) {
     }
     
     console.log('\nQuery Results @ Server level for GET api/:quantity');
-    if (data.length > 0) {
-        console.log('data is not empty, but too afraid to print');
+    try {
+        if (data.length > 0) {
+            console.log('data is not empty, but too afraid to print');
+        }
+    } catch {
+        console.log('length is not a property');
     }
     //console.log(data);
     res.status(200).send({"data": data});
