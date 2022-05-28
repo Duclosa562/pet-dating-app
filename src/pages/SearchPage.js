@@ -86,7 +86,7 @@ function SearchPage(props) {
       .then((res) => setSearchResults(res.data));
   };
   const getAllPets = () => {
-    //.query_findMany("Animals", {}) <- previously
+    //.query_findMany("Animals", {}) <- previously this. I think it might be something about the empty JSON causing the error.
     queries
       .query_userLandingPage(1000)
       .then((res) => setSearchResults(res.data));
