@@ -79,7 +79,7 @@ function LandingPage() {
     //populates the table component with data from the DB
     const loadAnimals = async () => {
         console.log("Results of GET are....");
-        let results = await queries.query_findMany("Animals", {})
+        let results = await queries.query_userLandingPage(12)
             .then((res) => getCarouselImages(res.data) )
     }
 
