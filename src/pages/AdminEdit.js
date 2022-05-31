@@ -115,6 +115,9 @@ function AdminEdit({animal}) {
     const history = useNavigate();
 
     const submitHandler = async (event) => {
+        console.log("ggg  is ", animal)
+
+        console.log("goodWithAnimals is ", goodWithAnimals)
         event.preventDefault();
         const animalId = animal._id;
         const animalTest = { _id:animalId, 
@@ -122,18 +125,22 @@ function AdminEdit({animal}) {
             availability:avail, description:descr, good_with_animals:goodWithAnimals, 
             good_with_children:goodWithChildren, must_be_leashed:mustBeLeashed, image:img}
 
-        if (animalTest.good_with_animals === 'true')
+        console.log("animal test is")
+        console.log(animalTest)
+        if (String(animalTest.good_with_animals) === 'true'){
+            // console.log("good w animals is : ", animalTest.good_with_animals);
             animalTest.good_with_animals = true;
+        }
         else{
             animalTest.good_with_animals = false;
         }
-        if (animalTest.good_with_children === 'true'){
+        if (String(animalTest.good_with_children) === 'true'){
             animalTest.good_with_children = true;
         }
         else{
             animalTest.good_with_children = false;
         }
-        if (animalTest.must_be_leashed === 'true'){
+        if (String(animalTest.must_be_leashed) === 'true'){
             animalTest.must_be_leashed = true;
         }
         else{
@@ -283,47 +290,48 @@ function AdminEdit({animal}) {
               </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
-              <FormControl required={true}>
-                <FormLabel required={true} id="demo-radio-buttons-group-label">Good With Animals?</FormLabel>
+              <FormControl >
+                <FormLabel  id="demo-radio-buttons-group-label">Good With Animals?</FormLabel>
                 <RadioGroup
-                    required={true}
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="Weeks"
                     name="dispositionAdd0"
                     value={String(goodWithAnimals)}
-                    onChange={e => setGoodWithAnimals(e.target.value)}>
-                    <FormControlLabel value="true" control={<Radio required={true}/>} label="Yes" />
-                    <FormControlLabel value="false" control={<Radio required={true}/>} label="No" />
+                    onChange={e => {
+                      console.log("g isd ", e.target.value)
+                      setGoodWithAnimals(e.target.value)}}>
+                    <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="false" control={<Radio />} label="No" />
                 </RadioGroup>
               </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
-              <FormControl required={true}>
-                <FormLabel required={true} id="demo-radio-buttons-group-label">Good With Kids?</FormLabel>
+              <FormControl >
+                <FormLabel  id="demo-radio-buttons-group-label">Good With Kids?</FormLabel>
                 <RadioGroup
-                    required={true}
+                    
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="Weeks"
                     name="dispositionAdd1"
                     value={String(goodWithChildren)}
                     onChange={e => setGoodWithChildren(e.target.value)}>
-                    <FormControlLabel value="true" control={<Radio required={true}/>} label="Yes" />
-                    <FormControlLabel value="false" control={<Radio required={true}/>} label="No" />
+                    <FormControlLabel value="true" control={<Radio/>} label="Yes" />
+                    <FormControlLabel value="false" control={<Radio />} label="No" />
                 </RadioGroup>
               </FormControl>
           </Grid>
           <Grid item xs={12} md={2}>
-              <FormControl required={true}>
-                <FormLabel required={true} id="demo-radio-buttons-group-label">Must Be Leashed?</FormLabel>
+              <FormControl >
+                <FormLabel  id="demo-radio-buttons-group-label">Must Be Leashed?</FormLabel>
                 <RadioGroup
-                  required={true}
+                 
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="Yes"
                     name="dispositionAdd2"
                     value={String(mustBeLeashed)}
                     onChange={e => setMustBeLeashed(e.target.value)}>
-                    <FormControlLabel value="true" control={<Radio required={true}/>} label="Yes" />
-                    <FormControlLabel value="false" control={<Radio required={true}/>} label="No" />
+                    <FormControlLabel value="true" control={<Radio />} label="Yes" />
+                    <FormControlLabel value="false" control={<Radio />} label="No" />
                 </RadioGroup>
               </FormControl>
           </Grid>
